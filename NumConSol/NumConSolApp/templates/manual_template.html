@@ -23,6 +23,30 @@
     $(document).ready(function() {
     $('select').material_select();
     });
+    
+    var counter = 1;   
+    function addVars(divName){
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML = "Variable "  + (counter + 1) + " <br><input type='text' name='myVars[]' class='validate'>";
+        document.getElementById(divName).appendChild(newdiv);
+
+    }
+
+    function addDoms(divName){
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML = "Domain "  + (counter + 1) + " <br><input type='text' name='myDoms[]' class='validate'>";
+        document.getElementById(divName).appendChild(newdiv);
+        counter++;
+    }     
+    
+    function showDiv() {
+        document.getElementById('objfnc').style.display = "block";
+    } 
+
+    function hideDiv() {
+        document.getElementById('objfnc').style.display = "none";
+    } 
+
 </script>
 
 
@@ -38,94 +62,171 @@
 
 
 <div class="row">
-    <form class="col s6 offset-s3">
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">input</i>
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Domain</label>
-            </div>
-        </div>
+    
+    <form class="col s12 ">
+        
+        <!-- ****************************MIDDLE CONTENT*********************** -->
+        <div class="col s9">
+         
+          <!-- ROW -->
+          <div class="row">
+              <h5>File Input</h5>
+              <div class="file-field input-field col s5">
+                  <div class="btn">
+                      <span>File</span>
+                      <input type="file">
+                  </div>
+                  <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text">
+                  </div>
+              </div>
+              <h5 class="center-align">Constraint Type</h5>
+              <div class="button col s3 offset-s1">
+                  <a class="waves-effect waves-light btn" onClick="hideDiv();">Satisfaction</a>
+              </div>
+              <div class="button col s3">
+                  <a class="waves-effect waves-light btn" onClick="showDiv();">Optimization</a>
+              </div>
+          </div>
 
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">input</i>
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Variables</label>
-            </div>
-        </div>
+          <!-- ROW -->
+          <br><br>
+          <h5 class="center-align">Variables and Domains</h5>
+          <div class="row">
 
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">mode_edit</i>
+            <div class="button col s1 offset-s1">
+              <a class="waves-effect waves-light btn" onClick="addVars('dynamicVariable'); addDoms('dynamicDomain');">Add</a>
+            </div>
+
+            <div class="input-field col s3 offset-s1" id="dynamicVariable">
+                Variable 1<br><input type="text" class="validate" name="myVars[]">
+            </div>
+
+            <div class="input-field col s3" id="dynamicDomain">
+                Domain 1<br><input type="text" class="validate" name="myDoms[]">
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="row">
+            <div class="input-field col s6 offset-s3">
                 <textarea id="constraints" class="materialize-textarea"></textarea>
                 <label for="constraints">Constraints</label>
             </div>
+          </div>
+
+          <!-- ROW -->
+          <div class="row">
+            <div class="input-field col s6 offset-s3" style="display:none" id="objfnc">
+              <input id="objFunction" type="text" class="validate">
+              <label class="active" for="objFunction">Objective Function</label>
+            </div>
+          </div>
+          
+          <!-- ROW -->     
+          <div class="row">
+            <div class="button col s3 offset-s9">
+              <a class="waves-effect waves-light btn-large">Submit</a>
+            </div>
+          </div>
+
         </div>
 
-        <div class="row"></div>
 
-        <div class="row">
-            <div class="input-field col s5 offset-s1">
-                <select>
-                    <option value="" disabled selected>Choose your option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                </select>
-                <label>Consistency Technique</label>
+
+        <!-- **********************RIGHT CONTENT************************** -->
+        <h5 class="center-align">Options</h5>
+        <div class="col s3">
+
+            <!-- ROW -->
+            <div class="row">
+              <div class="input-field col s11">
+                  <select>
+                      <option value="" disabled selected></option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                  </select>
+                  <label>Precision</label>
+              </div>
             </div>
 
-            <div class="input-field col s5 offset-s1">
-                <select>
-                    <option value="" disabled selected>Choose your option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                </select>
-                <label>Int Evaluation</label>
+            <!-- ROW -->
+            <div class="row">
+              <div class="input-field col s11">
+                  <select>
+                      <option value="" disabled selected></option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                  </select>
+                  <label>Consistency Technique</label>
+              </div>
             </div>
-        </div>
 
-        <div class="row"></div>
+            <!-- ROW -->
+            <div class="row">
+              <div class="input-field col s11">
+                  <select>
+                      <option value="" disabled selected></option>
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                  </select>
+                  <label>Integer Evaluation</label>
+              </div>
+            </div>
 
-        <div class="row">
-            <div class="col s5 offset-s1">
-            <label>Local Optimization</label>
+            <!-- ROW -->
+            <div class="row">
+              <div class="col s6">
+                <label>Local Optimization</label>
                 <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        On
-                    </label>
+                  <label>
+                      Off
+                      <input type="checkbox">
+                      <span class="lever"></span>
+                      On
+                  </label>
                 </div>
+              </div>
+              <div class="col s6">
+                <label>Speculation</label>
+                <div class="switch">
+                  <label>
+                      Off
+                      <input type="checkbox">
+                      <span class="lever"></span>
+                      On
+                  </label>
+                </div>
+              </div>
             </div>
-        </div>
 
-        <div class="row"></div>
+            <!-- ROW -->
+            <div class="row">
+
+            </div>
+
+
+
+
+
+        <div class="row">
+
+        </div>
         
         <div class="row">
-            <div class="col s5 offset-s1">
-                <label>Speculation<label>
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                </div>
-            </label>
+           
         </div>
 
     </form>
 </div>
 
-
-
-
-
-
 </body>
 </html>
+
+
+
+
