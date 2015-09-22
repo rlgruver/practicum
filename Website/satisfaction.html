@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<html>
+<head>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" type="text/css" href="css/theme.css" >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="teal">
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+
+  <script>
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+
+  var counter = 1;   
+  function addVars(divName){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = " <br><input type='text' name='myVars[]' class='validate'>";
+    document.getElementById(divName).appendChild(newdiv);
+  }
+  function addDoms1(divName){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML =  " <br><input type='text' name='myDoms1[]' class='validate'>";
+    document.getElementById(divName).appendChild(newdiv);
+  } 
+  function addDoms2(divName){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML =  " <br><input type='text' name='myDoms2[]' class='validate'>";
+    document.getElementById(divName).appendChild(newdiv);
+    counter++;
+  }     
+
+  function addText(inz,lez,coz,riz){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = "<div class='inz1'>IN</div>";
+    document.getElementById(inz).appendChild(newdiv);
+
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = "<div class='varText1'>[</div>";
+    document.getElementById(lez).appendChild(newdiv);
+
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = "<div class='varText1'>,</div>";
+    document.getElementById(coz).appendChild(newdiv);
+
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = "<div class='varText1'>]</div>";
+    document.getElementById(riz).appendChild(newdiv);
+  }
+
+
+  function disable() {
+    document.getElementById('precision').disabled=true;
+    document.getElementById('consistency').disabled=true;
+    document.getElementById('evaluation').disabled=true;
+    document.getElementById('optimization').disabled=true;
+    document.getElementById('speculation').disabled=true;
+
+  } 
+  function enable() {
+    document.getElementById('precision').disabled=false;
+    document.getElementById('consistency').disabled=false;
+    document.getElementById('evaluation').disabled=false;
+    document.getElementById('optimization').disabled=false;
+    document.getElementById('speculation').disabled=false;
+  } 
+
+
+//SCROLLING NAVBAR
+$(function(){ // document ready
+ 
+  var stickyTop = $('.rightNav').offset().top; // returns number 
+ 
+  $(window).scroll(function(){ // scroll event  
+ 
+    var windowTop = $(window).scrollTop(); // returns number
+ 
+    if (stickyTop < windowTop) {
+      $('.rightNav').css({ position: 'fixed', top: 0 });
+    }
+
+    else {
+      $('.rightNav').css('position','static');
+    }
+ 
+  });
+ 
+});
+
+  </script>
+
+
+  <nav class="grey darken-2">
+    <div class="nav-wrapper">
+      <a href="index.html" class="brand-logo" style="padding-left: 1cm"><img src="img/cr2g.png"></a>
+      <a href="index.html" class="brand-logo center">NumConSol</a>
+      <ul class="right hide-on-med-and-down" style="padding-right: 2cm">
+        <li><a href="index.html">Optimization</a></li>
+        <li class="active"><a href="satisfaction.html">Satisfaction</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="row">
+    <br>
+    <form class="col s12 ">
+      
+            
+      <!-- ****************************MIDDLE CONTENT*********************** -->
+      <div class="col s9">
+  
+    <!-- ROW -->
+        <div class="row card-panel">
+          <h5>File Input</h5>
+          <div class="file-field input-field col s6">
+
+            <div class="btn green darken-3">
+              <span>Browse</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- ROW -->
+
+        <div class="card-panel">
+          <div class="row">
+            <h5>Constraints</h5>
+            <div class="input-field col s6">
+              <textarea placeholder="Enter constraints here." id="constraints" class="ta1"></textarea>
+            </div>
+            <div class="file-field input-field col s5 offset-s1">
+              <br><br>
+              <div class="btn green darken-3">
+                <span>Browse</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <!-- ROW -->
+
+        <div class="card-panel">
+          <div class="row">
+            <h5>Variables and Domains</h5>
+
+              <div class="col s6">
+                  <div class="input-field col s2 " id="dynamicVariable">
+                    <input type="text" class="validate" name="myVars[]">
+                  </div>
+
+                  <div class="input-field col s1 right-align" id="inText">
+                     <div class="inz">IN</div>
+                  </div>
+
+                  <div class="input-field col s1 right-align" id="leftBracket">
+                      <div class="varText">[</div>
+                  </div>
+
+                  <div class="input-field col s2" id="dynamicDomain1">
+                    <input type="text" class="validate" name="myDoms1[]">
+                  </div>
+
+                  <div class="input-field col s1 right-align" id="commaText">
+                     <div class="varText"> ,</div>
+                  </div>
+
+
+                  <div class="input-field col s2" id="dynamicDomain2">
+                    <input type="text" class="validate" name="myDoms2[]">
+                  </div>
+
+                  <div class="input-field col s1 left-align" id="rightBracket">
+                      <div class="varText">]</div>
+                  </div>
+
+              </div>
+
+            <div class="file-field input-field col s5 offset-s1">
+
+              <div class="btn green darken-3">
+                <span>Browse</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="button col s1">
+              <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariable'); addDoms1('dynamicDomain1');addDoms2('dynamicDomain2');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- ROW -->     
+        <div class="row center-align">
+          <div class="button">
+            <a class="waves-effect waves-light btn-large green darken-4">Submit</a>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <!-- **********************RIGHT CONTENT************************** -->
+
+        <div class="col s3 card-panel rightNav" >
+          <h5 class="center-align">Options</h5>
+          <br>
+          <div class="row center-align">
+
+            <input class="with-gap" name="group1" type="radio" id="def" checked="checked" onClick="disable()"/>
+            <label for="def">Default</label>
+
+            <input class="with-gap" name="group1" type="radio" id="custom" onClick="enable()"/>
+            <label for="custom">Custom</label>
+
+          </div>
+
+
+          <!-- ROW -->
+          <div class="row">
+            <div class="input-field col s11">
+              <input id="precision" type="text" class="validate" disabled>
+              <label>Precision</label>
+            </div>
+          </div>
+
+          <!-- ROW -->
+          <div class="row">
+            <div class="input-field col s11">
+              <select id="consistency" disabled>
+                <option value="0"selected>Default</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+              <label>Consistency Technique</label>
+            </div>
+          </div>
+
+          <!-- ROW -->
+          <div class="row">
+            <div class="input-field col s11">
+              <select id="evaluation" disabled>
+                <option value="0"selected>Default</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+              <label>Integer Evaluation</label>
+            </div>
+          </div>
+
+          <!-- ROW -->
+          <div class="row">
+            <div class="col s6">
+              <label>Local Optimization</label>
+              <div class="switch">
+                <label>
+                  Off
+                  <input type="checkbox" id="optimization" disabled>
+                  <span class="lever"></span>
+                  On
+                </label>
+              </div>
+            </div>
+            <div class="col s6">
+              <label>Speculation</label>
+              <div class="switch">
+                <label>
+                  Off
+                  <input type="checkbox" id="speculation" disabled>
+                  <span class="lever"></span>
+                  On
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </form>
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="container">
+      <div class="row">
+        <div class="col s6">
+          <h5 class="white-text">NumConSol Footer</h5>
+          <p class="grey-text text-lighten-4">This is the footer.</p>
+        </div>
+        <div class="col s2 offset-s4">
+          <img src="img/logo.png">
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright grey darken-3">
+      <div class="container">
+        © 2015 Mohandeseen Studios
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

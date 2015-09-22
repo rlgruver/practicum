@@ -1,3 +1,33 @@
-.test1{
-	background-color: #ffffff;
+.ta1 {
+	border: 2px solid #765942;
+	border-radius: 10px;
+	height: 90px;
+	width: 500px;
+	outline: none;
+	max-width: 500px;
 }
+
+.inz{
+	font-size: 15px;
+	padding-top: 25px;
+}
+
+.inz1{
+	font-size: 15px;
+	padding-top: 61px;
+}
+
+.varText{
+	font-size: 25px;
+	padding-top: 10px;
+}
+
+.varText1{
+	font-size: 25px;
+	padding-top: 46px;
+}
+
+.rightNav{
+	right:10px;
+}
+
