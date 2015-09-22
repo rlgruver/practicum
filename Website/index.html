@@ -79,27 +79,6 @@
   } 
 
 
-//SCROLLING NAVBAR
-$(function(){ // document ready
- 
-  var stickyTop = $('.rightNav').offset().top; // returns number 
- 
-  $(window).scroll(function(){ // scroll event  
- 
-    var windowTop = $(window).scrollTop(); // returns number
- 
-    if (stickyTop < windowTop) {
-      $('.rightNav').css({ position: 'fixed', top: 0});
-    }
-
-    else {
-      $('.rightNav').css('position','static');
-    }
- 
-  });
- 
-});
-
   </script>
 
 
