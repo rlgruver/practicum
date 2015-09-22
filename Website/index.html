@@ -79,27 +79,6 @@
   } 
 
 
-//SCROLLING NAVBAR
-$(function(){ // document ready
- 
-  var stickyTop = $('.rightNav').offset().top; // returns number 
- 
-  $(window).scroll(function(){ // scroll event  
- 
-    var windowTop = $(window).scrollTop(); // returns number
- 
-    if (stickyTop < windowTop) {
-      $('.rightNav').css({ position: 'fixed', top: 0 });
-    }
-
-    else {
-      $('.rightNav').css('position','static');
-    }
- 
-  });
- 
-});
-
   </script>
 
 
@@ -170,7 +149,7 @@ $(function(){ // document ready
           <div class="row">
             <h5>Constraints</h5>
             <div class="input-field col s6">
-              <textarea placeholder="Enter constraints here." id="constraints" class="ta1"></textarea>
+              <textarea placeholder="Enter constraints here." id="constraints" class="textarea"></textarea>
             </div>
             <div class="file-field input-field col s5 offset-s1">
               <br><br>
@@ -277,7 +256,7 @@ $(function(){ // document ready
           <!-- ROW -->
           <div class="row">
             <div class="input-field col s11">
-              <input id="precision" type="text" class="validate" disabled>
+              <input id="precision" type="text" class="validate" disabled >
               <label>Precision</label>
             </div>
           </div>
