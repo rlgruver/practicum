@@ -34,3 +34,77 @@
 }
 
 
+
+/*custom drop down select menu*/
+ 
+:root .css3-metro-dropdown option,
+:root .css3-metro-dropdown:after,
+:root .css3-metro-dropdown::after,
+:root .css3-metro-dropdown select2
+{
+    color: #a4a4a4;
+}
+ 
+:root .css3-metro-dropdown select,
+:root .css3-metro-dropdown:after,
+:root .css3-metro-dropdown::after
+{
+    display: block;
+    background: #ffffff;
+}
+ 
+:root .css3-metro-dropdown select,
+:root .css3-metro-dropdown option
+{
+    padding: 8px;
+}
+ 
+:root .css3-metro-dropdown
+{
+    position: relative;
+    display: inline-block;
+    border: 0;
+}
+ 
+:root .css3-metro-dropdown::after
+{
+    content: "\25bc";
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 32px;
+    font-size: 12px;
+    line-height: 39px;
+    text-align: center;
+     
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    pointer-events: none;
+}
+ 
+:root .css3-metro-dropdown select
+{
+   height: 40px;
+   width:250px;
+   border: 0;
+   vertical-align: middle;
+   font-family: 'Roboto', sans-serif;
+   font-size:14px;
+   outline: 0 none;
+   padding-top: 3px;
+   padding-left: 0px;
+   margin-bottom: 10px;
+   border-bottom: solid #BDBDBD 1px;
+
+}
+ 
+:root .css3-metro-dropdown option
+{
+    background: #fff;
+    color: #009082;
+}
+ 
+
+
+

@@ -21,9 +21,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
   <script>
-  $(document).ready(function() {
-    $('select').material_select();
-  });
+
 
   var counter = 1;   
   function addVars(divName){
@@ -248,28 +246,34 @@
           </div>
 
           <!-- ROW -->
+          <h8 style="color:#7FAA00">Consistency Technique</h8>
           <div class="row">
             <div class="input-field col s11">
-              <select id="consistency" disabled>
-                <option value="0"selected>Default</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-              <label>Consistency Technique</label>
+                <span class="css3-metro-dropdown">
+                <select name="dropdown-2" id="consistency" disabled>
+                    <option value="def">default</option>
+                    <option value="neuton">interval neuton</option>        
+                    <option value="bc4">bc4</option>
+                    <option value="hc4">hc4</option>
+                    <option value="null">null</option>
+                </select>
+                </span>
             </div>
           </div>
 
           <!-- ROW -->
+          <h8 style="color:#7FAA00">Integer Evaluation</h8>
           <div class="row">
             <div class="input-field col s11">
-              <select id="evaluation" disabled>
-                <option value="0"selected>Default</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-              <label>Integer Evaluation</label>
+                <span class="css3-metro-dropdown">
+                <select name="dropdown-2" id="evaluation" disabled>
+                    <option value="def">default</option>
+                    <option value="neutral">neutral</option>        
+                    <option value="horner">horner</option>
+                    <option value="occ">occ grouping</option>
+                    <option value="monotonicity">monotonicity</option>
+                </select>
+                </span>
             </div>
           </div>
 
