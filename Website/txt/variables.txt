@@ -1,0 +1,9 @@
+#Remove all notes (including this one) before using as input file
+
+VARIABLES
+x in [-10, 10], y in [-8, 8], z in [-1,1];
+
+#Separate variables with commas, end field with semi-colon
+#List variables in the format "var in [domain lb, domain ub]"
+#lb = lower bound, ub = upper bound
+

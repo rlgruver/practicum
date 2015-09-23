@@ -78,27 +78,11 @@
     document.getElementById('speculation').disabled=false;
   } 
 
-
-//SCROLLING NAVBAR
-$(function(){ // document ready
- 
-  var stickyTop = $('.rightNav').offset().top; // returns number 
- 
-  $(window).scroll(function(){ // scroll event  
- 
-    var windowTop = $(window).scrollTop(); // returns number
- 
-    if (stickyTop < windowTop) {
-      $('.rightNav').css({ position: 'fixed', top: 0 });
-    }
-
-    else {
-      $('.rightNav').css('position','static');
-    }
- 
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
   });
- 
-});
+
 
   </script>
 
@@ -118,16 +102,24 @@ $(function(){ // document ready
   <div class="row">
     <br>
     <form class="col s12 ">
-      
-            
+
+      <div class="col s12">
+        <div class="row card-panel blue-grey darken-1 white-text">
+          <p>Welcome to the NumConSol Application. Here, you'll be able to run all of your fancy math problems through a convenient website without having to download any external code or program. Just follow the easy to read instructions and you'll be well on your way to becoming a math genius!</p>
+        </div>
+      </div>
+
+
       <!-- ****************************MIDDLE CONTENT*********************** -->
       <div class="col s9">
-  
-    <!-- ROW -->
-        <div class="row card-panel">
-          <h5>File Input</h5>
-          <div class="file-field input-field col s6">
 
+        <!-- ROW -->
+        <div class="row card-panel">
+          <div class="row">
+            <h5 style="display:inline;">File Input</h5>
+            <div class="right orange-text" style="display:inline;"><a class="example modal-trigger" href="#fileModal">EXAMPLE FILE</a></div>
+          </div>
+          <div class="file-field input-field col s6">
             <div class="btn green darken-3">
               <span>Browse</span>
               <input type="file">
@@ -136,15 +128,18 @@ $(function(){ // document ready
               <input class="file-path validate" type="text">
             </div>
           </div>
-
-
         </div>
+
+        <!-- ROW -->
 
         <!-- ROW -->
 
         <div class="card-panel">
           <div class="row">
-            <h5>Constraints</h5>
+            <div class="row">
+              <h5 style="display:inline;">Constraints</h5>
+              <div class="right orange-text" style="display:inline;"><a class="example modal-trigger" href="#constModal">EXAMPLE FILE</a></div>
+            </div>
             <div class="input-field col s6">
               <textarea placeholder="Enter constraints here." id="constraints" class="textarea"></textarea>
             </div>
@@ -168,169 +163,235 @@ $(function(){ // document ready
 
         <div class="card-panel">
           <div class="row">
-            <h5>Variables and Domains</h5>
+           <div class="row">
+            <h5 style="display:inline;">Variables and Domains</h5>
+            <div class="right orange-text" style="display:inline;"><a class="example modal-trigger" href="#varModal">EXAMPLE FILE</a></div>
+          </div>
 
-              <div class="col s6">
-                  <div class="input-field col s2 " id="dynamicVariable">
-                    <input type="text" class="validate" name="myVars[]">
-                  </div>
-
-                  <div class="input-field col s1 right-align" id="inText">
-                     <div class="inz">IN</div>
-                  </div>
-
-                  <div class="input-field col s1 right-align" id="leftBracket">
-                      <div class="varText">[</div>
-                  </div>
-
-                  <div class="input-field col s2" id="dynamicDomain1">
-                    <input type="text" class="validate" name="myDoms1[]">
-                  </div>
-
-                  <div class="input-field col s1 right-align" id="commaText">
-                     <div class="varText"> ,</div>
-                  </div>
-
-
-                  <div class="input-field col s2" id="dynamicDomain2">
-                    <input type="text" class="validate" name="myDoms2[]">
-                  </div>
-
-                  <div class="input-field col s1 left-align" id="rightBracket">
-                      <div class="varText">]</div>
-                  </div>
-
-              </div>
-
-            <div class="file-field input-field col s5 offset-s1">
-
-              <div class="btn green darken-3">
-                <span>Browse</span>
-                <input type="file">
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
+          <div class="col s6">
+            <div class="input-field col s2 " id="dynamicVariable">
+              <input type="text" class="validate" name="myVars[]">
             </div>
 
+            <div class="input-field col s1 right-align" id="inText">
+             <div class="inz">IN</div>
+           </div>
+
+           <div class="input-field col s1 right-align" id="leftBracket">
+            <div class="varText">[</div>
           </div>
-          <div class="row">
-            <div class="button col s1">
-              <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariable'); addDoms1('dynamicDomain1');addDoms2('dynamicDomain2');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
-            </div>
+
+          <div class="input-field col s2" id="dynamicDomain1">
+            <input type="text" class="validate" name="myDoms1[]">
           </div>
+
+          <div class="input-field col s1 right-align" id="commaText">
+           <div class="varText"> ,</div>
+         </div>
+
+
+         <div class="input-field col s2" id="dynamicDomain2">
+          <input type="text" class="validate" name="myDoms2[]">
         </div>
 
-
-
-        <!-- ROW -->     
-        <div class="row center-align">
-          <div class="button">
-            <a class="waves-effect waves-light btn-large green darken-4">Submit</a>
-          </div>
+        <div class="input-field col s1 left-align" id="rightBracket">
+          <div class="varText">]</div>
         </div>
 
       </div>
 
+      <div class="file-field input-field col s5 offset-s1">
 
-
-      <!-- **********************RIGHT CONTENT************************** -->
-
-        <div class="col s3 card-panel rightNav" >
-          <h5 class="center-align">Options</h5>
-          <br>
-          <div class="row center-align">
-
-            <input class="with-gap" name="group1" type="radio" id="def" checked="checked" onClick="disable()"/>
-            <label for="def">Default</label>
-
-            <input class="with-gap" name="group1" type="radio" id="custom" onClick="enable()"/>
-            <label for="custom">Custom</label>
-
-          </div>
-
-
-          <!-- ROW -->
-          <div class="row">
-            <div class="input-field col s11">
-              <input id="precision" type="text" class="validate" disabled>
-              <label>Precision</label>
-            </div>
-          </div>
-
-          <!-- ROW -->
-          <div class="row">
-            <div class="col s11">
-              <select id="consistency" disabled>
-                <option value="0"selected>Default</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-              <label>Consistency Technique</label>
-            </div>
-          </div>
-
-          <!-- ROW -->
-          <div class="row">
-            <div class="input-field col s11">
-              <select id="evaluation" disabled>
-                <option value="0"selected>Default</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-              <label>Integer Evaluation</label>
-            </div>
-          </div>
-
-          <!-- ROW -->
-          <div class="row">
-            <div class="col s6">
-              <label>Local Optimization</label>
-              <div class="switch">
-                <label>
-                  Off
-                  <input type="checkbox" id="optimization" disabled>
-                  <span class="lever"></span>
-                  On
-                </label>
-              </div>
-            </div>
-            <div class="col s6">
-              <label>Speculation</label>
-              <div class="switch">
-                <label>
-                  Off
-                  <input type="checkbox" id="speculation" disabled>
-                  <span class="lever"></span>
-                  On
-                </label>
-              </div>
-            </div>
-          </div>
+        <div class="btn green darken-3">
+          <span>Browse</span>
+          <input type="file">
         </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
 
-    </form>
+    </div>
+    <div class="row">
+      <div class="button col s1">
+        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariable'); addDoms1('dynamicDomain1');addDoms2('dynamicDomain2');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
+      </div>
+    </div>
   </div>
 
-  <footer class="page-footer grey darken-2">
+
+
+  <!-- ROW -->     
+  <div class="row center-align">
+    <div class="button">
+      <a class="waves-effect waves-light btn-large green darken-4">Submit</a>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- **********************RIGHT CONTENT************************** -->
+
+<div class="col s3 card-panel rightNav" >
+  <h5 class="center-align">Options</h5>
+  <br>
+  <div class="row center-align">
+
+    <input class="with-gap" name="group1" type="radio" id="def" checked="checked" onClick="disable()"/>
+    <label for="def">Default</label>
+
+    <input class="with-gap" name="group1" type="radio" id="custom" onClick="enable()"/>
+    <label for="custom">Custom</label>
+
+  </div>
+
+
+  <!-- ROW -->
+  <div class="row">
+    <div class="input-field col s11">
+      <input id="precision" type="text" class="validate" disabled >
+      <label>Precision</label>
+    </div>
+  </div>
+
+  <!-- ROW -->
+  <div class="row">
+    <div class="input-field col s11">
+      <select id="consistency" disabled>
+        <option value="0"selected>Default</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+      </select>
+      <label>Consistency Technique</label>
+    </div>
+  </div>
+
+  <!-- ROW -->
+  <div class="row">
+    <div class="input-field col s11">
+      <select id="evaluation" disabled>
+        <option value="0"selected>Default</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+      </select>
+      <label>Integer Evaluation</label>
+    </div>
+  </div>
+
+  <!-- ROW -->
+  <div class="row">
+    <div class="col s6">
+      <label>Local Optimization</label>
+      <div class="switch">
+        <label>
+          Off
+          <input type="checkbox" id="optimization" disabled>
+          <span class="lever"></span>
+          On
+        </label>
+      </div>
+    </div>
+    <div class="col s6">
+      <label>Speculation</label>
+      <div class="switch">
+        <label>
+          Off
+          <input type="checkbox" id="speculation" disabled>
+          <span class="lever"></span>
+          On
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+</form>
+</div>
+
+
+  <!-- Modal Structure -->
+  <div id="fileModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Text File Example</h4>
+      <p>
+        <object data="txt/satisfaction_all.txt" width="650" height="300">
+          <embed src="txt/satisfaction_all.txt" width="650" height="300"> </embed>
+          Error: Embedded data could not be displayed.
+        </object>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+      <a href="txt/satisfaction_all.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="constModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Text File Example</h4>
+      <p>
+        <object data="txt/satisfaction_constraints.txt" width="650" height="300">
+          <embed src="txt/satisfaction_constraints.txt" width="650" height="300"> </embed>
+          Error: Embedded data could not be displayed.
+        </object>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+      <a href="txt/satisfaction_constraints.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
+    </div>
+  </div>
+
+    <!-- Modal Structure -->
+  <div id="varModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Text File Example</h4>
+      <p>
+        <object data="txt/variables.txt" width="650" height="300">
+          <embed src="txt/variables.txt" width="650" height="300"> </embed>
+          Error: Embedded data could not be displayed.
+        </object>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+      <a href="txt/variables.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
+    </div>
+  </div>
+
+
+
+<footer class="page-footer grey darken-2">
+  <div class="container">
+    <div class="row">
+      <div class="col s1">
+        <img src="img/logo.png">
+      </div>
+      <div class="col s6 offset-s2">
+        <h5 class="white-text">CR2G</h5>
+        <p class="grey-text text-lighten-4">We are a group of people who share interests in all aspects of constraint solving and optimization. We do research on applications of constraints and on discovering new constraint solving and optimization algorithms. We are also involved in educational activities, and in outreach activities.</p>
+      </div>
+      <div class="col s3">
+        <h5 class="white-text">Useful Links</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="#!">CR2G Website</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">UTEP Computer Science</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Martine Ceberio</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer-copyright grey darken-3">
     <div class="container">
-      <div class="row">
-        <div class="col s6">
-          <h5 class="white-text">NumConSol Footer</h5>
-          <p class="grey-text text-lighten-4">This is the footer.</p>
-        </div>
-        <div class="col s2 offset-s4">
-          <img src="img/logo.png">
-        </div>
-      </div>
+      © 2015 Mohandeseen
     </div>
-    <div class="footer-copyright grey darken-3">
-      <div class="container">
-        © 2015 Mohandeseen Studios
-      </div>
-    </div>
-  </footer>
+  </div>
+</footer>
 </body>
 </html>

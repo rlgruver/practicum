@@ -1,0 +1,23 @@
+#Remove all notes (including this one) before using as input file
+
+CONSTANTS
+objfunct = [-10, 10], t = .00000123;
+
+#Separate constants with commas, end field with semi-colon		
+#Must have at least one constant that sets the range of the
+#objective function. 
+#Optionally,may set any constants that will be used in #constraints.
+
+VARIABLES
+x in [-10, 10], y in [-8, 8], z in [-1,1];
+
+#Separate variables with commas, end field with semi-colon
+#List variables in the format "var in [domain lb, domain ub]"
+#lb = lower bound, ub = upper bound
+
+CONSTRAINTS
+x + x^2 = objfunct, y = x-2, z = tx;
+
+#Separate variables with commas, end field with semi-colon
+#Must include at least objective function
+#Any other constraints are optional

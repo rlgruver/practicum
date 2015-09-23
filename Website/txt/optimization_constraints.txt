@@ -1,0 +1,8 @@
+#Remove all notes (including this one) before using as input file
+
+CONSTRAINTS
+x + x^2 = objfunct, y = x-2, z = tx;
+
+#Separate variables with commas, end field with semi-colon
+#Must include at least objective function
+#Any other constraints are optional
