@@ -1,0 +1,6 @@
+CONSTANTS
+objfunct = [-10, 10], t = .00000123;
+VARIABLES
+x in [-10, 10],y in [-8, 8],z in [-2, 2];
+CONSTRAINTS
+x + x^2 = objfunct, y = x-2, z = tx;
