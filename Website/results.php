@@ -100,9 +100,9 @@
 //send File to cr2g server
 //write to file
      $inputFile = "txt/input.txt"; 
-     $remoteOutputFile = "input.txt.tmp.solution"; 
+     $remoteOutputFile = "input.txt.solution"; 
      $localOutputFile = "txt/output.txt"; 
-     $remoteDir="/code/spec/src/tests/";
+     $remoteDir="/code/spopt/tests/";
 
      if (!function_exists("ssh2_connect")) die("function ssh2_connect doesn't exist");
 
@@ -117,56 +117,61 @@
         // allright, we're in!
 
         // send a file
-        ssh2_scp_send($con, 'txt/input.txt', '/code/spec/src/tests/input.txt', 0644);
+        ssh2_scp_send($con, 'txt/input.txt', '/code/spopt/tests/input.txt', 0644);
         //change to directory and run python script
-        $stream = ssh2_exec($con, 'cd /code/spec/src; python Solver.py tests/input.txt');
-
-        // Create our SFTP resource
-        if (!$sftp = ssh2_sftp($con)) {
-          throw new Exception('Unable to create SFTP connection.');
+        if(!$stream = ssh2_exec($con, 'cd /code/spopt; python SpOpt.py tests/input.txt')){
+          throw new Exception('Unable to execute command.');
         }
 
-        // Remote stream
-        if (!$remoteStream = @fopen("ssh2.sftp://{$sftp}{$remoteDir}{$remoteOutputFile}", 'r')) {
-          throw new Exception("Unable to open remote file: $outputFile");
-        } 
+        else{
 
-        // Local stream
-        if (!$localStream = @fopen("{$localOutputFile}", 'w')) {
-          throw new Exception("Unable to open local file for writing: $localOutputFile");
-        }
-
-        // Write from our remote stream to our local stream
-        $read = 0;
-        $fileSize = filesize("ssh2.sftp://{$sftp}{$remoteDir}{$remoteOutputFile}");
-        while ($read < $fileSize && ($buffer = fread($remoteStream, $fileSize - $read))) {
-                    // Increase our bytes read
-          $read += strlen($buffer);
-
-                    // Write to our local file
-          if (fwrite($localStream, $buffer) === FALSE) {
-            throw new Exception("Unable to write to local file: $localOutputFile");
+          // Create our SFTP resource
+          if (!$sftp = ssh2_sftp($con)) {
+            throw new Exception('Unable to create SFTP connection.');
           }
-          else
-          {
-            echo "<div class='row col s12 center-align'>
-            <object data='txt/output.txt' class='white' style='border:1.5px solid #99CC00' width='700' height='400'>
-            <embed src='txt/output.txt' width='700' height='400'> </embed>
-            Error: Embedded data could not be displayed.
-            </object>  
-            </div>
-            <div class='row col s12 center-align'>
-            <a href='txt/output.txt' class='modal-action waves-effect waves-green btn' download>Download</a>
-            </div>";
+
+          // Remote stream
+          if (!$remoteStream = @fopen("ssh2.sftp://{$sftp}{$remoteDir}{$remoteOutputFile}", 'r')) {
+            throw new Exception("1 Unable to open remote file: $outputFile");
+          } 
+
+          // Local stream
+          if (!$localStream = @fopen("{$localOutputFile}", 'w')) {
+            throw new Exception("Unable to open local file for writing: $localOutputFile");
           }
+
+          // Write from our remote stream to our local stream
+          $read = 0;
+          $fileSize = filesize("ssh2.sftp://{$sftp}{$remoteDir}{$remoteOutputFile}");
+          while ($read < $fileSize && ($buffer = fread($remoteStream, $fileSize - $read))) {
+                      // Increase our bytes read
+            $read += strlen($buffer);
+
+                      // Write to our local file
+            if (fwrite($localStream, $buffer) === FALSE) {
+              throw new Exception("Unable to write to local file: $localOutputFile");
+            }
+            else
+            {
+              echo "<div class='row col s12 center-align'>
+              <object data='txt/output.txt' class='white' style='border:1.5px solid #99CC00' width='700' height='400'>
+              <embed src='txt/output.txt' width='700' height='400'> </embed>
+              Error: Embedded data could not be displayed.
+              </object>  
+              </div>
+              <div class='row col s12 center-align'>
+              <a href='txt/output.txt' class='modal-action waves-effect waves-green btn' download>Download</a>
+              </div>";
+            }
+          }
+
+          // Close our streams
+          fclose($localStream);
+          fclose($remoteStream);
+
+
+          ssh2_exec($con, 'exit');
         }
-
-        // Close our streams
-        fclose($localStream);
-        fclose($remoteStream);
-
-
-        ssh2_exec($con, 'exit');
 
       }
     }
