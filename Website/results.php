@@ -29,78 +29,81 @@
       <ul class="right hide-on-med-and-down" style="padding-right: 2cm">
         <li><a href="index.html">Optimization</a></li>
         <li><a href="satisfaction.html">Satisfaction</a></li>
-    </ul>
+      </ul>
     </div>
- </nav>
+  </nav>
 
-<div class="row">
-  <div class="col s12">
-    <h3 class="center-align">Solutions</h3>
+  <div class="row">
+    <div class="col s12">
+      <h3 class="center-align">Solutions</h3>
 
-    <?php
+      <?php
 
-    $myfile = fopen("txt/input.txt", "w") or die("Unable to open file!");
+      $myfile = fopen("txt/input.txt", "w") or die("Unable to open file!");
 
-    $txt = "CONSTANTS\n";
-    fwrite($myfile, $txt);
-
-    $objective = $_POST["objFnc"];
-    $txt = "objfunct = ".$objective."\n";
-    fwrite($myfile, $txt);
-
-    $txt = "VARIABLES\n";
-    fwrite($myfile, $txt);
+      $txt = "Variables\n";
+      fwrite($myfile, $txt);
 
 
-    $variables = $_POST["myVars"];
-    $lowerBound = $_POST["myDoms1"];
-    $upperBound = $_POST["myDoms2"];
-    $count = 0;
+      $variables = $_POST["myVars"];
+      $lowerBound = $_POST["myDoms1"];
+      $upperBound = $_POST["myDoms2"];
+      $count = 0;
 
-    $last_index = count($variables) -1;
+      $last_index = count($variables) -1;
 
-    foreach ($variables as $value) {
-      if($count ==  $last_index){
-       $txt = $variables[$count]." in [".$lowerBound[$count].", ".$upperBound[$count]."];\n";
+      foreach ($variables as $value) {
+        if($count ==  $last_index){
+         $txt = $variables[$count]." in [".$lowerBound[$count].", ".$upperBound[$count]."];\n";
+         fwrite($myfile, $txt);
+         $count ++;
+       }
+       else{
+         $txt = $variables[$count]." in [".$lowerBound[$count].", ".$upperBound[$count]."],";
+         fwrite($myfile, $txt);
+         $count ++;
+       }
+
+     }
+
+     $objective = $_POST["objFnc"];
+     $txt = $objective."\n";
+     fwrite($myfile, $txt);
+
+
+     if(!empty($_POST["constraints"])){
+       $txt = "CONSTRAINTS\n";
        fwrite($myfile, $txt);
-       $count ++;
-   }
-   else{
-       $txt = $variables[$count]." in [".$lowerBound[$count].", ".$upperBound[$count]."],";
+
+       $txt = $_POST["constraints"];
        fwrite($myfile, $txt);
-       $count ++;
-   }
+     }
+     else{
 
-}
-
-$txt = "CONSTRAINTS\n";
-fwrite($myfile, $txt);
-
-$txt = $_POST["constraints"];
-fwrite($myfile, $txt);
+     }
 
 
-fclose($myfile);
+     fclose($myfile);
 
 //go back and input error checking
 
 //send File to cr2g server
 //write to file
-$inputFile = "txt/input.txt"; 
-$remoteOutputFile = "input.txt.tmp.solution"; 
-$localOutputFile = "txt/output.txt"; 
-$remoteDir="/code/spec/src/tests/";
+     $inputFile = "txt/input.txt"; 
+     $remoteOutputFile = "input.txt.tmp.solution"; 
+     $localOutputFile = "txt/output.txt"; 
+     $remoteDir="/code/spec/src/tests/";
 
-if (!function_exists("ssh2_connect")) die("function ssh2_connect doesn't exist");
+     if (!function_exists("ssh2_connect")) die("function ssh2_connect doesn't exist");
 
 // log in at server1.example.com on port 22
-if(!($con = ssh2_connect("cr2g01.cs.utep.edu", 22))){
-    echo "fail: unable to establish connection\n";
-} else {
-    // try to authenticate with username root, password secretpassword
-    if(!ssh2_auth_password($con, "tamcgarity", "utep$2015")) {
-        echo "fail: unable to authenticate user\n";
+     if(!($con = ssh2_connect("cr2g01.cs.utep.edu", 22))){
+      echo "fail: unable to establish connection\n";
     } else {
+    // try to authenticate with username root, password secretpassword
+      if(!ssh2_auth_password($con, "tamcgarity", "utep$2015")) {
+        echo "fail: unable to authenticate user\n";
+      } else {
         // allright, we're in!
 
         // send a file
@@ -110,17 +113,17 @@ if(!($con = ssh2_connect("cr2g01.cs.utep.edu", 22))){
 
         // Create our SFTP resource
         if (!$sftp = ssh2_sftp($con)) {
-            throw new Exception('Unable to create SFTP connection.');
+          throw new Exception('Unable to create SFTP connection.');
         }
 
         // Remote stream
         if (!$remoteStream = @fopen("ssh2.sftp://{$sftp}{$remoteDir}{$remoteOutputFile}", 'r')) {
-            throw new Exception("Unable to open remote file: $outputFile");
+          throw new Exception("Unable to open remote file: $outputFile");
         } 
 
         // Local stream
         if (!$localStream = @fopen("{$localOutputFile}", 'w')) {
-            throw new Exception("Unable to open local file for writing: $localOutputFile");
+          throw new Exception("Unable to open local file for writing: $localOutputFile");
         }
 
         // Write from our remote stream to our local stream
@@ -128,24 +131,24 @@ if(!($con = ssh2_connect("cr2g01.cs.utep.edu", 22))){
         $fileSize = filesize("ssh2.sftp://{$sftp}{$remoteDir}{$remoteOutputFile}");
         while ($read < $fileSize && ($buffer = fread($remoteStream, $fileSize - $read))) {
                     // Increase our bytes read
-            $read += strlen($buffer);
+          $read += strlen($buffer);
 
                     // Write to our local file
-            if (fwrite($localStream, $buffer) === FALSE) {
-                throw new Exception("Unable to write to local file: $localOutputFile");
-            }
-            else
-            {
-                echo "<div class='row col s12 center-align'>
-                <object data='txt/output.txt' class='white' style='border:1.5px solid #99CC00' width='700' height='400'>
-                <embed src='txt/output.txt' width='700' height='400'> </embed>
-                Error: Embedded data could not be displayed.
-                </object>  
-                </div>
-                <div class='row col s12 center-align'>
-                <a href='txt/output.txt' class='modal-action waves-effect waves-green btn' download>Download</a>
-                </div>";
-            }
+          if (fwrite($localStream, $buffer) === FALSE) {
+            throw new Exception("Unable to write to local file: $localOutputFile");
+          }
+          else
+          {
+            echo "<div class='row col s12 center-align'>
+            <object data='txt/output.txt' class='white' style='border:1.5px solid #99CC00' width='700' height='400'>
+            <embed src='txt/output.txt' width='700' height='400'> </embed>
+            Error: Embedded data could not be displayed.
+            </object>  
+            </div>
+            <div class='row col s12 center-align'>
+            <a href='txt/output.txt' class='modal-action waves-effect waves-green btn' download>Download</a>
+            </div>";
+          }
         }
 
         // Close our streams
@@ -155,13 +158,13 @@ if(!($con = ssh2_connect("cr2g01.cs.utep.edu", 22))){
 
         ssh2_exec($con, 'exit');
 
+      }
     }
-}
 
-?>
+    ?>
 
 
-</div>
+  </div>
 </div>
 
 
