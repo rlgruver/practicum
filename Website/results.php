@@ -59,7 +59,7 @@
          $count ++;
        }
        else{
-         $txt = $variables[$count]." in [".$lowerBound[$count].", ".$upperBound[$count]."],";
+         $txt = $variables[$count]." in [".$lowerBound[$count].", ".$upperBound[$count]."],\n";
          fwrite($myfile, $txt);
          $count ++;
        }
