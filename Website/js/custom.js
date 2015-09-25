@@ -56,6 +56,36 @@
     document.getElementById('function').disabled=false;
   } 
 
+    window.onload = function() {
+    var fileInput = document.getElementById('fileInput');
+    var objectiveDisplayArea = document.getElementById('objFunction');
+
+    fileInput.addEventListener('change', function(e) {
+      var file = fileInput.files[0];
+      var textType = /text.*/;
+
+      if (file.type.match(textType)) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          var text = reader.result;
+          var vrbls = text.split("Variables");
+          var objt = vrbls[1].split("Objective");
+          objectiveDisplayArea.value = objt[1];
+
+          
+
+
+
+        }
+
+        reader.readAsText(file);  
+      } else {
+        alert("File not supported!");
+      }
+    });
+}
+
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal-trigger').leanModal();

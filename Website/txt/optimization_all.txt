@@ -15,4 +15,3 @@ range = [-1e+6,1e+6];
 
 #Separate objective function and range with a comma 
 #End field with semi-colon
-
