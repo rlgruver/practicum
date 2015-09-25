@@ -42,6 +42,8 @@
     document.getElementById('evaluation').disabled=true;
     document.getElementById('optimization').disabled=true;
     document.getElementById('speculation').disabled=true;
+    document.getElementById('domain').disabled=true;
+    document.getElementById('function').disabled=true;
 
   } 
   function enable() {
@@ -50,6 +52,8 @@
     document.getElementById('evaluation').disabled=false;
     document.getElementById('optimization').disabled=false;
     document.getElementById('speculation').disabled=false;
+    document.getElementById('domain').disabled=false;
+    document.getElementById('function').disabled=false;
   } 
 
   $(document).ready(function(){
