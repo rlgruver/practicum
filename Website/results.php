@@ -66,13 +66,16 @@
 
      }
 
+      $txt = "\nObjective\n";
+      fwrite($myfile, $txt);
+
      $objective = $_POST["objFnc"];
 
      $pieces = explode("range", $objective);
      $function = $pieces[0].trim("");
      $range = $pieces[1].trim("");
 
-     $txt = "\n".$function."\n";
+     $txt = $function."\n";
      fwrite($myfile, $txt);
      $txt = "range".$range."\n";
      fwrite($myfile, $txt);
