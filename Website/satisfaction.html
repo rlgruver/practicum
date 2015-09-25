@@ -176,58 +176,76 @@
 <div class="col s3 card-panel rightNav" >
   <h5 class="center-align">Options</h5>
   <br>
-  <div class="row center-align">
+  <div class="row">
+    <div class="col s6 center-align">
+      <input class="with-gap" name="group1" type="radio" id="def" checked="checked" onClick="disable()"/>
+      <label for="def">Default</label>
+    </div>
 
-    <input class="with-gap" name="group1" type="radio" id="def" checked="checked" onClick="disable()"/>
-    <label for="def">Default</label>
-
-    <input class="with-gap" name="group1" type="radio" id="custom" onClick="enable()"/>
-    <label for="custom">Custom</label>
+    <div class"col s6 center-align">
+      <input class="with-gap" name="group1" type="radio" id="custom" onClick="enable()"/>
+      <label for="custom">Custom</label>
+    </div>
 
   </div>
 
 
   <!-- ROW -->
+  <h8 style="color:#7FAA00">Precision</h8>
   <div class="row">
     <div class="input-field col s11">
       <input id="precision" type="text" class="validate" disabled >
-      <label>Precision</label>
+      <label class="active" for="precision">Enter Here</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s6 center-align">
+      <input class="filled-in" name="group2" type="checkbox" id="domain" disabled/>
+      <label for="domain">Domain</label>
+    </div>
+
+    <div class="col s6 center-align">
+      <input class="filled-in" name="group2" type="checkbox" id="function" disabled/>
+      <label for="function">Function</label>
+    </div>
+
+  </div>
+
+
+  <!-- ROW -->
+  <br>
+  <h8 style="color:#7FAA00">Consistency Technique</h8>
+  <div class="row">
+    <div class="input-field col s11">
+      <span class="css3-metro-dropdown">
+        <select name="dropdown-2" id="consistency" disabled>
+          <option value="def">Default</option>
+          <option value="neuton">interval newton</option>        
+          <option value="bc4">bc4</option>
+          <option value="hc4">hc4</option>
+          <option value="null">null</option>
+        </select>
+      </span>
     </div>
   </div>
 
   <!-- ROW -->
-          <h8 style="color:#7FAA00">Consistency Technique</h8>
-          <div class="row">
-            <div class="input-field col s11">
-                <span class="css3-metro-dropdown">
-                <select name="dropdown-2" id="consistency" disabled>
-                    <option value="def">Default</option>
-                    <option value="neuton">interval newton</option>        
-                    <option value="bc4">bc4</option>
-                    <option value="hc4">hc4</option>
-                    <option value="null">null</option>
-                </select>
-                </span>
-            </div>
-          </div>
-
-          <!-- ROW -->
-          <h8 style="color:#7FAA00">Integer Evaluation</h8>
-          <div class="row">
-            <div class="input-field col s11">
-                <span class="css3-metro-dropdown">
-                <select name="dropdown-2" id="evaluation" disabled>
-                    <option value="def">Default</option>
-                    <option value="neutral">neutral</option>        
-                    <option value="horner">horner</option>
-                    <option value="occ">occ grouping</option>
-                    <option value="monotonicity">monotonicity</option>
-                </select>
-                </span>
-            </div>
-          </div>
-
-
+  <br>
+  <h8 style="color:#7FAA00">Integer Evaluation</h8>
+  <div class="row">
+    <div class="input-field col s11">
+      <span class="css3-metro-dropdown">
+        <select name="dropdown-2" id="evaluation" disabled>
+          <option value="def">Default</option>
+          <option value="neutral">neutral</option>        
+          <option value="horner">horner</option>
+          <option value="occ">occ grouping</option>
+          <option value="monotonicity">monotonicity</option>
+        </select>
+      </span>
+    </div>
+  </div>
 </div>
 
 </form>
