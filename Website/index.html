@@ -66,17 +66,27 @@
             </div>
           </div>
         </div>
+        <!-- ROW -->
+        <div class="card-panel">
+          <div class="row">
+            <div class="row">
+              <h5 style="display:inline;">Constants</h5> <div class="grey-text" style="display:inline; font-size:small">(Optional)</div>
+
+            </div>
+            <div class="input-field col s6" style="display:block" id="constants">
+              <input id="constants" type="text" class="validate" name="constants" placeholder="Enter constants here.">
+            </div>
+          </div>
+        </div>
 
         <!-- ROW -->
         <div class="card-panel">
           <div class="row">
             <div class="row">
               <h5 style="display:inline;">Objective Function</h5>
-
             </div>
-            <div class="input-field col s6" style="display:block" id="objfnc">
-              <input id="objFunction" type="text" class="validate" name="objFnc">
-              <label class="active" for="objFunction">Enter Here</label>
+            <div class="input-field col s12" style="display:block" id="objfnc">
+              <input id="objFunction" type="text" class="validate" name="objFnc" placeholder="Enter objective function here.">
             </div>
           </div>
         </div>
@@ -117,7 +127,7 @@
 
           <div class="col s6">
             <div class="input-field col s2 " id="dynamicVariable">
-              <input type="text" class="validate" name="myVars[]">
+              <input type="text" class="validate center-align" name="myVars[]" placeholder="X">
             </div>
 
             <div class="input-field col s1 right-align" id="inText">
@@ -129,7 +139,7 @@
           </div>
 
           <div class="input-field col s2" id="dynamicDomain1">
-            <input type="text" class="validate" name="myDoms1[]">
+            <input type="text" class="validate center-align" name="myDoms1[]" placeholder="-8">
           </div>
 
           <div class="input-field col s1 right-align" id="commaText">
@@ -138,7 +148,7 @@
 
 
          <div class="input-field col s2" id="dynamicDomain2">
-          <input type="text" class="validate" name="myDoms2[]">
+          <input type="text" class="validate center-align" name="myDoms2[]" placeholder="8">
         </div>
 
         <div class="input-field col s1 left-align" id="rightBracket">
@@ -204,8 +214,7 @@
   <h8 style="color:#7FAA00">Precision</h8>
   <div class="row">
     <div class="input-field col s11">
-      <input id="precision" type="text" class="validate" disabled >
-      <label class="active" for="precision">Enter Here</label>
+      <input id="precision" type="text" class="validate" value="1e-6" disabled >
     </div>
   </div>
 
@@ -247,8 +256,7 @@
     <div class="input-field col s11">
       <span class="css3-metro-dropdown">
         <select name="dropdown-2" id="evaluation" disabled>
-          <option value="def">Default</option>
-          <option value="neutral">neutral</option>        
+          <option value="def">Natural</option>     
           <option value="horner">horner</option>
           <option value="occ">occ grouping</option>
           <option value="monotonicity">monotonicity</option>
@@ -264,10 +272,10 @@
       <label>Local Optimization</label>
       <div class="switch">
         <label>
-          Off
-          <input type="checkbox" id="optimization" disabled>
+          No
+          <input type="checkbox" id="optimization" checked="checked" disabled>
           <span class="lever"></span>
-          On
+          Yes
         </label>
       </div>
     </div>
@@ -275,10 +283,10 @@
       <label>Speculation</label>
       <div class="switch">
         <label>
-          Off
-          <input type="checkbox" id="speculation" disabled>
+          No
+          <input type="checkbox" id="speculation" checked="checked" disabled>
           <span class="lever"></span>
-          On
+          Yes
         </label>
       </div>
     </div>

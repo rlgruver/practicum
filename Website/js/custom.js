@@ -2,17 +2,17 @@
   var counter = 1;   
   function addVars(divName){
     var newdiv = document.createElement('div');
-    newdiv.innerHTML = " <br><input type='text' name='myVars[]' class='validate'>";
+    newdiv.innerHTML = " <br><input type='text' name='myVars[]' class='validate center-align'>";
     document.getElementById(divName).appendChild(newdiv);
   }
   function addDoms1(divName){
     var newdiv = document.createElement('div');
-    newdiv.innerHTML =  " <br><input type='text' name='myDoms1[]' class='validate'>";
+    newdiv.innerHTML =  " <br><input type='text' name='myDoms1[]' class='validate center-align'>";
     document.getElementById(divName).appendChild(newdiv);
   } 
   function addDoms2(divName){
     var newdiv = document.createElement('div');
-    newdiv.innerHTML =  " <br><input type='text' name='myDoms2[]' class='validate'>";
+    newdiv.innerHTML =  " <br><input type='text' name='myDoms2[]' class='validate center-align'>";
     document.getElementById(divName).appendChild(newdiv);
     counter++;
   }     
