@@ -1,17 +1,12 @@
-CONSTANTS
-t=0.000123,
-g=9.8;
+OPTIONS
+Precision = 1e-6
+Consistency = default
+Interval Eval = natural
+Local Opt = yes
+Speculation = yes
 
 VARIABLES
-X1 in [-10,10],
-X2 in [-10,10],
-X3 in [-10,10],
-X4 in [-10,10];
+ in [,];
 
 OBJECTIVE
-100*(x1^2-x2)^2+(x1-1)^2+100*(x2^2-x3)^2+(x2-1)^2+100*(x3^2-x4)^2+(x3-1)^2;
-
-CONSTRAINTS
-x1<=x2,
-x3=x1*t,
-abs(x4)>=g;
+;

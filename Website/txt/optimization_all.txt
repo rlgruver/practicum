@@ -1,36 +1,30 @@
 #This section is for any constant values that you wish to use in the
-#Constraints section. This is an optional section, and should be removed
-#completely if not used. Separate entries with commas, and end the field
-#with a semi-colon.
+#Constraints section. This is an OPTIONAL section, and SHOULD BE REMOVED
+#COMPLETELY IF NOT USED. Separate entries with a comma and a line break.
 
 CONSTANTS
 t=0.000123,
-g=9.8;
+g=9.8
 
-#This section is for listing ALL variables used in the Objective function
-#and/or Constraints. Separate variables with commas, and end the field with
-#a semi-colon. List variables in the format "var in [domain lb, domain ub]"
-#lb = lower bound, ub = upper bound.
+#This section is for listing ALL variables used in the Objective Function
+#and Constraints sections. Separate entries with a comma and a line #break. List variables in the format "var in [domain lb, domain ub]" where #lb = lower #bound, ub = upper bound.
 
 VARIABLES
 x1 in [-10, 10],
 x2 in [-10, 10],
 x3 in [-10, 10],
-x4 in [-10, 10];
+x4 in [-10, 10]
 
 #This section is for the Objective Function. Make sure that all variables
-#used in the Objective Function are listed in the Variables section.
-#End the field with a semi-colon.
+#used in the objective function are listed in the Variables section.
 
 OBJECTIVE
-100*(x1^2 - x2)^2 + (x1 - 1)^2 + 100*(x2^2 - x3)^2 + (x2 - 1)^2 + 100*(x3^2 - x4)^2 + (x3 - 1)^2;
+100*(x1^2 - x2)^2 + (x1 - 1)^2 + 100*(x2^2 - x3)^2 + (x2 - 1)^2 + 100*(x3^2 - x4)^2 + (x3 - 1)^2
 
 #This section is for any constraints that must be satisfied by the variables
-#used in the Objective Function. This is an optional section, and should
-#be removed completely if not used. Separate entries with commas, and end
-#the field with a semi-colon.
+#used in the Objective Function. This is an OPTIONAL section, and SHOULD #BE REMOVED COMPLETELY IF NOT USED. Separate entries with commas.
 
 CONSTRAINTS
-x1<=x2,
+x1 <= x2,
 x3 = x1 * t,
-abs(x4) >= g;
+abs(x4) >= g

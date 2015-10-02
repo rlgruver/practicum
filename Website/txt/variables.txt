@@ -1,9 +1,7 @@
-#Remove all notes (including this one) before using as input file
+#Separate entries with a comma and a line break. ALL variables used in the #Objective Function and Constraints sections MUST be listed here.
+#List variables in the format "var in [domain lb, domain ub]" where
+#lb = lower bound, ub = upper bound.
 
 VARIABLES
 X1 in [-100, 100],
-X2 in [-100, 100];
-
-#Separate variables with commas, end field with semi-colon
-#List variables in the format "var in [domain lb, domain ub]"
-#lb = lower bound, ub = upper bound
+X2 in [-100, 100]

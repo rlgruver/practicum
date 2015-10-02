@@ -214,7 +214,7 @@
   <h8 style="color:#7FAA00">Precision</h8>
   <div class="row">
     <div class="input-field col s11">
-      <input id="precision" type="text" class="validate" value="1e-6" disabled >
+      <input id="precision" type="text" class="validate" value="1e-6" name="precision" disabled >
     </div>
   </div>
 
@@ -238,12 +238,12 @@
   <div class="row">
     <div class="input-field col s11">
       <span class="css3-metro-dropdown">
-        <select name="dropdown-2" id="consistency" disabled>
-          <option value="def">Default</option>
-          <option value="neuton">interval newton</option>        
+        <select id="consistency" name="consis" disabled>
+          <option value="default">Default</option>
+          <option value="newton">Interval Newton</option>        
           <option value="bc4">bc4</option>
           <option value="hc4">hc4</option>
-          <option value="null">null</option>
+          <option value="null">Null</option>
         </select>
       </span>
     </div>
@@ -255,11 +255,12 @@
   <div class="row">
     <div class="input-field col s11">
       <span class="css3-metro-dropdown">
-        <select name="dropdown-2" id="evaluation" disabled>
-          <option value="def">Natural</option>     
-          <option value="horner">horner</option>
-          <option value="occ">occ grouping</option>
-          <option value="monotonicity">monotonicity</option>
+        <select id="evaluation" name="eval" disabled>
+          <option value="natural">Natural</option>
+          <option value="center">Center</option>     
+          <option value="horner">Horner</option>
+          <option value="occ">OCC Grouping</option>
+          <option value="monotonicity">Monotonicity</option>
         </select>
       </span>
     </div>
@@ -273,7 +274,7 @@
       <div class="switch">
         <label>
           No
-          <input type="checkbox" id="optimization" checked="checked" disabled>
+          <input type="checkbox" id="optimization" checked="checked" name="optimization" disabled>
           <span class="lever"></span>
           Yes
         </label>
@@ -284,7 +285,7 @@
       <div class="switch">
         <label>
           No
-          <input type="checkbox" id="speculation" checked="checked" disabled>
+          <input type="checkbox" id="speculation" checked="checked" name="speculation" disabled>
           <span class="lever"></span>
           Yes
         </label>
@@ -302,8 +303,8 @@
   <div class="modal-content">
     <h4>Text File Example</h4>
     <p>
-      <object data="txt/optimization_all.txt" width="650" height="300">
-        <embed src="txt/optimization_all.txt" width="650" height="300"> </embed>
+      <object data="txt/optimization_all.txt" width="650" height="250">
+        <embed src="txt/optimization_all.txt" width="650" height="250"> </embed>
         Error: Embedded data could not be displayed.
       </object>
     </p>
@@ -319,8 +320,8 @@
   <div class="modal-content">
     <h4>Text File Example</h4>
     <p>
-      <object data="txt/optimization_constraints.txt" width="650" height="300">
-        <embed src="txt/optimization_constraints.txt" width="650" height="300"> </embed>
+      <object data="txt/optimization_constraints.txt" width="650" height="250">
+        <embed src="txt/optimization_constraints.txt" width="650" height="250"> </embed>
         Error: Embedded data could not be displayed.
       </object>
     </p>
@@ -336,8 +337,8 @@
   <div class="modal-content">
     <h4>Text File Example</h4>
     <p>
-      <object data="txt/variables.txt" width="650" height="300">
-        <embed src="txt/variables.txt" width="650" height="300"> </embed>
+      <object data="txt/variables.txt" width="650" height="250">
+        <embed src="txt/variables.txt" width="650" height="250"> </embed>
         Error: Embedded data could not be displayed.
       </object>
     </p>

@@ -1,8 +1,6 @@
-#Remove all notes (including this one) before using as input file
+#Separate entries with a comma and a line break. Only use constants that #are entered in the Constants section.
 
 CONSTRAINTS
-x + x^2 = objfunct, y = x-2, z = tx;
+y = x-2, 
+z = tx         #Shows and example of a constraint using a constant (t).
 
-#Separate variables with commas, end field with semi-colon
-#Must include at least objective function
-#Any other constraints are optional

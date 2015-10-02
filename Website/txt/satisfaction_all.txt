@@ -1,21 +1,21 @@
-#Remove all notes (including this one) before using as input file
+#This section is for any constant values that you wish to use in the
+#Constraints section. This is an OPTIONAL section, and SHOULD BE REMOVED
+#COMPLETELY IF NOT USED. Separate entries with a comma and a line break.
 
 CONSTANTS
-t = .00000123;
+t = .00000123
 
-#Separate constants with commas, end field with semi-colon		
-#Optionally,may set any constants that will be used in #constraints.
+#This section is for listing ALL variables used in the Constraints section. #Separate entries with a comma and a line break. List variables in the format 
+#"var in [domain lb, domain ub]" where lb = lower bound, ub = upper bound.
 
 VARIABLES
-x in [-10, 10], y in [-8, 8], z in [-1,1];
+x in [-10, 10], 
+y in [-8, 8], 
+z in [-1,1]
 
-#Separate variables with commas, end field with semi-colon
-#List variables in the format "var in [domain lb, domain ub]"
-#lb = lower bound, ub = upper bound
+#This section is for ALL constraints that must be satisfied by the variables
+#listed in the Variables section. You must include at least one constraint. #Separate entries with a comma and a line break.
 
 CONSTRAINTS
-y = x-2, z = tx;
-
-#Separate variables with commas, end field with semi-colon
-#Must include at least one constraint
-
+y = x-2,     
+z = tx       #Shows and example of a constraint using a constant (t).
