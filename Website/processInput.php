@@ -18,7 +18,7 @@ $speculation = $_POST["speculation"];
 
 
 
-$myfile = fopen("txt/input.txt", "w") or die("Unable to open file!");
+$myfile = fopen("writable/input.txt", "w") or die("1 Unable to open file!");
 
 //OPTIONS Section
 //Creating header
@@ -69,7 +69,7 @@ else{
 
 
 //Downloadable file begins here
-$userfile = fopen("txt/upload.txt", "w") or die("Unable to open file!");
+$userfile = fopen("txt/upload.txt", "w") or die("Unable to open 'upload.txt' file!");
 
 
 //CONSTANTS Section

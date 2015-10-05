@@ -12,7 +12,7 @@
   <script>
   function redirectPage()
   {
-   parent.document.getElementById("frame1").src = "txt/output.txt";
+   parent.document.getElementById("frame1").src = "writable/output.txt";
  }
  </script>
 </head>
@@ -21,8 +21,8 @@
 
 <?php
 
-$localInputFile = "txt/input.txt"; 
-$localOutputFile = "txt/output.txt"; 
+$localInputFile = "writable/input.txt"; 
+$localOutputFile = "writable/output.txt"; 
 $remoteInputFile = "/code/spopt-stable/tests/input.txt";
 $remoteOutputFile = "/code/spopt-stable/tests/input.txt.out"; 
 
