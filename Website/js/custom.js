@@ -191,8 +191,8 @@ window.onload = function() {
             objectiveDisplayArea.value = getObjective[0];
           }
           else{
-            secondSplit[0] = secondSplit[0].replace(/\s/g,"");
-            objectiveDisplayArea.value = secondSplit[0];
+            secondSplit[1] = secondSplit[1].replace(/\s/g,"");
+            objectiveDisplayArea.value = secondSplit[1];
           }
 
 
