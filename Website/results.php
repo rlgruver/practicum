@@ -49,7 +49,7 @@
   </div>
 
  <div class='row col s12 center-align'>
-  <a href='writable/upload.txt' class='modal-action waves-effect waves-green btn' download>Download Input File</a>
+  <a href='txt/upload.txt' class='modal-action waves-effect waves-green btn' download>Download Input File</a>
    <a href='writable/output.txt' class='modal-action waves-effect waves-green btn' download>Download Output File</a>
  </div>
  <br>
