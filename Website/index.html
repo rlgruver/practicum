@@ -73,7 +73,7 @@
               <h5 style="display:inline;">Constants</h5> <div class="grey-text" style="display:inline; font-size:small">(Optional)</div>
 
             </div>
-            <div class="input-field col s6" style="display:block" id="constants">
+            <div class="input-field col s6" style="display:block" id="constant">
               <input id="constants" type="text" class="validate" name="constants" placeholder="Enter constants here.">
             </div>
           </div>
@@ -105,7 +105,7 @@
               <br><br>
               <div class="btn green darken-3">
                 <span>Browse</span>
-                <input type="file" name="constraintFile">
+                <input type="file" name="constraintFile" id="constraintFile">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -126,8 +126,8 @@
           </div>
 
           <div class="col s6">
-            <div class="input-field col s2 " id="dynamicVariable">
-              <input type="text" class="validate center-align" name="myVars[]" placeholder="X">
+            <div class="input-field col s2 " id="dynamicVariables">
+              <input type="text" class="validate center-align" name="myVars[]" placeholder="X" id="initialVariable">
             </div>
 
             <div class="input-field col s1 right-align" id="inText">
@@ -138,8 +138,8 @@
             <div class="varText">[</div>
           </div>
 
-          <div class="input-field col s2" id="dynamicDomain1">
-            <input type="text" class="validate center-align" name="myDoms1[]" placeholder="-8">
+          <div class="input-field col s2" id="dynamicLowerBounds">
+            <input type="text" class="validate center-align" name="myLower[]" placeholder="-8" id="initialLowerBound">
           </div>
 
           <div class="input-field col s1 right-align" id="commaText">
@@ -147,8 +147,8 @@
          </div>
 
 
-         <div class="input-field col s2" id="dynamicDomain2">
-          <input type="text" class="validate center-align" name="myDoms2[]" placeholder="8">
+         <div class="input-field col s2" id="dynamicUpperBounds">
+          <input type="text" class="validate center-align" name="myUpper[]" placeholder="8" id="initialUpperBound">
         </div>
 
         <div class="input-field col s1 left-align" id="rightBracket">
@@ -161,7 +161,7 @@
 
         <div class="btn green darken-3">
           <span>Browse</span>
-          <input type="file" name="varFile">
+          <input type="file" name="varFile" id="varFile">
         </div>
         <div class="file-path-wrapper">
           <input class="file-path validate" type="text">
@@ -171,7 +171,7 @@
     </div>
     <div class="row">
       <div class="button col s1">
-        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariable'); addDoms1('dynamicDomain1');addDoms2('dynamicDomain2');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
+        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariables',''); addLower('dynamicLowerBounds','');addUpper('dynamicUpperBounds','');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
       </div>
     </div>
   </div>

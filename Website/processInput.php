@@ -4,8 +4,8 @@
 
 //POST variables from the GUI
 $variables = $_POST["myVars"];
-$lowerBounds = $_POST["myDoms1"];
-$upperBounds = $_POST["myDoms2"];
+$lowerBounds = $_POST["myLower"];
+$upperBounds = $_POST["myUpper"];
 $constants = $_POST["constants"];
 $constraints = $_POST["constraints"];
 $objectiveFunction = $_POST["objFnc"];
