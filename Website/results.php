@@ -48,9 +48,13 @@
     </div>
   </div>
 
+ <div class='row col s12 center-align'>
+  <a href='writable/upload.txt' class='modal-action waves-effect waves-green btn' download>Download Input File</a>
+   <a href='writable/output.txt' class='modal-action waves-effect waves-green btn' download>Download Output File</a>
+ </div>
+ <br>
 
-
-<footer class="page-footer grey darken-2">
+ <footer class="page-footer grey darken-2">
   <div class="container">
     <div class="row">
       <div class="col s1">
