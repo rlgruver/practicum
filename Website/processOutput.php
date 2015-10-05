@@ -11,89 +11,60 @@
 
   <script>
   function redirectPage()
-    {
-     parent.document.getElementById("frame1").src = "txt/output.txt";
-    }
-  </script>
+  {
+   parent.document.getElementById("frame1").src = "txt/output.txt";
+ }
+ </script>
 </head>
 
 </html>
 
 <?php
-//send File to cr2g server
-//write to file
 
-     $inputFile = "txt/input.txt"; 
-     $remoteOutputFile = "input.txt.solution"; 
-     $localOutputFile = "txt/output.txt"; 
-     $remoteDir="/code/spopt/tests/";
+$localInputFile = "txt/input.txt"; 
+$localOutputFile = "txt/output.txt"; 
+$remoteInputFile = "/code/spopt-stable/tests/input.txt";
+$remoteOutputFile = "/code/spopt-stable/tests/input.txt.out"; 
 
-     if (!function_exists("ssh2_connect")) die("function ssh2_connect doesn't exist");
+set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
+include('Net/SSH2.php');
+include('Net/SFTP.php');
 
-// log in at server1.example.com on port 22
-     if(!($con = ssh2_connect("cr2g01.cs.utep.edu", 22))){
-      echo "fail: unable to establish connection\n";
-    } else {
-    // try to authenticate with username root, password secretpassword
-      if(!ssh2_auth_password($con, "tamcgarity", "utep$2015")) {
-        echo "fail: unable to authenticate user\n";
-      } else {
-        // allright, we're in!
+//ssh connect to cr2g server 
+$ssh = new Net_SSH2('cr2g01.cs.utep.edu',22);
+if (!$ssh->login('rlgruver', 'utep$2015')) { 
+  exit('ssh Login Failed');
+}
 
-        // send a file
-        ssh2_scp_send($con, 'txt/input.txt', '/code/spopt/tests/input.txt', 0644);
-        //change to directory and run python script
-        if(!$stream1 = ssh2_exec($con, 'cd /code/spopt; python SpOpt.py tests/input.txt')){
-          throw new Exception('Unable to execute command.');
-        }
-
-        else{
-          
-          stream_set_blocking($stream1, true);
-          // The command may not finish properly if the stream is not read to end
-          $output = stream_get_contents($stream1);
-        }
-
-          // Create our SFTP resource
-          if (!$sftp = ssh2_sftp($con)) {
-            throw new Exception('Unable to create SFTP connection.');
-          }
-
-          // Remote stream
-          if (!$remoteStream = @fopen("ssh2.sftp://{$sftp}{$remoteDir}{$remoteOutputFile}", 'r')) {
-            throw new Exception("1 Unable to open remote file: $outputFile");
-          } 
-
-          // Local stream
-          if (!$localStream = @fopen("{$localOutputFile}", 'w')) {
-            throw new Exception("Unable to open local file for writing: $localOutputFile");
-          }
-
-          // Write from our remote stream to our local stream
-          $read = 0;
-          $fileSize = filesize("ssh2.sftp://{$sftp}{$remoteDir}{$remoteOutputFile}");
-          while ($read < $fileSize && ($buffer = fread($remoteStream, $fileSize - $read))) {
-                      // Increase our bytes read
-            $read += strlen($buffer);
-
-                      // Write to our local file
-            if (fwrite($localStream, $buffer) === FALSE) {
-              throw new Exception("Unable to write to local file: $localOutputFile");
-            }
-            else
-            {
-              echo "<script>redirectPage();</script>";
-            }
-          }
-
-          // Close our streams
-          fclose($localStream);
-          fclose($remoteStream);
+//sftp connect to cr2g server
+$sftp = new Net_SFTP('cr2g01.cs.utep.edu',22);
+if (!$sftp->login('tamcgarity', 'utep$2015')) { 
+  exit('sftp Login Failed');
+}
 
 
-          ssh2_exec($con, 'exit');
 
-      }
-    }
+  //send input file to cr2g server 
+$sftp->put($remoteInputFile, $localInputFile,  NET_SFTP_LOCAL_FILE);
+$sftp->chmod(0777, $remoteInputFile);
 
-    ?>
+  //execute python script
+if(!$ssh->exec('cd /code/spopt-stable; python SpOpt.py tests/input.txt')){
+  throw new Exception('Unable to execute command.');
+}
+
+else{
+      //get output contents
+  if(!$sftp->get($remoteOutputFile, $localOutputFile)){
+    throw new Exception('Unable to get output file.');
+  }
+  else{
+    echo "<script>redirectPage();</script>";
+  }
+  
+}
+
+
+
+
+?>
