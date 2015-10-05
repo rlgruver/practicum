@@ -65,12 +65,90 @@ window.onload = function() {
   var constantDisplayArea = document.getElementById('constants');
   var constraintDisplayArea = document.getElementById('constraints');
 
+//**********************************CONSTRAINTS ONLY*************
   constraintInput.addEventListener('change', function(e){
-    alert("ayyLmao");
+
+    var file = constraintInput.files[0];
+    var textType = 'text/plain';
+
+    if(file.type.match(textType)){
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        var text = reader.result;
+        var constraintSplit = text.split("CONSTRAINTS");
+        constraintSplit[1] = constraintSplit[1].replace(/\s/g,"");
+        constraintDisplayArea.value = constraintSplit[1];
+      }
+      reader.readAsText(file); 
+    }
+
+    else{
+      alert("File not supported!");
+    }
   });
+
+//*****************************VARIABLES ONLY****************
+  variableInput.addEventListener('change', function(e){
+    var file = variableInput.files[0];
+    var textType = 'text/plain';
+
+    if(file.type.match(textType)){
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        var text = reader.result;
+        var getVariableList = text.split("VARIABLES");
+        getVariableList[1] = getVariableList[1].replace(/\s/g,"");
+        getVariableList[1] = getVariableList[1].replace(/in[[\]]/gi,"SPLITHERE");
+        getVariableList[1] = getVariableList[1].replace(/[\]],/g,"SPLITHERE");
+        getVariableList[1] = getVariableList[1].replace(/[\]]/g,"SPLITHERE");
+
+        var getVarNames = getVariableList[1].split("SPLITHERE");
+        getVarNames.pop();
+
+        var i = 0;
+        var name = getVarNames[i];
+        i++;
+
+          //lower and upper bounds
+        var bounds = getVarNames[i].split(",");
+        var lower = bounds[0];
+        var upper = bounds[1];
+        document.getElementById('initialVariable').value = name;
+        document.getElementById('initialLowerBound').value = lower;
+        document.getElementById('initialUpperBound').value = upper;
+        i++;
+
+        while(i < getVarNames.length){
+            //Variable Name
+          var name = getVarNames[i];
+          i++;
+
+            //lower and upper bounds
+          var bounds = getVarNames[i].split(",");
+          var lower = bounds[0];
+          var upper = bounds[1];
+
+          addVars('dynamicVariables',name); 
+          addLower('dynamicLowerBounds',lower);
+          addUpper('dynamicUpperBounds',upper);
+          addText('inText','leftBracket','commaText','rightBracket');
+          i++;
+        }
+      }
+      reader.readAsText(file); 
+    }
+
+    else{
+      alert("File not supported!");
+    }
+  });
+
+//**************************************ALL INPUTS**********************
   fileInput.addEventListener('change', function(e) {
     var file = fileInput.files[0];
-    var textType = /text.*/;
+    var textType = 'text/plain';
 
     if (file.type.match(textType)) {
       var reader = new FileReader();
