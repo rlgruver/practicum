@@ -37,6 +37,11 @@
 	color: inherit;
 }
 
+.error{
+  font-size:9pt;
+  color:red;
+  visibility:hidden;
+}
 
 /*custom drop down select menu*/
  
