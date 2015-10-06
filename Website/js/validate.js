@@ -3,6 +3,7 @@ function validate_form(){
 	var varObjective = varArrayObjective();
 	//var varConstraints =function varArrayConstraints();
 	var varVariables = varArrayVariables();
+	var varConstants = varArrayConstants();
 	var valid = true;
 
 	var match1 = (varObjective.length == varVariables.length) && varObjective.every(function(element, index) {
@@ -51,6 +52,24 @@ function varArrayVariables(){
 	}
 
 	return varArr;
+}
+
+function varArrayConstants(){
+	var constants = document.getElementById("constants").value;
+	var tmpArr = constants.split(/[^a-zA-Z0-9']+/g);
+	var varArr = new Array();
+	var count = 0;
+
+	 for (var i=0; i<tmpArr.length; i++){
+	 	if(/[a-zA-Z]/.test(tmpArr[i])){
+	 		varArr[count]=tmpArr[i];
+	 		count++;
+	 	}
+	 }
+
+	 varArrUnique = $.unique(varArr);
+	 return varArrUnique;
+
 }
           
           
