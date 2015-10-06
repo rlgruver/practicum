@@ -45,12 +45,20 @@ function varArrayVariables(){
 	var varArr = new Array();
 	var form = document.forms.form1;
 	var varNames = form.elements['myVars[]'];
+	var varLength = varNames.length;
 
-	for (var i=0; i<varNames.length ;i++)
-	{
-		varArr[i]=varNames[i].value;
+	if (varLength == undefined){
+
+		varArr = [varNames.value];
 	}
+	else{
+		for (var i=0; i<varNames.length ;i++)
+		{
+			varArr[i]=varNames[i].value;
+		}
 
+	}
+	alert(varArr.toString());
 	return varArr;
 }
 
@@ -67,9 +75,7 @@ function varArrayConstants(){
 	 	}
 	 }
 
-	 varArrUnique = $.unique(varArr);
-	 return varArrUnique;
-
+	 return varArr;
 }
           
           
