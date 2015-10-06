@@ -18,6 +18,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
   <script src="js/custom.js"></script>
+  <script src="js/validate.js"></script>
 </head>
 
 
@@ -38,7 +39,7 @@
 
   <div class="row">
     <br>
-    <form class="col s12" id="form1" action="results.php" method="post">
+    <form class="col s12" id="form1" name="form1" onsubmit="return validate_form()" action="results.php" method="post">
 
       <div class="col s12">
         <div class="row card-panel blue-grey darken-1 white-text">
@@ -75,6 +76,7 @@
             </div>
             <div class="input-field col s6" style="display:block" id="constant">
               <input id="constants" type="text" class="validate" name="constants" placeholder="Enter constants here.">
+              <span id="error1" class="error">Error: Please include Constants</span>
             </div>
           </div>
         </div>
@@ -128,6 +130,8 @@
           <div class="col s6">
             <div class="input-field col s2 " id="dynamicVariables">
               <input type="text" class="validate center-align" name="myVars[]" placeholder="X" id="initialVariable">
+
+
             </div>
 
             <div class="input-field col s1 right-align" id="inText">
