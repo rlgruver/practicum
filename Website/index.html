@@ -76,7 +76,6 @@
             </div>
             <div class="input-field col s6" style="display:block" id="constant">
               <input id="constants" type="text" class="validate" name="constants" placeholder="Enter constants here.">
-              <span id="error1" class="error">Error: Please include Constants</span>
             </div>
           </div>
         </div>
@@ -89,6 +88,7 @@
             </div>
             <div class="input-field col s12" style="display:block" id="objfnc">
               <input id="objFunction" type="text" class="validate" name="objFnc" placeholder="Enter objective function here.">
+              <span id="errorMatch1" class="error">Error: Variables used in Objective Function don't match Variables And Domains section</span>
             </div>
           </div>
         </div>
@@ -130,8 +130,6 @@
           <div class="col s6">
             <div class="input-field col s2 " id="dynamicVariables">
               <input type="text" class="validate center-align" name="myVars[]" placeholder="X" id="initialVariable">
-
-
             </div>
 
             <div class="input-field col s1 right-align" id="inText">
