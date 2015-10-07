@@ -18,7 +18,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
   <script src="js/custom.js"></script>
-  <script src="js/validate.js"></script>
+  <script src="js/validateOptimization.js"></script>
 </head>
 
 
@@ -88,7 +88,7 @@
             </div>
             <div class="input-field col s12" style="display:block" id="objfnc">
               <input id="objFunction" type="text" class="validate" name="objFnc" placeholder="Enter objective function here.">
-              <span id="errorMatch1" class="error">Error: Variables used in Objective Function don't match Variables And Domains section</span>
+              <span id="errorMatch1" class="error">Error: Variables used in Objective Function don't match Variables And Domains</span>
             </div>
           </div>
         </div>
@@ -102,6 +102,7 @@
             </div>
             <div class="input-field col s6">
               <textarea placeholder="Enter constraints here." id="constraints" class="textarea" form="form1" name="constraints"></textarea>
+              <span id="errorMatch2" class="error">Error: Variables used in Constraints don't match Variables And Domains or Constants</span>
             </div>
             <div class="file-field input-field col s5 offset-s1">
               <br><br>
