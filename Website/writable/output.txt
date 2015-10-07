@@ -1,0 +1,5 @@
+RESULTS
+	Search: Complete
+	Solutions: 0
+	Elapsed time: 332.961082458 ms
+	Best upper bound: Infinity

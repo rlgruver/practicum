@@ -9,6 +9,16 @@
 	padding-top: 10px;
 }
 
+.textSample{
+  width: 100%;
+  height: 100%;
+}
+
+.objectSample{
+  width: 100%;
+  height: 400px;
+}
+
 .inz{
 	font-size: 15px;
 	padding-top: 25px;
