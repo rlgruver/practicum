@@ -1,0 +1,3 @@
+CONSTRAINTS
+y = x-2, 
+z = tx
