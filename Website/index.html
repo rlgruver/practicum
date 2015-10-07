@@ -18,6 +18,10 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
+  <!-- Underscore Library for array functions -->
+  <script type="text/javascript" src ="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+  <script type="text/javascript" src ="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
   <script src="js/custom.js"></script>
   <script src="js/validateOptimization.js"></script>
 </head>
@@ -89,7 +93,6 @@
             </div>
             <div class="input-field col s12" style="display:block" id="objfnc">
               <input id="objFunction" type="text" class="validate" name="objFnc" placeholder="Enter objective function here.">
-              <span id="errorMatch1" class="error">Error: Variables used in Objective Function don't match Variables And Domains</span>
             </div>
           </div>
         </div>
@@ -103,7 +106,6 @@
             </div>
             <div class="input-field col s6">
               <textarea placeholder="Enter constraints here." id="constraints" class="textarea" form="form1" name="constraints"></textarea>
-              <span id="errorMatch2" class="error">Error: Variables used in Constraints don't match Variables And Domains or Constants</span>
             </div>
             <div class="file-field input-field col s5 offset-s1">
               <br><br>
@@ -175,7 +177,8 @@
     </div>
     <div class="row">
       <div class="button col s1">
-        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariables'); addLower('dynamicLowerBounds');addUpper('dynamicUpperBounds');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
+        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariables',''); addLower('dynamicLowerBounds','');addUpper('dynamicUpperBounds','');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
+        <span id="errorMatch" class="error">Error: Variable mismatch detected!</span>
       </div>
     </div>
   </div>

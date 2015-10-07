@@ -34,7 +34,7 @@ include('Net/SFTP.php');
 $ssh = new Net_SSH2('cr2g01.cs.utep.edu',22);
 if (!$ssh->login('rlgruver', 'utep$2015')) { 
   exit('ssh Login Failed');
-}
+$ssh->setTimeout(1);
 
 //sftp connect to cr2g server
 $sftp = new Net_SFTP('cr2g01.cs.utep.edu',22);

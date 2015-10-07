@@ -4,23 +4,18 @@ function validate_form(){
 	var varObjective = varArrayObjective();
 	var varConstraints = varArrayConstraints();
 	var varVariables = varArrayVariables();
-	var combinedVar = varVariables.concat(varConstants);
+	var comboVarAndConstants = _.union(varVariables,varConstants);
+	var comboObjAndConstraints = _.union(varObjective,varConstraints);
 
-alert(combinedVar.toString());
 
-	var match1 = (varObjective.length == varVariables.length) && varObjective.every(function(element, index) {
-		return element === varVariables[index]; 
+	var match1 = (comboVarAndConstants.length == comboObjAndConstraints.length) && comboVarAndConstants.every(function(element, index) {
+		return element === comboObjAndConstraints[index]; 
 	});
 
-	var match2 = (varConstraints.length == combinedVar.length) && varConstraints.every(function(element, index) {
-		return element === combinedVar[index]; 
-	});
+	alert(match1);
 
 	if(!match1){
-		document.getElementById("errorMatch1").style.visibility = "visible";
-		if(!match2){
-			document.getElementById("errorMatch2").style.visibility = "visible";
-		}
+		document.getElementById("errorMatch").style.visibility = "visible";
 
 		valid = false;
 	}
@@ -60,9 +55,7 @@ function varArrayObjective(){
 	 		count++;
 	 	}
 	 }
-	 
-	 var varArrUnique = $.unique(varArr);
-	 return varArrUnique;
+	 return varArr;
 }
 
 function varArrayConstraints(){
@@ -77,9 +70,7 @@ function varArrayConstraints(){
 	 		count++;
 	 	}
 	 }
-	
-	 var varArrUnique = $.unique(varArr);
-	 return varArrUnique;
+	 return varArr;
 }
 
 function varArrayVariables(){
