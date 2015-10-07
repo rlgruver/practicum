@@ -6,7 +6,7 @@ function validate_form(){
 	var varVariables = varArrayVariables();
 	var combinedVar = varVariables.concat(varConstants);
 
-//alert(varConstraints.toString());
+alert(combinedVar.toString());
 
 	var match1 = (varObjective.length == varVariables.length) && varObjective.every(function(element, index) {
 		return element === varVariables[index]; 
