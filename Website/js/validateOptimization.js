@@ -1,38 +1,12 @@
 function validate_form(){
 	var valid = true;
-
-	var comboVarAndConstants = _.union(varArrayVariables(),varArrayConstants());
-	var comboObjAndConstraints = _.union(varArrayObjective(),varArrayConstraints());
-	var varsAndDomains = checkVarsAndDomains();
-
-	var objFunction = document.getElementById("objFunction").value;
-	var constraints = document.getElementById("constraints").value;
-	var match = _.isMatch(comboVarAndConstants.sort(),comboObjAndConstraints.sort());
 	
-	if(!match){
-		document.getElementById("error1").style.visibility = "visible";
-		valid = false;
-	}
+	var objFunction = objFunctionValidate();
+	var constraints = constraintsValidate();
+	var varsAndDomains = varsDomainValidate();
+	var matchVars = matchVarsValidate();
 
-	if(objFunction == "" | objFunction == null){
-		document.getElementById("error2").style.visibility = "visible";
-		valid = false;
-	}
-
-	if(!varsAndDomains){
-		document.getElementById("error3").style.visibility = "visible";
-		valid = false;
-	}
-
-	if(!(parenthesesBalanced(objFunction))||!(bracketsBalanced(objFunction))){
-		document.getElementById("error4").style.visibility = "visible";
-		valid = false;
-	}
-
-	if(!(parenthesesBalanced(constraints))||!(bracketsBalanced(constraints))){
-		document.getElementById("error5").style.visibility = "visible";
-		valid = false;
-	}
+	var valid = objFunction && constraints && varsAndDomains && matchVars;
 
 	if(valid == false){
 		alert("Please fix errors then try submitting again.");
@@ -40,6 +14,108 @@ function validate_form(){
 
 	return valid;
 }
+
+////////////////////////////
+//VALIDATE BY SECTION
+function objFunctionValidate(){
+	var valid = true;
+	var objF = document.getElementById("objFunction").value;
+
+	if(objF == "" | objF == null){
+		document.getElementById("error2").style.visibility = "visible";
+		valid = false;
+	}
+	else if(!(parenthesesBalanced(objF))||!(bracketsBalanced(objF))){
+		document.getElementById("error4").style.visibility = "visible";
+		valid = false;
+	}
+
+	// if(!(mathExp(objF))){
+	// 	document.getElementById("error6").style.visibility = "visible";
+	// 	valid = false;
+	// }
+
+	return valid;
+}
+
+function constraintsValidate(){
+	valid = true;
+	var con = document.getElementById("constraints").value;
+
+	if(!(parenthesesBalanced(con))||!(bracketsBalanced(con))){
+		document.getElementById("error5").style.visibility = "visible";
+		valid = false;
+	}
+
+	// if(!(mathExp(con))){
+	// 	document.getElementById("error7").style.visibility = "visible";
+	// 	valid = false;
+	// }
+
+	return valid;
+}
+
+ function varsDomainValidate(){
+	var valid = true;
+	var varTmp = varArrayVariables();
+	var lowerTmp = varArrayLower();
+	var upperTmp = varArrayUpper();
+	
+	var arrayVar = new Array();
+	var arrayLower = new Array();
+	var arrayUpper = new Array();
+
+	for (var i=0; i<varTmp.length ;i++){
+			if(!(varTmp[i]==''))
+			{
+				arrayVar[i]=varTmp[i].value;
+			}
+		}
+
+	for (var i=0; i<lowerTmp.length ;i++){
+			if(!(lowerTmp[i]==''))
+			{
+				arrayLower[i]=lowerTmp[i].value;
+			}
+		}
+
+	for (var i=0; i<upperTmp.length ;i++){
+			if(!(upperTmp[i]==''))
+			{
+				arrayUpper[i]=upperTmp[i].value;
+			}
+		}
+
+	if(!(arrayVar.length == arrayLower.length && arrayVar.length == arrayUpper.length && arrayUpper.length == arrayLower.length)){
+		valid = false;
+	}
+
+	if(valid==false){
+		document.getElementById("error3").style.visibility = "visible";
+	}
+
+	return valid;
+}
+
+
+function matchVarsValidate(){
+	var valid = true;
+	var comboVarAndConstants = _.union(varArrayVariables(),varArrayConstants());
+	var comboObjAndConstraints = _.union(varArrayObjective(),varArrayConstraints());
+
+	var match = _.isMatch(comboVarAndConstants.sort(),comboObjAndConstraints.sort());
+
+	if(!match){
+		document.getElementById("error1").style.visibility = "visible";
+		valid = false;
+	}
+
+	return valid;
+}
+
+
+/////////////////////////////////
+//VALIDATION SETUP
 
 function varArrayConstants(){
 	var constants = document.getElementById("constants").value;
@@ -146,48 +222,8 @@ function varArrayUpper(){
 	return varArr;
 }
 
- function checkVarsAndDomains(){
-	var pass = true;
-	var varTmp = varArrayVariables();
-	var lowerTmp = varArrayLower();
-	var upperTmp = varArrayUpper();
-	
-	var arrayVar = new Array();
-	var arrayLower = new Array();
-	var arrayUpper = new Array();
 
-	for (var i=0; i<varTmp.length ;i++){
-			if(!(varTmp[i]==''))
-			{
-				arrayVar[i]=varTmp[i].value;
-			}
-		}
-
-	for (var i=0; i<lowerTmp.length ;i++){
-			if(!(lowerTmp[i]==''))
-			{
-				arrayLower[i]=lowerTmp[i].value;
-			}
-		}
-
-	for (var i=0; i<upperTmp.length ;i++){
-			if(!(upperTmp[i]==''))
-			{
-				arrayUpper[i]=upperTmp[i].value;
-			}
-		}
-
-	if(!(arrayVar.length == arrayLower.length && arrayVar.length == arrayUpper.length && arrayUpper.length == arrayLower.length)){
-		pass = false;
-	}
-
-	return pass;
-}
-
-
-
-function parenthesesBalanced(s)
-{
+function parenthesesBalanced(s){
   var open = (arguments.length > 1) ? arguments[1] : '(';
   var close = (arguments.length > 2) ? arguments[2] : ')';  
   var c = 0;
@@ -207,8 +243,7 @@ function parenthesesBalanced(s)
   return c == 0;
 }
  
-function bracketsBalanced(s)
-{
+function bracketsBalanced(s){
   var open = (arguments.length > 1) ? arguments[1] : '[';
   var close = (arguments.length > 2) ? arguments[2] : ']';  
   var c = 0;
@@ -228,5 +263,8 @@ function bracketsBalanced(s)
   return c == 0;
 }
 
-
-
+function mathExp (exp) {
+	var firstChar = /^[a-zA-Z0-9]+$/.test(exp.charAt(0));
+	var lastChar = /^[a-zA-Z0-9]+$/.test(exp.charAt(exp.length-1));
+	return (firstChar && lastChar);
+}
