@@ -1,22 +1,36 @@
 function validate_form(){
 	var valid = true;
-	var varConstants = varArrayConstants();
-	var varObjective = varArrayObjective();
-	var varConstraints = varArrayConstraints();
-	var varVariables = varArrayVariables();
-	var comboVarAndConstants = _.union(varVariables,varConstants);
-	var comboObjAndConstraints = _.union(varObjective,varConstraints);
 
+	var comboVarAndConstants = _.union(varArrayVariables(),varArrayConstants());
+	var comboObjAndConstraints = _.union(varArrayObjective(),varArrayConstraints());
+	var varsAndDomains = checkVarsAndDomains();
 
-	var match1 = (comboVarAndConstants.length == comboObjAndConstraints.length) && comboVarAndConstants.every(function(element, index) {
-		return element === comboObjAndConstraints[index]; 
-	});
+	var objFunction = document.getElementById("objFunction").value;
+	var constraints = document.getElementById("constraints").value;
+	var match = _.isMatch(comboVarAndConstants.sort(),comboObjAndConstraints.sort());
+	
+	if(!match){
+		document.getElementById("error1").style.visibility = "visible";
+		valid = false;
+	}
 
-	alert(match1);
+	if(objFunction == "" | objFunction == null){
+		document.getElementById("error2").style.visibility = "visible";
+		valid = false;
+	}
 
-	if(!match1){
-		document.getElementById("errorMatch").style.visibility = "visible";
+	if(!varsAndDomains){
+		document.getElementById("error3").style.visibility = "visible";
+		valid = false;
+	}
 
+	if(!(parenthesesBalanced(objFunction))||!(bracketsBalanced(objFunction))){
+		document.getElementById("error4").style.visibility = "visible";
+		valid = false;
+	}
+
+	if(!(parenthesesBalanced(constraints))||!(bracketsBalanced(constraints))){
+		document.getElementById("error5").style.visibility = "visible";
 		valid = false;
 	}
 
@@ -33,50 +47,51 @@ function varArrayConstants(){
 	var varArr = new Array();
 	var count = 0;
 
-	 for (var i=0; i<tmpArr.length; i++){
-	 	if(/[a-zA-Z]/.test(tmpArr[i])){
-	 		varArr[count]=tmpArr[i];
-	 		count++;
-	 	}
-	 }
+	for (var i=0; i<tmpArr.length; i++){
+		if(/[a-zA-Z]/.test(tmpArr[i])){
+			varArr[count]=tmpArr[i];
+			count++;
+		}
+	}
 
-	 return varArr;
+	return varArr;
 }
 
 function varArrayObjective(){
-	 var objFunction = document.getElementById("objFunction").value;
-	 var tmpArr = objFunction.split(/[^a-zA-Z0-9']+/g);
-	 var varArr = new Array();
-	 var count = 0;
+	var objFunction = document.getElementById("objFunction").value;
+	var clean = objFunction.replace(/abs|sin|cos|tan|cot|sec|csc|sqrt|exp/g, "");
+	var tmpArr = clean.split(/[^a-zA-Z0-9']+/g);
+	var varArr = new Array();
+	var count = 0;
 
-	 for (var i=0; i<tmpArr.length; i++){
-	 	if(/[a-zA-Z]/.test(tmpArr[i])){
-	 		varArr[count]=tmpArr[i];
-	 		count++;
-	 	}
-	 }
-	 return varArr;
+	for (var i=0; i<tmpArr.length; i++){
+		if(/[a-zA-Z]/.test(tmpArr[i])){
+			varArr[count]=tmpArr[i];
+			count++;
+		}
+	}
+	return varArr;
 }
 
 function varArrayConstraints(){
-	 var constraints = document.getElementById("constraints").value;
-	 var tmpArr = constraints.split(/[^a-zA-Z0-9']+/g);
-	 var varArr = new Array();
-	 var count = 0;
+	var constraints = document.getElementById("constraints").value;
+	var clean = constraints.replace(/abs|sin|cos|tan|cot|sec|csc|sqrt|exp/g, "");
+	var tmpArr = clean.split(/[^a-zA-Z0-9']+/g);
+	var varArr = new Array();
+	var count = 0;
 
-	 for (var i=0; i<tmpArr.length; i++){
-	 	if(/[a-zA-Z]/.test(tmpArr[i])){
-	 		varArr[count]=tmpArr[i];
-	 		count++;
-	 	}
-	 }
-	 return varArr;
+	for (var i=0; i<tmpArr.length; i++){
+		if(/[a-zA-Z]/.test(tmpArr[i])){
+			varArr[count]=tmpArr[i];
+			count++;
+		}
+	}
+	return varArr;
 }
 
 function varArrayVariables(){
 	var varArr = new Array();
-	var form = document.forms.form1;
-	var varNames = form.elements['myVars[]'];
+	var varNames = document.forms.form1.elements['myVars[]'];
 	var varLength = varNames.length;
 
 	if (varLength == undefined){
@@ -92,6 +107,87 @@ function varArrayVariables(){
 	}
 	return varArr;
 }
-      
-          
-         
+
+function checkVarsAndDomains(){
+	var pass = true;
+	var varTmp = varArrayVariables();
+	var lowerTmp = document.forms.form1.elements['myLower[]'];
+	var upperTmp = document.forms.form1.elements['myUpper[]'];
+	var arrayVar = new Array();
+	var arrayLower = new Array();
+	var arrayUpper = new Array();
+
+	for (var i=0; i<varTmp.length ;i++){
+			if(!(varTmp[i].value==''))
+			{
+				arrayVar[i]=varTmp[i].value;
+			}
+		}
+
+	for (var i=0; i<lowerTmp.length ;i++){
+			if(!(lowerTmp[i].value==''))
+			{
+				arrayLower[i]=lowerTmp[i].value;
+			}
+		}
+
+	for (var i=0; i<upperTmp.length ;i++){
+			if(!(upperTmp[i].value==''))
+			{
+				arrayUpper[i]=upperTmp[i].value;
+			}
+		}
+
+	if(!(arrayVar.length == arrayLower.length == arrayUpper.length)){
+		pass = false;
+	}
+
+	return pass;
+}
+
+
+
+function parenthesesBalanced(s)
+{
+  var open = (arguments.length > 1) ? arguments[1] : '(';
+  var close = (arguments.length > 2) ? arguments[2] : ')';  
+  var c = 0;
+  for(var i = 0; i < s.length; i++)
+  {
+    var ch = s.charAt(i);
+    if ( ch == open )
+    {
+      c++;
+    }
+    else if ( ch == close )
+    {
+      c--;
+      if ( c < 0 ) return false;
+    }
+  }
+  return c == 0;
+}
+ 
+function bracketsBalanced(s)
+{
+  var open = (arguments.length > 1) ? arguments[1] : '[';
+  var close = (arguments.length > 2) ? arguments[2] : ']';  
+  var c = 0;
+  for(var i = 0; i < s.length; i++)
+  {
+    var ch = s.charAt(i);
+    if ( ch == open )
+    {
+      c++;
+    }
+    else if ( ch == close )
+    {
+      c--;
+      if ( c < 0 ) return false;
+    }
+  }
+  return c == 0;
+}
+
+
+
