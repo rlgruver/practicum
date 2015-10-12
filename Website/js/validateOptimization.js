@@ -108,11 +108,50 @@ function varArrayVariables(){
 	return varArr;
 }
 
+function varArrayLower(){
+	var varArr = new Array();
+	var lowerTmp = document.forms.form1.elements['myLower[]'];
+	var varLength = lowerTmp.length;
+
+	if (varLength == undefined){
+
+		varArr = [lowerTmp.value];
+	}
+	else{
+		for (var i=0; i<lowerTmp.length ;i++)
+		{
+			varArr[i]=lowerTmp[i].value;
+		}
+
+	}
+	return varArr;
+}
+
+function varArrayUpper(){
+	var varArr = new Array();
+	var upperTmp = document.forms.form1.elements['myUpper[]'];
+	var varLength = upperTmp.length;
+
+	if (varLength == undefined){
+
+		varArr = [upperTmp.value];
+	}
+	else{
+		for (var i=0; i<upperTmp.length ;i++)
+		{
+			varArr[i]=upperTmp[i].value;
+		}
+
+	}
+	return varArr;
+}
+
 function checkVarsAndDomains(){
 	var pass = true;
 	var varTmp = varArrayVariables();
-	var lowerTmp = document.forms.form1.elements['myLower[]'];
-	var upperTmp = document.forms.form1.elements['myUpper[]'];
+	var lowerTmp = varArrayLower();
+	var upperTmp = varArrayUpper();
+	
 	var arrayVar = new Array();
 	var arrayLower = new Array();
 	var arrayUpper = new Array();

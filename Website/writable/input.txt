@@ -9,4 +9,4 @@ VARIABLES
 x in [-1,1];
 
 OBJECTIVE
-;
+x;
