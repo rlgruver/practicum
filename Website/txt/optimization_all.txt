@@ -7,8 +7,8 @@ t=0.000123,
 g=9.8
 
 #This section is for listing ALL variables used in the Objective Function
-#and Constraints sections. Separate entries with a comma and a line 
-#break. List variables in the format "var in [domain lb, domain ub]" where 
+#and Constraints sections. Separate entries with a comma and a line
+#break. List variables in the format "var in [domain lb, domain ub]" where
 #lb = lower bound, ub = upper bound.
 
 VARIABLES
@@ -24,7 +24,7 @@ OBJECTIVE
 100*(x1^2 - x2)^2 + (x1 - 1)^2 + 100*(x2^2 - x3)^2 + (x2 - 1)^2 + 100*(x3^2 - x4)^2 + (x3 - 1)^2
 
 #This section is for any constraints that must be satisfied by the variables
-#used in the Objective Function. This is an OPTIONAL section, and SHOULD 
+#used in the Objective Function. This is an OPTIONAL section, and SHOULD
 #BE REMOVED COMPLETELY IF NOT USED. Separate entries with commas.
 
 CONSTRAINTS
