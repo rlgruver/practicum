@@ -10,11 +10,11 @@ $constants = $_POST["constants"];
 $constraints = $_POST["constraints"];
 $objectiveFunction = $_POST["objFunction"];
 
-$precision = $_POST["precision"];
-$consistency = $_POST["consis"];
-$intervalEval = $_POST["eval"];
-$localOpt = $_POST["optimization"];
-$speculation = $_POST["speculation"];
+$precision = isset($_POST['precision']) ? $_POST['precision'] : '';
+$consistency = isset($_POST['consis']) ? $_POST['consis'] : '';
+$intervalEval = isset($_POST['eval']) ? $_POST['eval'] : '';
+$localOpt = isset($_POST['optimization']) ? $_POST['optimization'] : '';
+$speculation = isset($_POST['speculation']) ? $_POST['speculation'] : '';
 
 
 
@@ -28,7 +28,7 @@ fwrite($myfile, $txt);
 //Check if default using the consistency var, if it returns empty, it means that the GUI elements are disabled which 
 //only happens when the default button is selected in the options pane
 
-if(empty($consistency)){
+if($consistency == ''){
 	$txt = "Precision = 1e-6\nConsistency = default\nInterval Eval = natural\nLocal Opt = yes\nSpeculation = yes\n\n";
 	fwrite($myfile, $txt);
 }

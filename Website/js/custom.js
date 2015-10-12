@@ -267,8 +267,6 @@ window.onload = function() {
 
         for(var i = 0; i< stripped.length; i++){
           populateInput(stripped[i], positionArray[i]);
-          alert(stripped[i]);
-          alert(positionArray[i]);
         }
 
         }
