@@ -1,5 +1,5 @@
 VARIABLES
-x in [1,2];
+x1 in [2,2];
 
 OBJECTIVE
-x;
+100*(x1^2-x1)^2;

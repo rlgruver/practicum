@@ -1,4 +1,5 @@
-#Separate entries with a comma and a line break. ALL variables used in the #Objective Function and Constraints sections MUST be listed here.
+#Separate entries with a comma and a line break. ALL variables used in the 
+#Objective Function and Constraints sections MUST be listed here.
 #List variables in the format "var in [domain lb, domain ub]" where
 #lb = lower bound, ub = upper bound.
 

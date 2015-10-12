@@ -1,6 +1,6 @@
 #Separate entries with a comma and a line break. Must include at least
-#one constraint. Only use constants that are entered in the Constants #section.
+#one constraint. Only use constants that are entered in the Constants section.
 
 CONSTRAINTS
 y = x-2, 
-z = tx     #Shows and example of a constraint using a constant (t).
+z = tx     #Shows an example of a constraint using a constant (t).

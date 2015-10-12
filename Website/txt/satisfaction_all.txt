@@ -5,7 +5,8 @@
 CONSTANTS
 t = .00000123
 
-#This section is for listing ALL variables used in the Constraints section. #Separate entries with a comma and a line break. List variables in the format 
+#This section is for listing ALL variables used in the Constraints section. 
+#Separate entries with a comma and a line break. List variables in the format 
 #"var in [domain lb, domain ub]" where lb = lower bound, ub = upper bound.
 
 VARIABLES
@@ -14,8 +15,9 @@ y in [-8, 8],
 z in [-1,1]
 
 #This section is for ALL constraints that must be satisfied by the variables
-#listed in the Variables section. You must include at least one constraint. #Separate entries with a comma and a line break.
+#listed in the Variables section. You must include at least one constraint. 
+#Separate entries with a comma and a line break.
 
 CONSTRAINTS
 y = x-2,     
-z = tx       #Shows and example of a constraint using a constant (t).
+z = tx       #Shows an example of a constraint using a constant (t).
