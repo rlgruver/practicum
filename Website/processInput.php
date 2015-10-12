@@ -164,6 +164,16 @@ if(!empty($constraints)){
 		$pieces[$count] = trim($pieces[$count]," ");
 		$pieces[$count] = trim((preg_replace('/\s+/', '', $pieces[$count])));
 
+		if(strpos($pieces[$count], "=>") !== false){
+			$operatorSplit = explode("=>", $pieces[$count]);
+			$pieces[$count] = $operatorSplit[1]."<=".$operatorSplit[0];
+		}
+
+		if(strpos($pieces[$count], ">=") !== false){
+			$operatorSplit = explode(">=", $pieces[$count]);
+			$pieces[$count] = $operatorSplit[1]."<=".$operatorSplit[0];
+		}
+
 		//checking for last constant to add the ';' character
 		if($count == $last_index){
 			$txt = $pieces[$count].";";

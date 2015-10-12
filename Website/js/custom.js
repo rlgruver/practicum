@@ -239,10 +239,20 @@ window.onload = function() {
         positionArray.sort();
 
         var index = positionArray.indexOf(variablePosition);
-        positionArray[index] = "VARIABLES";
+        if(positionArray[index] == -1){
+          positionArray.splice(index,1);
+        }
+        else{
+          positionArray[index] = "VARIABLES";
+        }
 
         index = positionArray.indexOf(objectivePosition);
-        positionArray[index] = "OBJECTIVE";
+        if(positionArray[index] == -1){
+          positionArray.splice(index,1);
+        }
+        else{
+          positionArray[index] = "OBJECTIVE";
+        }
 
         index = positionArray.indexOf(constraintPosition);
         if(positionArray[index] == -1){
@@ -272,6 +282,7 @@ window.onload = function() {
         }
 
         reader.readAsText(file);  
+        fileInput.value = "";
       } else {
         alert("File not supported!");
       }

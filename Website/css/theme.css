@@ -1,5 +1,6 @@
 .objectSample{
     position:fixed;
+    overflow-y: hidden;
     width:93%;
     height:70%;
 }
