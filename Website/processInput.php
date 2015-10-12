@@ -8,7 +8,7 @@ $lowerBounds = $_POST["myLower"];
 $upperBounds = $_POST["myUpper"];
 $constants = $_POST["constants"];
 $constraints = $_POST["constraints"];
-$objectiveFunction = $_POST["objFnc"];
+$objectiveFunction = $_POST["objFunction"];
 
 $precision = $_POST["precision"];
 $consistency = $_POST["consis"];
