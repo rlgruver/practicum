@@ -1,5 +1,5 @@
 VARIABLES
-x in [-1,1];
+x in [1,2];
 
 OBJECTIVE
 x;

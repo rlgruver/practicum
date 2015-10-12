@@ -146,7 +146,7 @@ function varArrayUpper(){
 	return varArr;
 }
 
-function checkVarsAndDomains(){
+ function checkVarsAndDomains(){
 	var pass = true;
 	var varTmp = varArrayVariables();
 	var lowerTmp = varArrayLower();
@@ -157,27 +157,27 @@ function checkVarsAndDomains(){
 	var arrayUpper = new Array();
 
 	for (var i=0; i<varTmp.length ;i++){
-			if(!(varTmp[i].value==''))
+			if(!(varTmp[i]==''))
 			{
 				arrayVar[i]=varTmp[i].value;
 			}
 		}
 
 	for (var i=0; i<lowerTmp.length ;i++){
-			if(!(lowerTmp[i].value==''))
+			if(!(lowerTmp[i]==''))
 			{
 				arrayLower[i]=lowerTmp[i].value;
 			}
 		}
 
 	for (var i=0; i<upperTmp.length ;i++){
-			if(!(upperTmp[i].value==''))
+			if(!(upperTmp[i]==''))
 			{
 				arrayUpper[i]=upperTmp[i].value;
 			}
 		}
 
-	if(!(arrayVar.length = arrayLower.length = arrayUpper.length)){
+	if(!(arrayVar.length == arrayLower.length && arrayVar.length == arrayUpper.length && arrayUpper.length == arrayLower.length)){
 		pass = false;
 	}
 
