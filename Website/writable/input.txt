@@ -6,6 +6,7 @@ Local Opt = yes
 Speculation = yes
 
 VARIABLES
+x in [-8,8];
 
 OBJECTIVE
-;
+x+23409320349203420349230203423;

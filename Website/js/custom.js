@@ -214,7 +214,7 @@ window.onload = function() {
     }
   });
 
-//**************************************ALL INPUTS**********************
+//**************************************ALL INPUTS************************
   fileInput.addEventListener('change', function(e) {
     var file = fileInput.files[0];
     var textType = 'text/plain';
