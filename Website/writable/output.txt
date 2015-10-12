@@ -1,5 +1,20 @@
 RESULTS
 	Search: Complete
-	Solutions: 0
-	Elapsed time: 332.961082458 ms
-	Best upper bound: Infinity
+	Solutions: 2
+	Elapsed time: 19.4289684296 ms
+	Best upper bound: -1.0000000000000000
+SOLUTIONS
+	SOLUTION #1
+		OBJECTIVE FUNCTION
+		[-1.0000000000000000, -1.0000000000000000]
+		Precision: -0
+		DOMAIN
+		x in [-1.0000000000000000, -1.0000000000000000]
+		Precision: 0
+	SOLUTION #2
+		OBJECTIVE FUNCTION
+		[-1.0000000000000000, -1.0000000000000000]
+		Precision: -0
+		DOMAIN
+		x in [-1.0000000000000000, -1.0000000000000000]
+		Precision: 0

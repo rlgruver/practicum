@@ -1,0 +1,12 @@
+OPTIONS
+Precision = 1e-6
+Consistency = default
+Interval Eval = natural
+Local Opt = yes
+Speculation = yes
+
+VARIABLES
+ in [,];
+
+OBJECTIVE
+;
