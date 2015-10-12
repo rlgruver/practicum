@@ -138,7 +138,7 @@ function checkVarsAndDomains(){
 			}
 		}
 
-	if(!(arrayVar.length == arrayLower.length == arrayUpper.length)){
+	if(!(arrayVar.length = arrayLower.length = arrayUpper.length)){
 		pass = false;
 	}
 
