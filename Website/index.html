@@ -24,6 +24,9 @@
 
   <script src="js/custom.js"></script>
   <script src="js/validateOptimization.js"></script>
+
+
+
 </head>
 
 
@@ -41,10 +44,9 @@
     </div>
   </nav>
 
-
   <div class="row">
     <br>
-    <form class="col s12" id="form1" name="form1" onsubmit="return validate_form()" action="results.php" method="post">
+    <form class="col s12" id="form1" name="form1" onsubmit="return validate_form();" action="results.php" method="post">
 
       <div class="col s12">
         <div class="row card-panel blue-grey darken-1 white-text">
@@ -92,7 +94,9 @@
               <h5 style="display:inline;">Objective Function</h5>
             </div>
             <div class="input-field col s12" style="display:block" id="objfnc">
-              <input id="objFunction" type="text" class="validate" name="objFnc" placeholder="Enter objective function here.">
+              <input id="objFunction" type="text" class="validate" name="objFunction" placeholder="Enter objective function here.">
+              <span id="error2" class="error">Error: Please do not leave blank</span><br>
+              <span id="error4" class="error">Error: Missing parenthesis or brackets</span>
             </div>
           </div>
         </div>
@@ -106,6 +110,7 @@
             </div>
             <div class="input-field col s6">
               <textarea placeholder="Enter constraints here." id="constraints" class="textarea" form="form1" name="constraints"></textarea>
+              <span id="error5" class="error">Error: Missing parenthesis or brackets</span>
             </div>
             <div class="file-field input-field col s5 offset-s1">
               <br><br>
@@ -180,7 +185,8 @@
         <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariables',''); addLower('dynamicLowerBounds','');addUpper('dynamicUpperBounds','');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
       </div>
     </div>
-    <span id="errorMatch" class="error">Error: Variable mismatch detected!</span>
+    <span id="error1" class="error">Error: Variable mismatch detected</span><br>
+    <span id="error3" class="error">Error: Please fill out all fields</span>
   </div>
 
 

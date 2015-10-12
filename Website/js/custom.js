@@ -2,7 +2,7 @@
 var counter = 1;   
 function addVars(divName,value){
   var newdiv = document.createElement('div');
-  newdiv.innerHTML = " <br><input type='text' name='myVars[]' class='validate center-align' value='"+value+"'>";
+  newdiv.innerHTML = " <br><input type='text' name='myVars[]' class='validate center-align' value="+value+">";
   document.getElementById(divName).appendChild(newdiv);
 }
 function addLower(divName,value){
