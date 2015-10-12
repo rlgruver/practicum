@@ -69,6 +69,7 @@
  
 :root .css3-metro-dropdown
 {
+    width:100%;
     position: relative;
     display: inline-block;
     border: 0;
@@ -94,7 +95,7 @@
 :root .css3-metro-dropdown select
 {
    height: 40px;
-   width:250px;
+   width:100%;
    border: 0;
    vertical-align: middle;
    font-family: 'Roboto', sans-serif;
