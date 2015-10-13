@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="teal">
+<body class="teal" style = "background-image: url(img/background.png)">
 
 
   <nav class="grey darken-2">
