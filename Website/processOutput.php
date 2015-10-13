@@ -49,12 +49,12 @@ if (!$sftp->login('rlgruver', 'utep$2015')) {
 $sftp->put($remoteInputFile, $localInputFile,  NET_SFTP_LOCAL_FILE);
 $sftp->chmod(0777, $remoteInputFile);
 
-  //execute python script
-if(!$ssh->exec('cd /code/spopt-stable; python SpOpt.py tests/input.txt')){
-  throw new Exception('Unable to execute command.');
-}
+//execute python script with 5 minute timeout
+$ssh->setTimeout(300);
+$ssh->exec('cd /code/spopt-stable; python SpOpt.py tests/input.txt');
 
-else{
+
+
       //get output contents
   if(!$sftp->get($remoteOutputFile, $localOutputFile)){
     throw new Exception('Unable to get output file.');
@@ -63,7 +63,7 @@ else{
     echo "<script>redirectPage();</script>";
   }
   
-}
+
 
 
 ?>
