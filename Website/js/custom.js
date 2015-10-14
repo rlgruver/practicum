@@ -25,6 +25,9 @@ function stopRKey(evt) {
 
 document.onkeypress = stopRKey; 
 
+function sortNumber(a,b){
+  return a - b;
+}
 
 function addText(inz,lez,coz,riz){
   var newdiv = document.createElement('div');
@@ -236,7 +239,7 @@ window.onload = function() {
         positionArray.push(objectivePosition);
         positionArray.push(constraintPosition);
         positionArray.push(constantPosition);
-        positionArray.sort();
+        positionArray.sort(sortNumber);
 
         var index = positionArray.indexOf(variablePosition);
         if(positionArray[index] == -1){
