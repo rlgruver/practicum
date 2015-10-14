@@ -76,6 +76,7 @@ function populateInput(value, type){
 
   if(type == "VARIABLES"){
     value = value.replace(/\s/g,"");
+    value = value.replace(/;/g,"");
     value = value.replace(/in[[\]]/gi,"SPLITHERE");
     value = value.replace(/[\]],/g,"SPLITHERE");
     value = value.replace(/[\]]/g,"SPLITHERE");
@@ -116,14 +117,18 @@ function populateInput(value, type){
 
   if(type == "OBJECTIVE"){
     value = value.replace(/\s/g, "");
+    value = value.replace(/;/g,"");
     objectiveDisplayArea.value = value;
   }
   if(type == "CONSTRAINTS"){
     value = value.replace(/\s/g, "");
+    value = value.replace(/;/g,"");
+    value = value.replace(/,/g,",\n");
     constraintDisplayArea.value = value;
   }
   if(type == "CONSTANTS"){
     value = value.replace(/\s/g, "");
+    value = value.replace(/;/g,"");
     constantDisplayArea.value = value;
   }
 }
