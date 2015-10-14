@@ -30,7 +30,7 @@
       <a href="index.html" class="brand-logo" style="padding-left: 1cm"><img src="img/cr2g.png"></a>
       <a href="index.html" class="brand-logo center">NumConSol</a>
       <ul class="right hide-on-med-and-down" style="padding-right: 2cm">
-        <li><a href="index.html">Optimization</a></li>
+        <li><a href="optimization.html">Optimization</a></li>
         <li><a href="satisfaction.html">Satisfaction</a></li>
       </ul>
     </div>
