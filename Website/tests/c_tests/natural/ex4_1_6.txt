@@ -1,0 +1,5 @@
+VARIABLES
+x1 in [-5,5],;
+
+OBJECTIVE
+x1^6 - 15*x1^4 + 27*x1^2 + 250;

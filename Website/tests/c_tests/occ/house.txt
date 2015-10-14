@@ -1,0 +1,22 @@
+VARIABLES
+x1 in [0,0],
+x2 in [-oo,+oo],
+x3 in [-oo,+oo],
+x4 in [40,68],
+x5 in [-oo,+oo],
+x6 in [56,100],
+x7 in [-oo,3000],
+x8 in [-oo,+oo];
+
+CONSTRAINTS
+- (x1*x2 + x5*x4) + x7 = 0,
+- x1*x3 + x8 = 0,
+- x2 - x5 + x6 = 0,
+x1 - 0.333333333333333*x4 >= 0,
+x1 - 0.5*x4 <= 0,
+x2*(x4 - x1) >= 1500,
+- 0.5*x2 + x3 - x5 = 0,
+- 0.5*x2 + x5 >= 0;
+
+OBJECTIVE
+- x7 - x8;

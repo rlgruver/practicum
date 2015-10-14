@@ -1,0 +1,5 @@
+VARIABLES
+x1 in [-5,5];
+
+OBJECTIVE
+4*x1^2 - 4*x1^3 + x1^4;

@@ -1,0 +1,10 @@
+VARIABLES
+x in [0,3],
+y in [0,4];
+
+CONSTRAINTS
+y - (2*x^4 - 8*x^3 + 8*x^2 + 2) <= 0,
+y - (4*x^4 - 32*x^3 + 88*x^2 - 96*x + 36) <= 0;
+
+OBJECTIVE
+- x - y;

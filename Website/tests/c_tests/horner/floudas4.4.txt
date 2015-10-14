@@ -1,0 +1,11 @@
+VARIABLES
+x1 in [0.01,3],
+u1 in [0,2],
+u2 in [0,2];
+
+CONSTRAINTS
+x1 + 2*u1 -4 <= 0,
+3*x1 + u2 - 1 <= 0;
+
+OBJECTIVE
+x1^0.6 + 2*(3*x1+3)^0.6 + 2*u1 - 2*(3*x1 + 3) - u2;

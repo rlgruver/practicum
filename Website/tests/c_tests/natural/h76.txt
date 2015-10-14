@@ -1,0 +1,13 @@
+VARIABLES
+x1 in [0,+oo],
+x2 in [0,+oo],
+x3 in [0,+oo],
+x4 in [0,+oo];
+
+CONSTRAINTS
+-(5 - x1 - 2*x2 - x3 - x4) <=0,
+-(4 - 3*x1 - x2 - 2*x3 + x4) <= 0,
+-(x2 + 4*x3 - 1.5) <= 0;
+
+OBJECTIVE
+x1^2 + 0.5*x2^2 + x3^2 + 0.5*x4^2 - x1*x3 + x3*x4 - x1 - 3*x2 + x3 - x4;
