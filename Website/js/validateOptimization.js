@@ -30,10 +30,10 @@ function objFunctionValidate(){
 		valid = false;
 	}
 
-	// if(!(mathExp(objF))){
-	// 	document.getElementById("error6").style.visibility = "visible";
-	// 	valid = false;
-	// }
+	if(!(mathExp(objF))){
+		document.getElementById("error6").style.visibility = "visible";
+		valid = false;
+	}
 
 	return valid;
 }
@@ -47,10 +47,10 @@ function constraintsValidate(){
 		valid = false;
 	}
 
-	// if(!(mathExp(con))){
-	// 	document.getElementById("error7").style.visibility = "visible";
-	// 	valid = false;
-	// }
+	if(!(mathExp(con))){
+		document.getElementById("error7").style.visibility = "visible";
+		valid = false;
+	}
 
 	return valid;
 }
@@ -263,8 +263,30 @@ function bracketsBalanced(s){
   return c == 0;
 }
 
-function mathExp (exp) {
-	var firstChar = /^[a-zA-Z0-9]+$/.test(exp.charAt(0));
-	var lastChar = /^[a-zA-Z0-9]+$/.test(exp.charAt(exp.length-1));
-	return (firstChar && lastChar);
+function mathExp(exp){
+	var valid = true; 
+	var firstChar = exp.charAt(0);
+	var lastChar = exp.charAt(exp.length-1);
+	var firstValid = /^[a-zA-Z0-9]+$/.test(firstChar);
+	var lastValid = /^[a-zA-Z0-9]+$/.test(lastChar);
+
+	if (firstValid == '1' && lastValid == '1'){
+		valid = true;
+	}
+
+	if (firstValid == '0'){
+		if (firstChar != '(' && firstChar != '[' && firstChar != '-' && firstChar != '.'){
+			valid = false;
+		}
+	}
+
+	if (lastValid == '0'){
+		if (lastChar!=')' && lastChar!=']'){
+			valid = false;
+		}
+	} 
+
+	return valid;
 }
+
+
