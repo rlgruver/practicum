@@ -6,12 +6,6 @@ Local Opt = yes
 Speculation = yes
 
 VARIABLES
-x in [-1,2],
-y in [-1,2];
 
 OBJECTIVE
-x+y;
-
-CONSTRAINTS
-1<=x,
-y<=2;
+;
