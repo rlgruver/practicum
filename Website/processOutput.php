@@ -31,7 +31,6 @@ $remoteDiscardedFile = "/code/spopt-stable/tests/input.txt.discarded";
 set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
 include('Net/SSH2.php');
 include('Net/SFTP.php');
-include('File/ANSI.php');
 
 //ssh connect to cr2g server 
 $ssh = new Net_SSH2('cr2g01.cs.utep.edu',22);
@@ -45,7 +44,6 @@ if (!$sftp->login('rlgruver', 'utep$2015')) {
   exit('sftp Login Failed');
 }
 
-$ansi = new File_ANSI();
 
 //remove old output files
 // $sftp->remove($localOutputFile); 
@@ -55,14 +53,12 @@ $sftp->put($remoteInputFile, $localInputFile,  NET_SFTP_LOCAL_FILE);
 $sftp->chmod(0777, $remoteInputFile);
 
 //execute python script 
-
 $ssh->exec('cd /code/spopt-stable; python SpOpt.py tests/input.txt');
 // $ssh->read('rlgruver@cr2g01:~$');
-// $ssh->write("cd tests/\n"); // note the "\n"
-// $ssh->write("less +F input.txt.discarded\n"); // note the "\n"
-// echo $ssh->read('rlgruver@cr2g01:~$');
-
-
+// $ssh->write("cd /code/spopt-stable/tests\n");
+// $ssh->read('rlgruver@cr2g01:/code/spopt-stable/tests$');
+// $ssh->write("ls\n"); 
+// echo $ssh->read('/(.*)rlgruver/s', NET_SSH2_READ_REGEX);
 
 //get output contents
   if(!$sftp->get($remoteOutputFile, $localOutputFile)){
@@ -72,10 +68,6 @@ $ssh->exec('cd /code/spopt-stable; python SpOpt.py tests/input.txt');
     echo "<script>redirectPage();</script>";
   }
 
-
-
-      
-  
 
 
 
