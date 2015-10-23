@@ -75,28 +75,23 @@ function constraintsValidate(){
 
 	for (var i=0; i<varTmp.length; i++){
 			if(!(varTmp[i]=='')){
-				arrayVar[i]=varTmp[i];
+				arrayVar.push(varTmp[i]);
 			}
 	}
 
 	for (var i=0; i<lowerTmp.length; i++){
-		alert(lowerTmp[i]);
 			if(!(lowerTmp[i]=='')){
 
-				arrayLower[i]=lowerTmp[i];
+				arrayLower.push(lowerTmp[i]);
 			}
 	}
 
 	for (var i=0; i<upperTmp.length; i++){
 			if(!(upperTmp[i]=='')){
-				arrayUpper[i]=upperTmp[i];
+				arrayUpper.push(upperTmp[i]);
 			}
 	}
 	
-	alert(arrayVar.length);
-	alert(arrayLower.length);
-	alert(arrayUpper.length);
-
 
 	if(!(arrayVar.length == arrayLower.length && arrayVar.length == arrayUpper.length && arrayUpper.length == arrayLower.length)){
 		document.getElementById("error3").style.visibility = "visible";
