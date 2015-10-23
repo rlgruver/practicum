@@ -15,8 +15,8 @@ $consistency = isset($_POST['consis']) ? $_POST['consis'] : '';
 $intervalEval = isset($_POST['eval']) ? $_POST['eval'] : '';
 $localOpt = isset($_POST['optimization']) ? $_POST['optimization'] : '';
 $speculation = isset($_POST['speculation']) ? $_POST['speculation'] : '';
-$domain = isset($_POST['domain']) ? $_POST['domain'] : 'D';
-$function = isset($_POST['function']) ? $_POST['function'] : 'O';
+$domain = isset($_POST['domain']) ? $_POST['domain'] : '';
+$function = isset($_POST['function']) ? $_POST['function'] : '';
 $timeout = isset($_POST['timeout']) ? $_POST['timeout'] : '';
 
 
