@@ -5,8 +5,10 @@ function validate_form(){
 	var constraints = constraintsValidate();
 	var varsAndDomains = varsDomainValidate();
 	var matchVars = matchVarsValidate();
+	var timeOut = timeOutValidate();
+	var precision = precisionValidate();
 
-	var valid = objFunction && constraints && varsAndDomains && matchVars;
+	var valid = objFunction && constraints && varsAndDomains && matchVars && timeOut && precisionValidate;
 
 	if(valid == false){
 		alert("Please fix errors then try submitting again.");
@@ -113,6 +115,28 @@ function matchVarsValidate(){
 	return valid;
 }
 
+function timeOutValidate(){
+	var timeOut = document.getElementById("timeout").value;
+	var check = isNaN(timeOut);
+	if(check){
+		document.getElementById("errorTimeOut").style.visibility = "visible";
+		return false;
+	}
+	document.getElementById("errorTimeOut").style.visibility = "hidden";
+	return true;
+}
+
+function precisionValidate(){
+	var precision = document.getElementById("precision").value;
+	precision = precision.replace(/e|\-|\./g, "");
+	var check = isNaN(precision);
+	if(check){
+		document.getElementById("errorPrecision").style.visibility = "visible";
+		return false;
+	}
+	document.getElementById("errorPrecision").style.visibility = "hidden";
+	return true;
+}
 
 /////////////////////////////////
 //VALIDATION SETUP
@@ -288,5 +312,6 @@ function mathExp(exp){
 
 	return valid;
 }
+
 
 

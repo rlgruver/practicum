@@ -31,7 +31,7 @@ fwrite($myfile, $txt);
 //only happens when the default button is selected in the options pane
 
 if($consistency == ''){
-	$txt = "Precision = 1e-6\nConsistency = default\nInterval Eval = natural\nLocal Opt = yes\nSpeculation = yes\nTimeout = 7200\n\n";
+	$txt = "Precision = 1e-6D\nConsistency = default\nInterval Eval = natural\nLocal Opt = yes\nSpeculation = yes\nTimeout = 7200\n\n";
 	fwrite($myfile, $txt);
 }
 //If not empty, then check each field
@@ -68,6 +68,7 @@ else{
 	fwrite($myfile, $txt);
 
 	//Timeout
+	$timeout = $timeout*60;
 	$txt = "Timeout = ".$timeout."\n\n";
 	fwrite($myfile, $txt);
 

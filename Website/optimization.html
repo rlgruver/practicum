@@ -227,22 +227,25 @@
   <h8 style="color:#7FAA00">Timeout Limit</h8>
   <div class="row">
     <div class="input-field col s9">
-      <input id="timeout" type="number" class="validate center-align" value="120" name="timeout"  disabled >
+      <input id="timeout" type="text" class="validate center-align" value="120" name="timeout"  disabled >
+      <label for="timeout" id="errorTimeOut" class="error red-text" >Error: Invalid input format.</label>
     </div>
     <div style="color:#7FAA00; font-size:small; padding-top:45px">minutes</div>
   </div>
+
 
   <!-- ROW -->
   <h8 style="color:#7FAA00">Precision</h8>
   <div class="row">
     <div class="input-field col s11">
       <input id="precision" type="text" class="validate" value="1e-6" name="precision" disabled >
+      <label for="precision" id="errorPrecision" class="error red-text" >Error: Invalid input format.</label>
     </div>
   </div>
 
   <div class="row">
     <div class="col s6 center-align">
-      <input id="domain" class="filled-in" name="domain" type="checkbox"  value = "D" disabled/>
+      <input id="domain" class="filled-in" name="domain" type="checkbox" checked="checked" value = "D" disabled/>
       <label for="domain">Domain</label>
     </div>
 
