@@ -138,8 +138,15 @@ function timeOutValidate(){
 	var check = isNaN(timeOut);
 	if(check){
 		document.getElementById("errorTimeOut").style.visibility = "visible";
+		document.getElementById("errorTimeOutLimit").style.visibility = "hidden";
 		return false;
 	}
+	else if(timeOut > 120){
+		document.getElementById("errorTimeOutLimit").style.visibility = "visible";
+		document.getElementById("errorTimeOut").style.visibility = "hidden";
+		return false;
+	}
+	document.getElementById("errorTimeOutLimit").style.visibility = "hidden";
 	document.getElementById("errorTimeOut").style.visibility = "hidden";
 	return true;
 }

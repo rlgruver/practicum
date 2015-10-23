@@ -1,14 +1,5 @@
 RESULTS
-	Search: Timed-out (2 hours)
-	Solutions: 0
-	Elapsed time: 7273393.38303 ms
-	Best upper bound: -1.0000000000000000
-	Number of discarded sub-problems: 0
-REMAINING SUBPROBLEMS
-SUBPROBLEM #1
-		OBJECTIVE FUNCTION
-		[-1.0000000000000000, -1.0000000000000000]
-		Precision: -0
-		DOMAIN
-		x in [-1.0000000000000000, -1.0000000000000000]
-		Precision: 0
+Search: Complete
+Solutions: 0
+Elapsed time: 5268.11289787 ms
+Best upper bound: -4.51420165136
