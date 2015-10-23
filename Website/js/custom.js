@@ -56,6 +56,7 @@ function disable() {
   document.getElementById('speculation').disabled=true;
   document.getElementById('domain').disabled=true;
   document.getElementById('function').disabled=true;
+  document.getElementById('timeout').disabled=true;
 
 } 
 function enable() {
@@ -66,6 +67,7 @@ function enable() {
   document.getElementById('speculation').disabled=false;
   document.getElementById('domain').disabled=false;
   document.getElementById('function').disabled=false;
+  document.getElementById('timeout').disabled=false;
 } 
 
 function populateInput(value, type){

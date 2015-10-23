@@ -17,6 +17,7 @@ $localOpt = isset($_POST['optimization']) ? $_POST['optimization'] : '';
 $speculation = isset($_POST['speculation']) ? $_POST['speculation'] : '';
 $domain = isset($_POST['domain']) ? $_POST['domain'] : 'D';
 $function = isset($_POST['function']) ? $_POST['function'] : 'O';
+$timeout = isset($_POST['timeout']) ? $_POST['timeout'] : '';
 
 
 $myfile = fopen("writable/input.txt", "w") or die("Unable to open file!");
@@ -30,7 +31,7 @@ fwrite($myfile, $txt);
 //only happens when the default button is selected in the options pane
 
 if($consistency == ''){
-	$txt = "Precision = 1e-6\nConsistency = default\nInterval Eval = natural\nLocal Opt = yes\nSpeculation = yes\n\n";
+	$txt = "Precision = 1e-6\nConsistency = default\nInterval Eval = natural\nLocal Opt = yes\nSpeculation = yes\nTimeout = 7200\n\n";
 	fwrite($myfile, $txt);
 }
 //If not empty, then check each field
@@ -59,11 +60,15 @@ else{
 
 	//Speculation option
 	if(!empty($speculation)){
-		$txt = "Speculation = yes\n\n";
+		$txt = "Speculation = yes\n";
 	}
 	else{
-		$txt = "Speculation = no\n\n";
+		$txt = "Speculation = no\n";
 	}
+	fwrite($myfile, $txt);
+
+	//Timeout
+	$txt = "Timeout = ".$timeout."\n\n";
 	fwrite($myfile, $txt);
 
 }
