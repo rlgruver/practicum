@@ -10,9 +10,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
   <script>
-  function loadPage(){
-       parent.document.getElementById("frame1").src = "AYYLMAO";
-  }
 
   function redirectPage()
   {
@@ -24,21 +21,22 @@
 </html>
 
 <?php
-echo "<script>loadPage();</script>";
 $localInputFile = "writable/input.txt"; 
 $localOutputFile = "writable/output.txt"; 
 $remoteInputFile = "/code/spopt-stable/tests/input.txt";
 $remoteOutputFile = "/code/spopt-stable/tests/input.txt.out"; 
+$remoteSolutionsFile = "/code/spopt-stable/tests/input.txt.solutions"; 
+$remoteDiscardedFile = "/code/spopt-stable/tests/input.txt.discarded"; 
 
 set_include_path(get_include_path() . PATH_SEPARATOR . 'phpseclib');
 include('Net/SSH2.php');
 include('Net/SFTP.php');
+include('File/ANSI.php');
 
 //ssh connect to cr2g server 
 $ssh = new Net_SSH2('cr2g01.cs.utep.edu',22);
 if (!$ssh->login('rlgruver', 'utep$2015')) { 
   exit('ssh Login Failed');
-$ssh->setTimeout(1);
 }
 
 //sftp connect to cr2g server
@@ -47,27 +45,36 @@ if (!$sftp->login('rlgruver', 'utep$2015')) {
   exit('sftp Login Failed');
 }
 
+$ansi = new File_ANSI();
 
 //remove old output files
-$sftp->delete($localOutputFile); 
+// $sftp->remove($localOutputFile); 
 
 //send input file to cr2g server 
 $sftp->put($remoteInputFile, $localInputFile,  NET_SFTP_LOCAL_FILE);
 $sftp->chmod(0777, $remoteInputFile);
 
-//execute python script with 5 minute timeout
-$ssh->setTimeout(600);
+//execute python script 
+
 $ssh->exec('cd /code/spopt-stable; python SpOpt.py tests/input.txt');
+// $ssh->read('rlgruver@cr2g01:~$');
+// $ssh->write("cd tests/\n"); // note the "\n"
+// $ssh->write("less +F input.txt.discarded\n"); // note the "\n"
+// echo $ssh->read('rlgruver@cr2g01:~$');
 
 
 
-      //get output contents
+//get output contents
   if(!$sftp->get($remoteOutputFile, $localOutputFile)){
     throw new Exception('Unable to get output file.');
   }
   else{
     echo "<script>redirectPage();</script>";
   }
+
+
+
+      
   
 
 

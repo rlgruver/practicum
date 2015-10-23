@@ -20,45 +20,51 @@ function validate_form(){
 ////////////////////////////
 //VALIDATE BY SECTION
 function objFunctionValidate(){
-	var valid = true;
 	var objF = document.getElementById("objFunction").value;
 
 	if(objF == "" | objF == null){
 		document.getElementById("error2").style.visibility = "visible";
-		valid = false;
+		return false;
 	}
 	else if(!(parenthesesBalanced(objF))||!(bracketsBalanced(objF))){
 		document.getElementById("error4").style.visibility = "visible";
-		valid = false;
+		return false;
 	}
 
 	if(!(mathExp(objF))){
 		document.getElementById("error6").style.visibility = "visible";
-		valid = false;
+		return false;
 	}
 
-	return valid;
+	document.getElementById("error2").style.visibility = "hidden";
+	document.getElementById("error4").style.visibility = "hidden";
+	document.getElementById("error6").style.visibility = "hidden";
+	return true;
 }
 
 function constraintsValidate(){
-	valid = true;
 	var con = document.getElementById("constraints").value;
+
+	if(con == "" || con == null){
+		return true;
+	}
 
 	if(!(parenthesesBalanced(con))||!(bracketsBalanced(con))){
 		document.getElementById("error5").style.visibility = "visible";
-		valid = false;
+		return false;
 	}
 
 	if(!(mathExp(con))){
 		document.getElementById("error7").style.visibility = "visible";
-		valid = false;
+		return false;
 	}
 
-	return valid;
+	document.getElementById("error5").style.visibility = "hidden";
+	document.getElementById("error7").style.visibility = "hidden";
+	return true;
 }
 
  function varsDomainValidate(){
-	var valid = true;
 	var varTmp = varArrayVariables();
 	var lowerTmp = varArrayLower();
 	var upperTmp = varArrayUpper();
@@ -67,41 +73,57 @@ function constraintsValidate(){
 	var arrayLower = new Array();
 	var arrayUpper = new Array();
 
-	for (var i=0; i<varTmp.length ;i++){
-			if(!(varTmp[i]==''))
-			{
-				arrayVar[i]=varTmp[i].value;
+	for (var i=0; i<varTmp.length; i++){
+			if(!(varTmp[i]=='')){
+				arrayVar[i]=varTmp[i];
 			}
-		}
+	}
 
-	for (var i=0; i<lowerTmp.length ;i++){
-			if(!(lowerTmp[i]==''))
-			{
-				arrayLower[i]=lowerTmp[i].value;
-			}
-		}
+	for (var i=0; i<lowerTmp.length; i++){
+		alert(lowerTmp[i]);
+			if(!(lowerTmp[i]=='')){
 
-	for (var i=0; i<upperTmp.length ;i++){
-			if(!(upperTmp[i]==''))
-			{
-				arrayUpper[i]=upperTmp[i].value;
+				arrayLower[i]=lowerTmp[i];
 			}
-		}
+	}
+
+	for (var i=0; i<upperTmp.length; i++){
+			if(!(upperTmp[i]=='')){
+				arrayUpper[i]=upperTmp[i];
+			}
+	}
+	
+	alert(arrayVar.length);
+	alert(arrayLower.length);
+	alert(arrayUpper.length);
+
 
 	if(!(arrayVar.length == arrayLower.length && arrayVar.length == arrayUpper.length && arrayUpper.length == arrayLower.length)){
-		valid = false;
-	}
-
-	if(valid==false){
 		document.getElementById("error3").style.visibility = "visible";
+		return false;
 	}
 
-	return valid;
+	// for (var i=0; i<arrayVar.length; i++){
+	// 	if(isNaN(arrayLower[i]) || isNaN(arrayUpper[i])){
+	// 		document.getElementById("error8").style.visibility = "visible";
+	// 		return false;
+	// 	}
+	// }
+
+	// for (var i=0; i<arrayVar.length; i++){
+	// 	if(arrayLower[i]>=arrayUpper[i]){
+	// 		document.getElementById("error8").style.visibility = "visible";
+	// 		return false;
+	// 	}
+	// }
+
+	document.getElementById("error3").style.visibility = "hidden";
+	document.getElementById("error8").style.visibility = "hidden";
+	return true;
 }
 
 
 function matchVarsValidate(){
-	var valid = true;
 	var comboVarAndConstants = _.union(varArrayVariables(),varArrayConstants());
 	var comboObjAndConstraints = _.union(varArrayObjective(),varArrayConstraints());
 
@@ -109,10 +131,11 @@ function matchVarsValidate(){
 
 	if(!match){
 		document.getElementById("error1").style.visibility = "visible";
-		valid = false;
+		return false;
 	}
 
-	return valid;
+	document.getElementById("error1").style.visibility = "hidden";
+	return true;
 }
 
 function timeOutValidate(){
@@ -305,7 +328,7 @@ function mathExp(exp){
 	}
 
 	if (lastValid == '0'){
-		if (lastChar!=')' && lastChar!=']'){
+		if (lastChar!=')' && lastChar!=']' && lastChar!=';' ){
 			valid = false;
 		}
 	} 
