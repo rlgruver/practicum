@@ -10,6 +10,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
   <script>
+  function loadPage(){
+       parent.document.getElementById("frame1").src = "AYYLMAO";
+  }
+
   function redirectPage()
   {
    parent.document.getElementById("frame1").src = "writable/output.txt";
@@ -20,7 +24,7 @@
 </html>
 
 <?php
-
+echo "<script>loadPage();</script>";
 $localInputFile = "writable/input.txt"; 
 $localOutputFile = "writable/output.txt"; 
 $remoteInputFile = "/code/spopt-stable/tests/input.txt";

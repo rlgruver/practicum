@@ -19,10 +19,18 @@
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<script>
+
+function displays(){
+document.getElementById('loadImg').style.display='none';
+document.getElementById('frameHolder').style.display='inline';
+
+}
+</script>
 
 </head>
 
-<body class="teal" style = "background-image: url(img/background.png)">
+<body class="teal" style = "background-image: url(img/background.png)" onload="rofl()">
 
 
   <nav class="grey darken-2">
@@ -41,8 +49,13 @@
       <h3 class="center-align">Solutions</h3>
 
       <div class='row col s12 center-align'>
-        <iframe id="frame1" src= "processOutput.php" class="white" style="border:1.5px solid #99CC00" width="700" height="400">
-        </iframe>
+        
+        
+        <img id="loadImg" class = "white"style="border:1.5px solid #99CC00" width="700" height="400" src="img/loading.gif" />
+        <div id="frameHolder" style="display:none">
+          <iframe id="frame1" src= "processOutput.php" class="white" style="border:1.5px solid #99CC00" width="700" height="400"
+          onload="displays()"></iframe>
+        </div>
       </div>
 
     </div>
