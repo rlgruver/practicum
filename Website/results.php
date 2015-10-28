@@ -29,8 +29,8 @@
   </script>
 
   <script>
-  function loading(){
-    document.getElementById('loading').style.visibility = 'visible'; 
+  function loading(visibility){
+    document.getElementById('loading').style.visibility = visibility; 
   }
   </script>
 
@@ -130,13 +130,31 @@ if ($f !== false) {
 }
 
 
-$pid = exec( "php processOutput.php > /dev/null &" );
-while(exec("ps $pid")){
+function is_process_running($PID)
+   {
+       exec("ps $PID", $ProcessState);
+       return(count($ProcessState) >= 2);
+   }
 
-  echo "<script> 
-  loading();
-  </script>";
-}
+
+$ps = exec( "php processOutput.php > /dev/null 2>&1 & echo $!" );
+  while(is_process_running($ps))
+   {
+     echo(" running.... ");
+     echo "<script> 
+        loading('visible');
+        </script>";
+       ob_flush(); flush();
+            sleep(1);
+   }
+
+   echo "done";
+
+
+echo "<script> 
+      loading('hidden');
+      </script>";
+
 
 
 ?>
