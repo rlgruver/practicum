@@ -33,7 +33,7 @@ $sftp->chmod(0777, $remoteInputFile);
 //execute python script 
 $ssh->write("cd /code/spopt-stable\n");
 $ssh->read('rlgruver@cr2g01:/code/spopt-stable$');
-$ssh->exec("python SpOpt.py tests/input.txt\n");
+$ssh->write("python SpOpt.py tests/input.txt\n");
 
 
 
@@ -41,7 +41,7 @@ $starttime = time();
 
 while ($ssh->isConnected()) {
         $now = time()-$starttime;
-        if($now >$timeoutVar){
+        if($now >30){
           break;
         } 
 
