@@ -21,24 +21,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
   <script>
-  function displays(){
-    document.getElementById('loadImg').style.display='none';
-    document.getElementById('frameHolder').style.display='inline';
-
+  function loading(status){
+   if(status=='1'){
+      document.getElementById('loading').style.visibility = 'visible'; 
+    }
+    else if(status=='2'){
+      document.getElementById('loadingPic').src= "img/loadbar.png"; 
+    } 
   }
   </script>
 
   <script>
-  function loading(visibility){
-    document.getElementById('loading').style.visibility = visibility; 
-  }
-  </script>
-
-  <script>
-  window.setInterval("reloadIFrame();", 5000);
+  window.setInterval("reloadIFrame();", 3000);
 
   function reloadIFrame() {
-   document.getElementById('output').contentWindow.location.reload(true);
+   document.getElementById('output').contentWindow.location.reload('true');
  }
  </script>
 
@@ -63,7 +60,7 @@
       <h3 class="center-align">Solutions</h3>
 
       <div class='row col s12 center-align'>
-        <div id ="loading" style="visibility:hidden;"> <img src="img/loadbar.gif" width="9%" height="auto"> </div>
+        <div id ="loading" style="visibility:hidden;"> <img src="img/loadbar.gif" id="loadingPic" width="9%" height="auto"> </div>
         <div id="frameHolder">
           <iframe id="output" name="output" src= "txt/realtime_output.txt" class="white" style="border:1.5px solid #99CC00" width="700" height="400"></iframe>
         </div>
@@ -140,20 +137,19 @@ function is_process_running($PID)
 $ps = exec( "php processOutput.php > /dev/null 2>&1 & echo $!" );
   while(is_process_running($ps))
    {
-     echo(" running.... ");
      echo "<script> 
-        loading('visible');
-        </script>";
+           loading('1');
+           </script>";
+
        ob_flush(); flush();
             sleep(1);
    }
 
-   echo "done";
-
 
 echo "<script> 
-      loading('hidden');
+      loading('2');
       </script>";
+
 
 
 
