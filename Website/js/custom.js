@@ -1,18 +1,40 @@
+function removeElementsByClass(className){
+    var elements = document.getElementsByClassName(className);
+
+    if(elements.length > 0){
+        document.getElementById("varSection").innerHTML = "";
+        replaceHtml();
+    }
+}
+
+function replaceHtml(){
+    var newdiv = document.createElement('div');
+    newdiv.innerHTML = '<div class="input-field col s2 " id="dynamicVariables"><input type="text"class="validate'
+    +' center-align" name="myVars[]" placeholder="x" form="form1" id="initialVariable"></div><div class="input-field'
+    +' col s1 right-align" id="inText"><div class="inz">IN</div></div><div class="input-field col s1 right-align" '
+    +'id="leftBracket"><div class="varText">[</div></div><div class="input-field col s2" id="dynamicLowerBounds">'
+    +'<input type="text" class="validate center-align" name="myLower[]" placeholder="-8" id="initialLowerBound">'
+    +'</div><div class="input-field col s1 right-align" id="commaText"><div class="varText"> ,</div></div><div'
+    +' class="input-field col s2" id="dynamicUpperBounds"><input type="text" class="validate center-align" '
+    +'name="myUpper[]" placeholder="8" id="initialUpperBound"></div><div class="input-field col s1 left-align" '
+    +'id="rightBracket"><div class="varText">]</div></div>';
+    document.getElementById("varSection").appendChild(newdiv);
+}
 
 var counter = 1;   
 function addVars(divName,value){
   var newdiv = document.createElement('div');
-  newdiv.innerHTML = " <br><input type='text' name='myVars[]' class='validate center-align' value="+value+">";
+  newdiv.innerHTML = " <br><input type='text' name='myVars[]' class='validate center-align dyVar' id='dyVar' value="+value+">";
   document.getElementById(divName).appendChild(newdiv);
 }
 function addLower(divName,value){
   var newdiv = document.createElement('div');
-  newdiv.innerHTML =  " <br><input type='text' name='myLower[]' class='validate center-align'value='"+value+"'>";
+  newdiv.innerHTML =  " <br><input type='text' name='myLower[]' class='validate center-align dyVar'  id='dyVar' value='"+value+"'>";
   document.getElementById(divName).appendChild(newdiv);
 } 
 function addUpper(divName,value){
   var newdiv = document.createElement('div');
-  newdiv.innerHTML =  " <br><input type='text' name='myUpper[]' class='validate center-align'value='"+value+"'>";
+  newdiv.innerHTML =  " <br><input type='text' name='myUpper[]' class='validate center-align dyVar'  id='dyVar' value='"+value+"'>";
   document.getElementById(divName).appendChild(newdiv);
   counter++;
 }     
@@ -77,6 +99,8 @@ function populateInput(value, type){
   var constraintDisplayArea = document.getElementById('constraints');
 
   if(type == "VARIABLES"){
+
+    removeElementsByClass("dyVar");
     value = value.replace(/\s/g,"");
     value = value.replace(/;/g,"");
     value = value.replace(/in[[\]]/gi,"SPLITHERE");
