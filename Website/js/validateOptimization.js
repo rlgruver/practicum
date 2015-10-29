@@ -184,7 +184,7 @@ function varArrayConstants(){
 
 function varArrayObjective(){
 	var objFunction = document.getElementById("objFunction").value;
-	var clean = objFunction.replace(/abs|sin|cos|tan|cot|sec|csc|sqrt|exp/g, "");
+	var clean = objFunction.replace(/abs|sin|cos|tan|cot|sec|csc|sqrt|exp|e/g, "");
 	var tmpArr = clean.split(/[^a-zA-Z0-9']+/g);
 	var varArr = new Array();
 	var count = 0;
@@ -200,7 +200,7 @@ function varArrayObjective(){
 
 function varArrayConstraints(){
 	var constraints = document.getElementById("constraints").value;
-	var clean = constraints.replace(/abs|sin|cos|tan|cot|sec|csc|sqrt|exp/g, "");
+	var clean = constraints.replace(/abs|sin|cos|tan|cot|sec|csc|sqrt|exp|e/g, "");
 	var tmpArr = clean.split(/[^a-zA-Z0-9']+/g);
 	var varArr = new Array();
 	var count = 0;
