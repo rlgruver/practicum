@@ -22,11 +22,13 @@
 
   <script>
   function loading(status){
-     if(status=='1'){
+     if(status=='running'){
       document.getElementById('loading').style.visibility = 'visible'; 
     }
-    else{
+    else if(status=='complete'){
       document.getElementById('loadingPic').src= "img/loadbar.png"; 
+      stopRefresh();
+      showOutputFile();
     } 
   }
 
@@ -37,6 +39,10 @@
 
   function stopRefresh() {
     clearInterval(interval);
+  }
+
+   function showOutputFile() {
+    document.getElementById('downloadOutputFile').style.visibility = 'visible'; 
   }
   </script>
 
@@ -74,7 +80,7 @@
 
   <div class='row col s12 center-align'>
     <a href='txt/upload.txt' class='modal-action waves-effect waves-green btn' download>Download Input File</a>
-    <a href='writable/output.txt' class='modal-action waves-effect waves-green btn' download>Download Output File</a>
+    <a href='writable/output.txt' style="visibility:hidden;" id="downloadOutputFile" class='modal-action waves-effect waves-green btn' download>Download Output File</a>
   </div>
   <br>
 
@@ -148,7 +154,7 @@ $ps = exec( "php processOutput.php > /dev/null 2>&1 & echo $!" );
 while(is_process_running($ps))
 {
  echo "<script> 
- loading('1');
+ loading('running');
  </script>";
 
  ob_flush(); flush();
@@ -156,8 +162,7 @@ while(is_process_running($ps))
 }
 
 
-echo "<script>loading('2');</script>";
-echo "<script>stopRefresh();</script>"
+echo "<script>loading('complete');</script>";
 
 
 
