@@ -22,22 +22,25 @@
 
   <script>
   function loading(status){
-   if(status=='1'){
+     if(status=='1'){
       document.getElementById('loading').style.visibility = 'visible'; 
     }
-    else if(status=='2'){
+    else{
       document.getElementById('loadingPic').src= "img/loadbar.png"; 
     } 
   }
-  </script>
 
-  <script>
-  window.setInterval("reloadIFrame();", 3000);
-
+  interval = window.setInterval("reloadIFrame();", 5000);
   function reloadIFrame() {
    document.getElementById('output').contentWindow.location.reload('true');
- }
- </script>
+  }
+
+  function stopRefresh() {
+    clearInterval(interval);
+  }
+  </script>
+
+
 
 </head>
 
@@ -62,7 +65,7 @@
       <div class='row col s12 center-align'>
         <div id ="loading" style="visibility:hidden;"> <img src="img/loadbar.gif" id="loadingPic" width="9%" height="auto"> </div>
         <div id="frameHolder">
-          <iframe id="output" name="output" src= "txt/realtime_output.txt" class="white" style="border:1.5px solid #99CC00" width="700" height="400"></iframe>
+          <iframe id="output" name="output" src="txt/realtime_output.txt" class="white" style="border:1.5px solid #99CC00" width="700" height="400"></iframe>
         </div>
       </div>
 
@@ -113,6 +116,7 @@
 //remove old files
 $localOutputFile = "writable/output.txt"; 
 $localSolutionsFile = "txt/realtime_output.txt"; 
+$localDiscardedFile = "txt/realtime_discarded.txt";  
 
 $f = @fopen($localOutputFile, "r+");
 if ($f !== false) {
@@ -126,30 +130,34 @@ if ($f !== false) {
   fclose($f);
 }
 
+$f = @fopen($localDiscardedFile, "r+");
+if ($f !== false) {
+  ftruncate($f, 0);
+  fclose($f);
+}
+
 
 function is_process_running($PID)
-   {
-       exec("ps $PID", $ProcessState);
-       return(count($ProcessState) >= 2);
-   }
+{
+ exec("ps $PID", $ProcessState);
+ return(count($ProcessState) >= 2);
+}
 
 
 $ps = exec( "php processOutput.php > /dev/null 2>&1 & echo $!" );
-  while(is_process_running($ps))
-   {
-     echo "<script> 
-           loading('1');
-           </script>";
+while(is_process_running($ps))
+{
+ echo "<script> 
+ loading('1');
+ </script>";
 
-       ob_flush(); flush();
-            sleep(1);
-   }
+ ob_flush(); flush();
+ sleep(1);
+}
 
 
-echo "<script> 
-      loading('2');
-      </script>";
-
+echo "<script>loading('2');</script>";
+echo "<script>stopRefresh();</script>"
 
 
 
