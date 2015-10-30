@@ -32,7 +32,7 @@
     } 
   }
 
-  interval = window.setInterval("reloadIFrame();", 5000);
+  interval = window.setInterval("reloadIFrame();", 3000);
   function reloadIFrame() {
    document.getElementById('output').contentWindow.location.reload('true');
   }
@@ -80,6 +80,7 @@
 
   <div class='row col s12 center-align'>
     <a href='txt/upload.txt' class='modal-action waves-effect waves-green btn' download>Download Input File</a>
+    <br><br>
     <a href='writable/output.txt' style="visibility:hidden;" id="downloadOutputFile" class='modal-action waves-effect waves-green btn' download>Download Output File</a>
   </div>
   <br>
@@ -148,6 +149,7 @@ function is_process_running($PID)
  exec("ps $PID", $ProcessState);
  return(count($ProcessState) >= 2);
 }
+
 
 
 $ps = exec( "php processOutput.php > /dev/null 2>&1 & echo $!" );
