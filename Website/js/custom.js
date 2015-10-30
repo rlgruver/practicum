@@ -200,6 +200,7 @@ window.onload = function() {
       var reader = new FileReader();
 
       reader.onload = function(e) {
+        removeElementsByClass("dyVar");
         var text = reader.result;
         var getVariableList = text.split("VARIABLES");
         getVariableList[1] = getVariableList[1].replace(/\s/g,"");

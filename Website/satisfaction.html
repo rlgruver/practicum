@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8;no-cache" />
+
 <html>
 <head>
   <!-- Compiled and minified CSS -->
@@ -17,19 +18,25 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
+  <!-- Underscore Library for array functions -->
+  <script type="text/javascript" src ="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+  <script type="text/javascript" src ="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
   <script src="js/custom.js"></script>
+  <script src="js/validateOptimization.js"></script>
+
+
+
 </head>
 
-<body class="teal">
-
-
+<body class="teal" style = "background-image: url(img/background.png)">
 
   <nav class="grey darken-2">
     <div class="nav-wrapper">
       <a href="index.html" class="brand-logo" style="padding-left: 1cm"><img src="img/cr2g.png"></a>
       <a href="index.html" class="brand-logo center">NumConSol</a>
       <ul class="right hide-on-med-and-down" style="padding-right: 2cm">
-        <li><a href="index.html">Optimization</a></li>
+        <li><a href="optimization.html">Optimization</a></li>
         <li class="active"><a href="satisfaction.html">Satisfaction</a></li>
       </ul>
     </div>
@@ -38,11 +45,11 @@
 
   <div class="row">
     <br>
-    <form class="col s12" id="form1">
+    <form class="col s12" id="form1" name="form1" onsubmit="return validate_form();" action="results.php" method="post">
 
       <div class="col s12">
         <div class="row card-panel blue-grey darken-1 white-text">
-          <p>Welcome to the NumConSol Application. Here, you'll be able to run all of your fancy math problems through a convenient website without having to download any external code or program. Just follow the easy to read instructions and you'll be well on your way to becoming a math genius!</p>
+          <p>Welcome to the NumConSol Application. Here, you'll be able to run all of your fancy math problems through a convenient website without having to download any external code or program. Just follow the easy to read instructions and you'll be well on your way to becoming a math genius!!</p>
         </div>
       </div>
 
@@ -50,6 +57,7 @@
       <!-- ****************************MIDDLE CONTENT*********************** -->
       <div class="col s9">
 
+        <input type="hidden" name="isSatisfaction" value="yes">
         <!-- ROW -->
         <div class="row card-panel">
           <div class="row">
@@ -59,7 +67,7 @@
           <div class="file-field input-field col s6">
             <div class="btn green darken-3">
               <span>Browse</span>
-              <input type="file" name="fileInput">
+              <input type="file" name="fileInput" id="fileInput">
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text">
@@ -67,31 +75,42 @@
           </div>
         </div>
 
-        <!-- ROW -->
-
-        <!-- ROW -->
-
+       <!-- ROW -->
         <div class="card-panel">
           <div class="row">
             <div class="row">
-              <h5 style="display:inline;">Constraints</h5>
+              <h5 style="display:inline;">Constants</h5> <div class="grey-text" style="display:inline; font-size:small">(Optional)</div>
+
+            </div>
+            <div class="input-field col s6" style="display:block" id="constant">
+              <input id="constants" type="text" class="validate" name="constants" placeholder="Enter constants here.">
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW -->
+        <div class="card-panel">
+          <div class="row">
+            <div class="row">
+              <h5 style="display:inline;">Constraints</h5> <div class="grey-text" style="display:inline; font-size:small">(Optional)</div>
               <div class="right orange-text" style="display:inline;"><a class="example modal-trigger" href="#constModal">EXAMPLE FILE</a></div>
             </div>
             <div class="input-field col s6">
               <textarea placeholder="Enter constraints here." id="constraints" class="textarea" form="form1" name="constraints"></textarea>
+              <span id="error5" class="error">Error: Missing parenthesis or brackets</span><br>
+              <span id="error7" class="error">Error: Invalid arithmetic expression</span>
             </div>
             <div class="file-field input-field col s5 offset-s1">
               <br><br>
               <div class="btn green darken-3">
                 <span>Browse</span>
-                <input type="file" name="constraintFile">
+                <input type="file" name="constraintFile" id="constraintFile">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
               </div>
             </div>
           </div>
-
         </div>
 
 
@@ -105,21 +124,22 @@
             <div class="right orange-text" style="display:inline;"><a class="example modal-trigger" href="#varModal">EXAMPLE FILE</a></div>
           </div>
 
-          <div class="col s6">
-            <div class="input-field col s2 " id="dynamicVariable">
-              <input type="text" class="validate" name="myVars[]">
+          <div class="col s6" id ="varSection">
+            
+            <div class="input-field col s2 " id="dynamicVariables">
+              <input type="text" class="validate center-align" name="myVars[]" placeholder="x" form="form1" id="initialVariable">
             </div>
 
             <div class="input-field col s1 right-align" id="inText">
              <div class="inz">IN</div>
-           </div>
+            </div>
 
            <div class="input-field col s1 right-align" id="leftBracket">
             <div class="varText">[</div>
           </div>
 
-          <div class="input-field col s2" id="dynamicDomain1">
-            <input type="text" class="validate" name="myDoms1[]">
+          <div class="input-field col s2" id="dynamicLowerBounds">
+            <input type="text" class="validate center-align" name="myLower[]" placeholder="-8" id="initialLowerBound">
           </div>
 
           <div class="input-field col s1 right-align" id="commaText">
@@ -127,8 +147,8 @@
          </div>
 
 
-         <div class="input-field col s2" id="dynamicDomain2">
-          <input type="text" class="validate" name="myDoms2[]">
+         <div class="input-field col s2" id="dynamicUpperBounds">
+          <input type="text" class="validate center-align" name="myUpper[]" placeholder="8" id="initialUpperBound">
         </div>
 
         <div class="input-field col s1 left-align" id="rightBracket">
@@ -141,7 +161,7 @@
 
         <div class="btn green darken-3">
           <span>Browse</span>
-          <input type="file">
+          <input type="file" name="varFile" id="varFile">
         </div>
         <div class="file-path-wrapper">
           <input class="file-path validate" type="text">
@@ -151,12 +171,13 @@
     </div>
     <div class="row">
       <div class="button col s1">
-        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariable'); addDoms1('dynamicDomain1');addDoms2('dynamicDomain2');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
+        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariables',''); addLower('dynamicLowerBounds','');addUpper('dynamicUpperBounds','');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
       </div>
     </div>
+    <span id="error1" class="error">Error: Variable mismatch detected</span><br>
+    <span id="error3" class="error">Error: Please fill out all fields</span><br>
+    <span id="error8" class="error">Error: Invalid domain values</span>
   </div>
-
-
 
   <!-- ROW -->     
   <div class="row center-align">
@@ -189,28 +210,39 @@
 
   </div>
 
+  <h8 style="color:#7FAA00">Timeout Limit</h8>
+  <div class="row">
+    <div class="input-field col s9">
+      <input id="timeout" type="text" class="validate center-align" value="120" name="timeout"  disabled >
+      <label for="timeout" id="errorTimeOut" class="error red-text" >Error: Invalid input format.</label>
+      <label for="timeout" id="errorTimeOutLimit" class="error red-text" >Error: Exceeded time limit (120 mins).</label>
+    </div>
+    <div style="color:#7FAA00; font-size:small; padding-top:45px">minutes</div>
+  </div>
+
 
   <!-- ROW -->
   <h8 style="color:#7FAA00">Precision</h8>
   <div class="row">
     <div class="input-field col s11">
-      <input id="precision" type="text" class="validate" disabled >
-      <label class="active" for="precision">Enter Here</label>
+      <input id="precision" type="text" class="validate" value="1e-6" name="precision" disabled >
+      <label for="precision" id="errorPrecision" class="error red-text" >Error: Invalid input format.</label>
     </div>
   </div>
 
   <div class="row">
     <div class="col s6 center-align">
-      <input class="filled-in" name="group2" type="checkbox" id="domain" disabled/>
+      <input id="domain" class="filled-in" name="domain" type="checkbox" checked="checked" value = "D" disabled/>
       <label for="domain">Domain</label>
     </div>
 
     <div class="col s6 center-align">
-      <input class="filled-in" name="group2" type="checkbox" id="function" disabled/>
+      <input id="function" class="filled-in" name="function" type="checkbox"  value = "O" disabled/>
       <label for="function">Function</label>
     </div>
 
   </div>
+
 
 
   <!-- ROW -->
@@ -219,12 +251,12 @@
   <div class="row">
     <div class="input-field col s11">
       <span class="css3-metro-dropdown">
-        <select name="dropdown-2" id="consistency" disabled>
-          <option value="def">Default</option>
-          <option value="neuton">interval newton</option>        
+        <select id="consistency" name="consis" disabled>
+          <option value="default">Default</option>
+          <option value="newton">Interval Newton</option>        
           <option value="bc4">bc4</option>
           <option value="hc4">hc4</option>
-          <option value="null">null</option>
+          <option value="null">Null</option>
         </select>
       </span>
     </div>
@@ -236,72 +268,74 @@
   <div class="row">
     <div class="input-field col s11">
       <span class="css3-metro-dropdown">
-        <select name="dropdown-2" id="evaluation" disabled>
-          <option value="def">Default</option>
-          <option value="neutral">neutral</option>        
-          <option value="horner">horner</option>
-          <option value="occ">occ grouping</option>
-          <option value="monotonicity">monotonicity</option>
+        <select id="evaluation" name="eval" disabled>
+          <option value="natural">Natural</option>
+          <option value="center">Center</option>     
+          <option value="horner">Horner</option>
+          <option value="occ">OCC Grouping</option>
+          <option value="monotonicity">Monotonicity</option>
         </select>
       </span>
     </div>
   </div>
+
+
 </div>
 
 </form>
 </div>
 
 
-  <!-- Modal Structure -->
-  <div id="fileModal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4>Text File Example</h4>
-      <p>
-        <object data="txt/satisfaction_all.txt" width="650" height="300">
-          <embed src="txt/satisfaction_all.txt" width="650" height="300"> </embed>
-          Error: Embedded data could not be displayed.
-        </object>
-      </p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-      <a href="txt/satisfaction_all.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
-    </div>
+<!-- Modal Structure -->
+<div id="fileModal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Text File Example</h4>
+    <p>
+      <object data="txt/satisfaction_all.txt" class="objectSample">
+        <embed src="txt/satisfaction_all.txt" class="textSample"> </embed>
+        Error: Embedded data could not be displayed.
+      </object>
+    </p>
   </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    <a href="txt/satisfaction_all_sample.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
+  </div>
+</div>
 
-  <!-- Modal Structure -->
-  <div id="constModal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4>Text File Example</h4>
-      <p>
-        <object data="txt/satisfaction_constraints.txt" width="650" height="300">
-          <embed src="txt/satisfaction_constraints.txt" width="650" height="300"> </embed>
-          Error: Embedded data could not be displayed.
-        </object>
-      </p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-      <a href="txt/satisfaction_constraints.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
-    </div>
+<!-- Modal Structure -->
+<div id="constModal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Text File Example</h4>
+    <p>
+      <object data="txt/satisfaction_constraints.txt" width="650" height="250">
+        <embed src="txt/satisfaction_constraints.txt" width="650" height="250"> </embed>
+        Error: Embedded data could not be displayed.
+      </object>
+    </p>
   </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    <a href="txt/satisfaction_constraints_sample.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
+  </div>
+</div>
 
-    <!-- Modal Structure -->
-  <div id="varModal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4>Text File Example</h4>
-      <p>
-        <object data="txt/variables.txt" width="650" height="300">
-          <embed src="txt/variables.txt" width="650" height="300"> </embed>
-          Error: Embedded data could not be displayed.
-        </object>
-      </p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-      <a href="txt/variables.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
-    </div>
+<!-- Modal Structure -->
+<div id="varModal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Text File Example</h4>
+    <p>
+      <object data="txt/variables.txt" class="textSample">
+        <embed src="txt/variables.txt" class="textSample"> </embed>
+        Error: Embedded data could not be displayed.
+      </object>
+    </p>
   </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    <a href="txt/variables_sample.txt" class="modal-action waves-effect waves-green btn-flat" download>Download</a>
+  </div>
+</div>
 
 
 

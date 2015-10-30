@@ -9,6 +9,7 @@ $upperBounds = $_POST["myUpper"];
 $constants = $_POST["constants"];
 $constraints = $_POST["constraints"];
 $objectiveFunction = $_POST["objFunction"];
+$satisfaction = $_POST["isSatisfaction"];
 
 $precision = isset($_POST['precision']) ? $_POST['precision'] : '';
 $consistency = isset($_POST['consis']) ? $_POST['consis'] : '';
@@ -18,6 +19,7 @@ $speculation = isset($_POST['speculation']) ? $_POST['speculation'] : '';
 $domain = isset($_POST['domain']) ? $_POST['domain'] : '';
 $function = isset($_POST['function']) ? $_POST['function'] : '';
 $timeout = isset($_POST['timeout']) ? $_POST['timeout'] : '';
+
 
 
 $myfile = fopen("writable/input.txt", "w") or die("Unable to open file!");
@@ -31,7 +33,13 @@ fwrite($myfile, $txt);
 //only happens when the default button is selected in the options pane
 
 if($consistency == ''){
-	$txt = "Precision = 1e-6D\nConsistency = default\nInterval Eval = natural\nLocal Opt = yes\nSpeculation = yes\nTimeout = 7200\n\n";
+	if($satisfaction == "yes"){
+		$txt = "Precision = 1e-6D\nConsistency = default\nInterval Eval = natural\nTimeout = 7200\n\n";
+	}
+	else{
+		$txt = "Precision = 1e-6D\nConsistency = default\nInterval Eval = natural\nLocal Opt = yes\nSpeculation = yes\nTimeout = 7200\n\n";
+	}
+	
 	fwrite($myfile, $txt);
 }
 //If not empty, then check each field
@@ -96,9 +104,14 @@ if(!empty($constants)){
 	foreach ($pieces as $value) {
 		//checking for last constant to add the ';' character
 		if($count == $last_index){
+
+			//this stops from adding the ; character to the user file
+			$txt = $pieces[$count]."\n\n";
+			fwrite($userfile, $txt);
+
 			$txt = $pieces[$count].";\n\n";
 			fwrite($myfile, $txt);
-			fwrite($userfile, $txt);
+
 		}
 		//if not last constant, just add a comma
 		else{
@@ -127,9 +140,12 @@ foreach ($variables as $value){
 
 	//if last variable add a ; 
 	if($count ==  $last_index){
+		
+		$txt = $variables[$count]." in [".$lowerBounds[$count].",".$upperBounds[$count]."]\n";
+		fwrite($userfile, $txt);
+
 		$txt = $variables[$count]." in [".$lowerBounds[$count].",".$upperBounds[$count]."];\n";
    		fwrite($myfile, $txt);
-   		fwrite($userfile, $txt);
    	}
    	//else add a , for the next variable in the array
  	else{
@@ -143,19 +159,27 @@ foreach ($variables as $value){
 
 //OBJECTIVE FUNCTION Section
 //Creating header
-$txt = "\nOBJECTIVE\n";
-fwrite($myfile, $txt);
-fwrite($userfile, $txt);
 
-//Replace all white space and add the objective function with a semicolon
-$txt = str_replace(" ", "", $objectiveFunction).";";
-fwrite($myfile, $txt);
-fwrite($userfile, $txt);
+if(!empty($objectiveFunction)){
+	$txt = "\nOBJECTIVE\n";
+	fwrite($myfile, $txt);
+	fwrite($userfile, $txt);
+
+	//Replace all white space and add the objective function with a semicolon
+	$clean = str_replace(" ", "", $objectiveFunction);
+
+	$txt = $clean."\n";
+	fwrite($userfile, $txt);
+
+	$txt = $clean.";\n";
+	fwrite($myfile, $txt);
+
+}
 
 //CONSTRAINTS Section
 //Creating header if there is input
 if(!empty($constraints)){
- 	$txt = "\n\nCONSTRAINTS\n";
+ 	$txt = "\nCONSTRAINTS\n";
  	fwrite($myfile, $txt);
  	fwrite($userfile, $txt);
 
@@ -170,6 +194,7 @@ if(!empty($constraints)){
 		$pieces[$count] = trim($pieces[$count]," ");
 		$pieces[$count] = trim((preg_replace('/\s+/', '', $pieces[$count])));
 
+		//Switching any occurance of > or => with opposite
 		if(strpos($pieces[$count], "=>") !== false){
 			$operatorSplit = explode("=>", $pieces[$count]);
 			$pieces[$count] = $operatorSplit[1]."<=".$operatorSplit[0];
@@ -185,13 +210,17 @@ if(!empty($constraints)){
 			$pieces[$count] = $operatorSplit[1]."<".$operatorSplit[0];
 		}
 
-		//checking for last constant to add the ';' character
+		//checking for last constraint to add the ';' character
 		if($count == $last_index){
+
+			$txt = $pieces[$count];
+			fwrite($userfile, $txt);
+
 			$txt = $pieces[$count].";";
 			fwrite($myfile, $txt);
-			fwrite($userfile, $txt);
+
 		}
-		//if not last constant, just add a comma
+		//if not last constraint, just add a comma
 		else{
 			$txt = $pieces[$count].",\n";
 			fwrite($myfile, $txt);

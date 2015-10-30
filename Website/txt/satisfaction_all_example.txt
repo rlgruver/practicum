@@ -1,0 +1,11 @@
+CONSTANTS
+t = .00000123
+
+VARIABLES
+x in [-10, 10], 
+y in [-8, 8], 
+z in [-1,1]
+
+CONSTRAINTS
+y = x-2,     
+z = tx

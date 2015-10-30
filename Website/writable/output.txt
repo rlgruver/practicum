@@ -1,5 +1,0 @@
-RESULTS
-Search: Complete
-Solutions: 0
-Elapsed time: 5268.11289787 ms
-Best upper bound: -4.51420165136
