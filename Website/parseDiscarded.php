@@ -2,23 +2,31 @@
 
 $text = file_get_contents('txt/realtime_discarded.txt');
 
-$input = array("x1");
-$myfile = fopen("writable/disarded.txt", "w") or die("Unable to open file!");
+//The specific variables that will be chosen to be parsed will be stored in this input array
+$input = array("x1","x2");
+
+//create a new csv file that will be used for visualizations
+$myfile = fopen("writable/disarded.csv", "w") or die("Unable to open file!");
+
+//Explode the realtime discarded solutions to get ready for parsing
 $solutions = explode("OBJECTIVE FUNCTION", $text);
 
 $varWrite = false;
 $count = 1;
 
-
+//Each iteration of the for loop goes through a discarded set of an objective function with its corresponding variables
 for($j=0; $j < count($solutions); $j++){
 
+	//These will store all values that we want to see
 	$nameArray = [];
 	$lowerArray = [];
 	$upperArray = [];
 
+	//These will store all values that we want to keep
 	$lowerOutput = [];
 	$upperOutput = [];
 
+	//Parsing to single out variable names, positions of occurance, lower and upper bounds. Also parsing objective function bounds
 	$objective = explode("DOMAIN", $solutions[$count]);
 
 	$objective[0] = str_replace("[", "", $objective[0]);
@@ -35,6 +43,7 @@ for($j=0; $j < count($solutions); $j++){
 	array_pop($getVarNames);
 	$i = 0;
 
+	//While loop to discern between variables and their lower and upper bounds
 	while($i < count($getVarNames)){
 		$name = $getVarNames[$i];
 		$i ++;
@@ -47,52 +56,49 @@ for($j=0; $j < count($solutions); $j++){
 		$i ++;
 	}
 
+	//Always store the objective function of a discarded set in the first position of the output arrays
 	$i = 0;
-	$lowerOutput[] = $lowerArray[0];
-	$upperOutput[] = $upperArray[0];
+	$lowerOutput[] = preg_replace('/\s+/','', $lowerArray[0]);
+	$upperOutput[] = preg_replace('/\s+/','', $upperArray[0]);
 
+	//While loop to go through each variable and its bounds to determine which ones should be placed in the output arrays
 	while($i < count($input)){
 
 		for($x = 0; $x < count($nameArray); $x ++){
 
 			if($input[$i] == $nameArray[$x]){
-				$lowerOutput[] = $lowerArray[$x+1];
-				$upperOutput[] = $upperArray[$x+1];
+
+				$lowerOutput[] = preg_replace('/\s+/','', $lowerArray[$x+1]);
+
+				$upperOutput[] = preg_replace('/\s+/','', $upperArray[$x+1]);
 			}
 		}
 		$i ++;
 
 	}
 
-//LOWEROUTPUT HAS OBJ FUNCTION FIRST POSITION OF ARRAY THEN THE VARIABLE LOWER BOUNDS IN ORDER 
+//First line will always have inputs 
+
+//Discarded #1
+//Lower bounds will always be put first: [objective function, lower bound x1, lowerbound x2, ...]
+//Upper bounds will go next line: [objective function, upper bound x1, upperbound x2, ...]
+
+//Discarded #2
+//Same format as above and so on for each discarded set
 
 
 	if(!$varWrite){
-		$varString = "";
-		for($i = 0; $i < count($input); $i++){
-			$varString .= $input[$i].',';
-		}
-		$varString = substr($varString, 0, -1);
+
 		$varWrite = true;
-		fwrite($myfile, $varString."\n");
+		fputcsv($myfile, $input);
 	}
 
-	$txt ="";
-	for($i = 0; $i <count($lowerOutput); $i++){
-		$txt .= $lowerOutput[$i].',';
-	}
-	$txt = substr($txt, 0, -1);
-	$txt = preg_replace('/\s+/','', $txt);
-	fwrite($myfile, $txt."\n");
+	fputcsv($myfile, $lowerOutput);
 	
-	$txt ="";
-	for($i = 0; $i <count($upperOutput); $i++){
-		$txt .= $upperOutput[$i].',';
-	}
-	$txt = substr($txt, 0, -1);
-	$txt = preg_replace('/\s+/','', $txt);
-	fwrite($myfile, $txt."\n");
+	fputcsv($myfile, $upperOutput);
+
 	$count ++;
+
 }
 
 fclose($myfile);
