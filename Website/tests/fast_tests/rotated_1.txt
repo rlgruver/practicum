@@ -1,0 +1,10 @@
+OPTIONS
+Precision = 1e-6D
+Consistency = hc4
+Interval Eval = natural
+
+VARIABLES
+x1 in [-100, 100];
+
+OBJECTIVE
+x1^2;

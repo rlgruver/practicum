@@ -1,0 +1,13 @@
+OPTIONS
+Precision = 1e-6D
+Consistency = hc4
+Interval Eval = natural
+Timeout = 120
+
+VARIABLES
+x1 in [-1.0e+10, 1.0e+10],
+x2 in [-1.0e+10, 1.0e+10];
+                
+CONSTRAINTS
+x1^2 + x2^2 - 1 = 0,
+x1^2 - x2 = 0;
