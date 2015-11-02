@@ -39,6 +39,7 @@
 
   function stopRefresh() {
     clearInterval(interval);
+    document.getElementById('output').src = "writable/output.txt";
   }
 
    function showOutputFile() {
@@ -124,6 +125,7 @@
 $localOutputFile = "writable/output.txt"; 
 $localSolutionsFile = "txt/realtime_output.txt"; 
 $localDiscardedFile = "txt/realtime_discarded.txt";  
+$localComplete = "txt/complete.txt";
 
 $f = @fopen($localOutputFile, "r+");
 if ($f !== false) {
@@ -143,13 +145,17 @@ if ($f !== false) {
   fclose($f);
 }
 
+$f = @fopen($localComplete, "r+");
+if ($f !== false) {
+  ftruncate($f, 0);
+  fclose($f);
+}
 
 function is_process_running($PID)
 {
  exec("ps $PID", $ProcessState);
  return(count($ProcessState) >= 2);
 }
-
 
 
 $ps = exec( "php processOutput.php > /dev/null 2>&1 & echo $!" );
