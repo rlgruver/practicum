@@ -20,48 +20,53 @@ function validate_form(){
 ////////////////////////////
 //VALIDATE BY SECTION
 function objFunctionValidate(){
+	var valid = true;
 	var objF = document.getElementById("objFunction").value;
+
+	document.getElementById("error2").style.visibility = "hidden";
+	document.getElementById("error4").style.visibility = "hidden";
+	document.getElementById("error6").style.visibility = "hidden";
 
 	if(objF == "" | objF == null){
 		document.getElementById("error2").style.visibility = "visible";
 		return false;
 	}
-	else if(!(parenthesesBalanced(objF))||!(bracketsBalanced(objF))){
+ 	if(!(parenthesesBalanced(objF))||!(bracketsBalanced(objF))){
 		document.getElementById("error4").style.visibility = "visible";
-		return false;
+		valid = false;
 	}
 
 	if(!(mathExp(objF))){
 		document.getElementById("error6").style.visibility = "visible";
-		return false;
+		valid = false;
 	}
 
-	document.getElementById("error2").style.visibility = "hidden";
-	document.getElementById("error4").style.visibility = "hidden";
-	document.getElementById("error6").style.visibility = "hidden";
-	return true;
+	return valid;
 }
 
 function constraintsValidate(){
+	var valid = true;
 	var con = document.getElementById("constraints").value;
 
+	document.getElementById("error5").style.visibility = "hidden";
+	document.getElementById("error7").style.visibility = "hidden";
+
 	if(con == "" || con == null){
+
 		return true;
 	}
 
 	if(!(parenthesesBalanced(con))||!(bracketsBalanced(con))){
 		document.getElementById("error5").style.visibility = "visible";
-		return false;
+		valid = false;
 	}
 
 	if(!(mathExp(con))){
 		document.getElementById("error7").style.visibility = "visible";
-		return false;
+		valid = false;
 	}
 
-	document.getElementById("error5").style.visibility = "hidden";
-	document.getElementById("error7").style.visibility = "hidden";
-	return true;
+	return valid;
 }
 
  function varsDomainValidate(){

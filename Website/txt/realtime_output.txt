@@ -1,0 +1,14 @@
+OBJECTIVE FUNCTION
+[0, 0]
+Precision: -0
+DOMAIN
+x1 = [-0, 0]
+Precision: 0
+
+OBJECTIVE FUNCTION
+[0, 0]
+Precision: -0
+DOMAIN
+x1 = [-0, 0]
+Precision: 0
+

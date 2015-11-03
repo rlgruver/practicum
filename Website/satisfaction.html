@@ -23,7 +23,7 @@
   <script type="text/javascript" src ="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
   <script src="js/custom.js"></script>
-  <script src="js/validateOptimization.js"></script>
+  <script src="js/validateSatisfaction.js"></script>
 
 
 
@@ -92,13 +92,14 @@
         <div class="card-panel">
           <div class="row">
             <div class="row">
-              <h5 style="display:inline;">Constraints</h5> <div class="grey-text" style="display:inline; font-size:small">(Optional)</div>
+              <h5 style="display:inline;">Constraints</h5>
               <div class="right orange-text" style="display:inline;"><a class="example modal-trigger" href="#constModal">EXAMPLE FILE</a></div>
             </div>
             <div class="input-field col s6">
               <textarea placeholder="Enter constraints here." id="constraints" class="textarea" form="form1" name="constraints"></textarea>
               <span id="error5" class="error">Error: Missing parenthesis or brackets</span><br>
-              <span id="error7" class="error">Error: Invalid arithmetic expression</span>
+              <span id="error7" class="error">Error: Invalid arithmetic expression</span><br>
+              <span id="error9" class="error">Error: Cannot be empty</span>
             </div>
             <div class="file-field input-field col s5 offset-s1">
               <br><br>
@@ -176,7 +177,6 @@
     </div>
     <span id="error1" class="error">Error: Variable mismatch detected</span><br>
     <span id="error3" class="error">Error: Please fill out all fields</span><br>
-    <span id="error8" class="error">Error: Invalid domain values</span>
   </div>
 
   <!-- ROW -->     

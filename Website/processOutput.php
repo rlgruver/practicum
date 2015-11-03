@@ -50,7 +50,7 @@ $starttime = time();
 
 while ($ssh->isConnected()) {
   $now = time()-$starttime;
-  if($now >120){
+  if($now >7200){
     $complete = "error";
     break;
   } 
@@ -76,6 +76,7 @@ if($complete == "done"){
   if(!$sftp->get($remoteOutputFile, $localOutputFile)){
     throw new Exception('Unable to get output file.');
   }
+  exec("php createOutput.php");
 }
 else if($complete == "error"){
   //retrieve error file from remote server talk to angel
