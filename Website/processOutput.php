@@ -68,6 +68,37 @@ while ($ssh->isConnected()) {
   }
 }
 
+//function to delete old session directories to reduce clutter 
+function deleteDirectory($dir) {
+    if (!file_exists($dir)) {
+        return true;
+    }
+
+    if (!is_dir($dir)) {
+        return unlink($dir);
+    }
+
+    foreach (scandir($dir) as $item) {
+        if ($item == '.' || $item == '..') {
+            continue;
+        }
+
+        if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+            return false;
+        }
+
+    }
+
+    return rmdir($dir);
+}
+
+//loop through all directories in sessions to see if they are older than 24 hours
+foreach (glob("sessions/*") as $filename) {
+    //86400 seconds is 24 hours
+    if(filemtime($filename) < time() - 86400){
+      deleteDirectory($filename);
+    }
+}
 
    exec("php parseOutput.php {$session}");
 
