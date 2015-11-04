@@ -69,7 +69,7 @@ while ($ssh->isConnected()) {
 }
 
 
-   exec("php createOutput.php {$session}");
+   exec("php parseOutput.php {$session}");
 
 
 ?>
