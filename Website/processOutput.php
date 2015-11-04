@@ -1,21 +1,20 @@
 <?php
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+$session = $_POST['session_id'];
+
 //local
-$localInputFile = "writable/input.txt"; 
-$localOutputFile = "writable/output.txt"; 
-$localSolutionsFile = "txt/realtime_output.txt";
-$localDiscardedFile = "txt/realtime_discarded.txt";
-$localComplete= "txt/complete.txt";   
+$localInputFile = "sessions/".$session."/input.txt"; 
+$localOutputFile = "sessions/".$session."/output.txt"; 
+$localSolutionsFile = "sessions/".$session."/realtime_output.txt";
+$localDiscardedFile = "sessions/".$session."/realtime_discarded.txt";
 
 //remote
-$remoteInputFile = "/code/spopt-stable/tests/input.txt";
-$remoteOutputFile = "/code/spopt-stable/tests/input.txt.out"; 
-$remoteSolutionsFile = "/code/spopt-stable/tests/input.txt.solutions";
-$remoteDiscardedFile = "/code/spopt-stable/tests/input.txt.discarded";
-$remoteComplete = "/code/spopt-stable/complete.txt";
+$remoteInputFile = "/code/spopt-stable/tests/".$session."/input.txt";
+$remoteOutputFile = "/code/spopt-stable/tests/".$session."/input.txt.out"; 
+$remoteSolutionsFile = "/code/spopt-stable/tests/".$session."/input.txt.solutions";
+$remoteDiscardedFile = "/code/spopt-stable/tests/".$session."/input.txt.discarded";
 
 
 //truncate Done text 
@@ -35,7 +34,8 @@ $sftp = new Net_SFTP('cr2g01.cs.utep.edu',22);
 if (!$sftp->login('rlgruver', 'utep$2015')) { 
   exit('sftp Login Failed');
 }
-//send input file to cr2g server 
+//send input file to cr2g server
+$sftp->mkdir('/code/spopt-stable/tests/'.$session); 
 $sftp->put($remoteInputFile, $localInputFile,  NET_SFTP_LOCAL_FILE);
 $sftp->chmod(0777, $remoteInputFile);
 
@@ -43,7 +43,7 @@ $sftp->chmod(0777, $remoteInputFile);
  //execute python script 
 $ssh->write("cd /code/spopt-stable\n");
 $ssh->read('rlgruver@cr2g01:/code/spopt-stable$');
-$ssh->write("python SpOpt.py tests/input.txt\n");
+$ssh->write("python SpOpt.py tests/".$session."/input.txt\n");
 
 
 $starttime = time();
@@ -51,7 +51,6 @@ $starttime = time();
 while ($ssh->isConnected()) {
   $now = time()-$starttime;
   if($now >7200){
-    $complete = "error";
     break;
   } 
 
@@ -60,27 +59,17 @@ while ($ssh->isConnected()) {
   //retrieve all information from remote server
   $sftp->get($remoteSolutionsFile, $localSolutionsFile);
   $sftp->get($remoteDiscardedFile, $localDiscardedFile);
-  $sftp->get($remoteComplete, $localComplete);
 
-  exec("php parseDiscarded.php");
+  exec("php parseDiscarded.php {$session}");
 
-  $status = file_get_contents($localComplete);
-  if(preg_match('/done/',$status)){
-    $complete = "done";
+  if($sftp->get($remoteOutputFile, $localOutputFile)){
+    $done = "true";
     break;
   }
-
 }
 
-if($complete == "done"){
-  if(!$sftp->get($remoteOutputFile, $localOutputFile)){
-    throw new Exception('Unable to get output file.');
-  }
-  exec("php createOutput.php");
-}
-else if($complete == "error"){
-  //retrieve error file from remote server talk to angel
-}
 
-return;
+   exec("php createOutput.php {$session}");
+
+
 ?>

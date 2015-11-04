@@ -1,12 +1,15 @@
 <?php
+//get session id
+parse_str($_SERVER["QUERY_STRING"], $_GET);
+$session = $argv[1];
 
-$text = file_get_contents('writable/output.txt');
+$text = file_get_contents('sessions/'.$session.'/output.txt');
 
 //The specific variables that will be chosen to be parsed will be stored in this input array
 $input = array("x1");
 
 //create a new csv file that will be used for visualizations
-$myfile = fopen("writable/solutions.csv", "w") or die("Unable to open file!");
+$myfile = fopen("sessions/".$session."/solutions.csv", "w") or die("Unable to open file!");
 
 //Explode the solutions to get ready for parsing
 $solutionList = explode("SOLUTIONS", $text);

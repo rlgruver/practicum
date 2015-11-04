@@ -1,12 +1,16 @@
 <?php
+//get session id
+parse_str($_SERVER["QUERY_STRING"], $_GET);
+$session = $argv[1];
 
-$text = file_get_contents('txt/realtime_discarded.txt');
+
+$text = file_get_contents('sessions/'.$session.'/realtime_discarded.txt');
 
 //The specific variables that will be chosen to be parsed will be stored in this input array
 $input = array("x1","x2");
 
 //create a new csv file that will be used for visualizations
-$myfile = fopen("writable/disarded.csv", "w") or die("Unable to open file!");
+$myfile = fopen('sessions/'.$session.'/disarded.csv', 'w') or die("Unable to open file!");
 
 //Explode the realtime discarded solutions to get ready for parsing
 $solutions = explode("OBJECTIVE FUNCTION", $text);

@@ -1,4 +1,7 @@
-<?php include 'processInput.php'; ?>
+<?php 
+session_start();
+include 'processInput.php'; 
+?>
 
 
 <!DOCTYPE html>
@@ -17,29 +20,46 @@
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
-  <script>
-  function loading(status){
-     if(status=='running'){
+<script>
+
+var session_id = '<?php echo session_id(); ?>';
+
+$(document).ready(function(){
+var data = {session_id:session_id};
+    // use ajax, call the PHP
+    $.ajax({
+        type: "POST",
+        url: 'processOutput.php', 
+        data: data,
+        success: function(response){
+            complete();
+        }
+    })
+});
+
+  function loading(){
       document.getElementById('loading').style.visibility = 'visible'; 
+      document.getElementById('output').src ="sessions/"+session_id+"/realtime_output.txt";
     }
-    else if(status=='complete'){
+  function complete(){
       document.getElementById('loadingPic').src= "img/loadbar.png"; 
       stopRefresh();
       showOutputFile();
-    } 
   }
 
-  interval = window.setInterval("reloadIFrame();", 3000);
+  interval = window.setInterval("reloadIFrame();", 5000);
   function reloadIFrame() {
    document.getElementById('output').contentWindow.location.reload('true');
   }
 
   function stopRefresh() {
     clearInterval(interval);
-    document.getElementById('output').src = "writable/output.txt";
+    document.getElementById('output').src = "sessions/"+session_id+"/output.txt";
   }
 
    function showOutputFile() {
@@ -51,7 +71,7 @@
 
 </head>
 
-<body class="teal" style = "background-image: url(img/background.png)" onload="rofl()">
+<body class="teal" style = "background-image: url(img/background.png)">
 
 
   <nav class="grey darken-2">
@@ -72,7 +92,7 @@
       <div class='row col s12 center-align'>
         <div id ="loading" style="visibility:hidden;"> <img src="img/loadbar.gif" id="loadingPic" width="9%" height="auto"> </div>
         <div id="frameHolder">
-          <iframe id="output" name="output" src="txt/realtime_output.txt" class="white" style="border:1.5px solid #99CC00" width="700" height="400"></iframe>
+          <iframe id="output" name="output" src="" class="white" style="border:1.5px solid #99CC00" width="700" height="400"></iframe>
         </div>
       </div>
 
@@ -80,9 +100,9 @@
   </div>
 
   <div class='row col s12 center-align'>
-    <a href='txt/upload.txt' class='modal-action waves-effect waves-green btn' download>Download Input File</a>
+    <a href="sessions/<?php echo htmlspecialchars(session_id()); ?>/input.txt" class='modal-action waves-effect waves-green btn' download>Download Input File</a>
     <br><br>
-    <a href='writable/output.txt' style="visibility:hidden;" id="downloadOutputFile" class='modal-action waves-effect waves-green btn' download>Download Output File</a>
+    <a href='sessions/<?php echo htmlspecialchars(session_id()); ?>/output.txt' style="visibility:hidden;" id="downloadOutputFile" class='modal-action waves-effect waves-green btn' download>Download Output File</a>
   </div>
   <br>
 
@@ -121,58 +141,7 @@
 
 <?php
 
-//remove old files
-$localOutputFile = "writable/output.txt"; 
-$localSolutionsFile = "txt/realtime_output.txt"; 
-$localDiscardedFile = "txt/realtime_discarded.txt";  
-$localComplete = "txt/complete.txt";
-
-$f = @fopen($localOutputFile, "r+");
-if ($f !== false) {
-  ftruncate($f, 0);
-  fclose($f);
-}
-
-$f = @fopen($localSolutionsFile, "r+");
-if ($f !== false) {
-  ftruncate($f, 0);
-  fclose($f);
-}
-
-$f = @fopen($localDiscardedFile, "r+");
-if ($f !== false) {
-  ftruncate($f, 0);
-  fclose($f);
-}
-
-$f = @fopen($localComplete, "r+");
-if ($f !== false) {
-  ftruncate($f, 0);
-  fclose($f);
-}
-
-function is_process_running($PID)
-{
- exec("ps $PID", $ProcessState);
- return(count($ProcessState) >= 2);
-}
-
-
-$ps = exec( "php processOutput.php > /dev/null 2>&1 & echo $!" );
-while(is_process_running($ps))
-{
- echo "<script> 
- loading('running');
- </script>";
-
- ob_flush(); flush();
- sleep(1);
-}
-
-
-echo "<script>loading('complete');</script>";
-
-
+echo "<script> loading(); </script>";
 
 ?>
 

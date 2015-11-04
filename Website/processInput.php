@@ -1,4 +1,10 @@
 <?php
+//CREATE UNIQUE SESSION DIRECTORY
+$makeDir = mkdir("sessions/".session_id()) or die("Unable to create user directory!");
+//HAVE TO INCLUDE REAL TIME OUTPUT FILE
+$realtimeFile = fopen("sessions/".session_id()."/realtime_output.txt", "w");
+fclose($realtimeFile);
+
 //This page creates the input.txt file that will be fed into the solver, it also creates the file upload.txt that contains the text file
 //without the options to allow the user to download it and use it for later use.
 //
@@ -21,8 +27,7 @@ $function = isset($_POST['function']) ? $_POST['function'] : '';
 $timeout = isset($_POST['timeout']) ? $_POST['timeout'] : '';
 
 
-
-$myfile = fopen("writable/input.txt", "w") or die("Unable to open file!");
+$myfile = fopen("sessions/".session_id()."/input.txt", "w") or die("Unable to open file!");
 
 //OPTIONS Section
 //Creating header
@@ -84,7 +89,7 @@ else{
 
 
 //Downloadable file begins here
-$userfile = fopen("txt/upload.txt", "w") or die("Unable to open 'upload.txt' file!");
+$userfile = fopen("sessions/".session_id()."/upload.txt", "w") or die("Unable to open 'upload.txt' file!");
 
 
 //CONSTANTS Section
