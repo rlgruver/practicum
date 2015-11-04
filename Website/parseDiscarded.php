@@ -62,8 +62,8 @@ for($j=0; $j < count($solutions); $j++){
 
 	//Always store the objective function of a discarded set in the first position of the output arrays
 	$i = 0;
-	$lowerOutput[] = preg_replace('/\s+/','', $lowerArray[0]);
-	$upperOutput[] = preg_replace('/\s+/','', $upperArray[0]);
+	//$lowerOutput[] = preg_replace('/\s+/','', $lowerArray[0]);
+	//$upperOutput[] = preg_replace('/\s+/','', $upperArray[0]);
 
 	//While loop to go through each variable and its bounds to determine which ones should be placed in the output arrays
 	while($i < count($input)){

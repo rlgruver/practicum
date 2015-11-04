@@ -3,7 +3,7 @@
 parse_str($_SERVER["QUERY_STRING"], $_GET);
 $session = $argv[1];
 
-$text = file_get_contents('sessions/'.$session.'/output.txt');
+$text = file_get_contents('sessions/'.$session.'/output.txt') or die("Output.txt does not exist!");
 
 //The specific variables that will be chosen to be parsed will be stored in this input array
 $input = array("x1");
