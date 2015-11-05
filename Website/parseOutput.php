@@ -3,10 +3,21 @@
 parse_str($_SERVER["QUERY_STRING"], $_GET);
 $session = $argv[1];
 
+$txt = file_get_contents('sessions/'.$session.'/parse.txt');
+$input = [];
+
+$outputs = explode("SPLITHERE", $txt);
+
+$commaSplit = explode(",", $outputs[0]);
+for ($i=0; $i < count($commaSplit) ; $i++) { 
+	$input[] = preg_replace('/\s+/','', $commaSplit[$i]);
+}
+
+
 $text = file_get_contents('sessions/'.$session.'/output.txt') or die("Output.txt does not exist!");
 
-//The specific variables that will be chosen to be parsed will be stored in this input array
-$input = array("x1");
+
+
 
 //create a new csv file that will be used for visualizations
 $myfile = fopen("sessions/".$session."/solutions.csv", "w") or die("Unable to open file!");

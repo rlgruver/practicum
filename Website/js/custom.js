@@ -7,6 +7,8 @@ function removeElementsByClass(className){
     }
 }
 
+var counter = 1;  
+
 function replaceHtml(){
     var newdiv = document.createElement('div');
     newdiv.innerHTML = '<div class="input-field col s2 " id="dynamicVariables"><input type="text"class="validate'
@@ -17,11 +19,22 @@ function replaceHtml(){
     +'</div><div class="input-field col s1 right-align" id="commaText"><div class="varText"> ,</div></div><div'
     +' class="input-field col s2" id="dynamicUpperBounds"><input type="text" class="validate center-align" '
     +'name="myUpper[]" placeholder="8" id="initialUpperBound"></div><div class="input-field col s1 left-align" '
-    +'id="rightBracket"><div class="varText">]</div></div>';
+    +'id="rightBracket"><div class="varText">]</div></div><div class ="col s1" id="dynamicChoices"><div class '
+    +'="checkWrapper"><input class="filled-in" name="vizChoices[]" type="checkbox" value = "0" id ="initialCho'
+    +'ice" /><label for="initialChoice"></label></div></div>';
     document.getElementById("varSection").appendChild(newdiv);
+    counter = 1;
 }
 
-var counter = 1;   
+ 
+function addBox(divName){
+  var newdiv = document.createElement('div');
+  newdiv.className = "checkWrapper1";
+  newdiv.innerHTML = "<input class='filled-in' name='vizChoices[]' type='checkbox' id='dyBox"+counter+"'' value="+counter+"><label for='dyBox"+counter+"'></label>";
+  document.getElementById(divName).appendChild(newdiv);
+  counter ++;
+}
+
 function addVars(divName,value){
   var newdiv = document.createElement('div');
   newdiv.innerHTML = " <br><input type='text' name='myVars[]' class='validate center-align dyVar' id='dyVar' value="+value+">";
@@ -36,7 +49,6 @@ function addUpper(divName,value){
   var newdiv = document.createElement('div');
   newdiv.innerHTML =  " <br><input type='text' name='myUpper[]' class='validate center-align dyVar'  id='dyVar' value='"+value+"'>";
   document.getElementById(divName).appendChild(newdiv);
-  counter++;
 }     
 
 function stopRKey(evt) { 
@@ -133,6 +145,7 @@ function populateInput(value, type){
       var lower = bounds[0];
       var upper = bounds[1];
 
+      addBox('dynamicChoices');
       addVars('dynamicVariables',name); 
       addLower('dynamicLowerBounds',lower);
       addUpper('dynamicUpperBounds',upper);
@@ -234,6 +247,7 @@ window.onload = function() {
           var lower = bounds[0];
           var upper = bounds[1];
 
+          addBox('dynamicChoices');
           addVars('dynamicVariables',name); 
           addLower('dynamicLowerBounds',lower);
           addUpper('dynamicUpperBounds',upper);

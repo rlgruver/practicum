@@ -3,6 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $session = $_POST['session_id'];
+$vars = $_POST['vars'];
+$lower = $_POST['lowerBounds'];
+$upper = $_POST['upperBounds'];
+
+
 
 //local
 $localInputFile = "sessions/".$session."/input.txt"; 
@@ -60,7 +65,7 @@ while ($ssh->isConnected()) {
   $sftp->get($remoteSolutionsFile, $localSolutionsFile);
   $sftp->get($remoteDiscardedFile, $localDiscardedFile);
 
-  exec("php parseDiscarded.php {$session}");
+  exec("php parseDiscarded.php {$session} ");
 
   if($sftp->get($remoteOutputFile, $localOutputFile)){
     $done = "true";
@@ -100,7 +105,7 @@ foreach (glob("sessions/*") as $filename) {
     }
 }
 
-   exec("php parseOutput.php {$session}");
+   exec("php parseOutput.php {$session} ");
 
 
 ?>

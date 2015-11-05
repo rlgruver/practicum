@@ -28,6 +28,7 @@ include 'processInput.php';
 
 <script>
 
+
 var session_id = '<?php echo session_id(); ?>';
 
 $(document).ready(function(){

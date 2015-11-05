@@ -15,6 +15,7 @@ $upperBounds = $_POST["myUpper"];
 $constants = $_POST["constants"];
 $constraints = $_POST["constraints"];
 $objectiveFunction = $_POST["objFunction"];
+$checkboxes = $_POST["vizChoices"];
 
 $satisfaction = isset($_POST['isSatisfaction']) ? $_POST['isSatisfaction'] : '';
 $precision = isset($_POST['precision']) ? $_POST['precision'] : '';
@@ -28,6 +29,7 @@ $timeout = isset($_POST['timeout']) ? $_POST['timeout'] : '';
 
 
 $myfile = fopen("sessions/".session_id()."/input.txt", "w") or die("Unable to open file!");
+
 
 //OPTIONS Section
 //Creating header
@@ -90,6 +92,7 @@ else{
 
 //Downloadable file begins here
 $userfile = fopen("sessions/".session_id()."/upload.txt", "w") or die("Unable to open 'upload.txt' file!");
+$parsefile = fopen("sessions/".session_id()."/parse.txt", "w") or die("Unable to open 'parse.txt' file!");
 
 
 //CONSTANTS Section
@@ -136,6 +139,56 @@ fwrite($userfile, $txt);
 
 //loop through the variable, and domain arrays to write to file
 $count = 0;
+
+//To keep track of chosen variables to visualize
+$boxCount = 0;
+$chosenVars = [];
+$chosenLowerBounds = [];
+$chosenUpperBounds = [];
+
+
+for($i = 0; $i < count($variables); $i++){
+
+	if($i == $checkboxes[$boxCount]){
+		$chosenVars [] = $variables[$i];
+		$chosenLowerBounds [] = $lowerBounds[$i];
+		$chosenUpperBounds [] = $upperBounds[$i];
+		$boxCount ++;
+	}
+
+}
+	$txt ="";
+	for($i = 0; $i <count($chosenVars); $i++){
+		$txt .= $chosenVars[$i].',';
+	}
+	$txt = substr($txt, 0, -1);
+	$txt = preg_replace('/\s+/','', $txt);
+	fwrite($parsefile, $txt."\n");
+
+	fwrite($parsefile, "SPLITHERE\n");
+
+	$txt ="";
+	for($i = 0; $i <count($chosenLowerBounds); $i++){
+		$txt .= $chosenLowerBounds[$i].',';
+	}
+	$txt = substr($txt, 0, -1);
+	$txt = preg_replace('/\s+/','', $txt);
+	fwrite($parsefile, $txt."\n");
+
+	fwrite($parsefile, "SPLITHERE\n");
+
+	$txt ="";
+	for($i = 0; $i <count($chosenUpperBounds); $i++){
+		$txt .= $chosenUpperBounds[$i].',';
+	}
+	$txt = substr($txt, 0, -1);
+	$txt = preg_replace('/\s+/','', $txt);
+	fwrite($parsefile, $txt."\n");
+
+fclose($parsefile);
+
+
+
 $last_index = count($variables) -1;
 foreach ($variables as $value){
 	//removing all white spaces

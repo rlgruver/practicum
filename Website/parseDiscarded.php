@@ -1,16 +1,34 @@
 <?php
 //get session id
 parse_str($_SERVER["QUERY_STRING"], $_GET);
+
 $session = $argv[1];
 
+$txt = file_get_contents('sessions/'.$session.'/parse.txt');
+$boundOutput = [];
+$input = [];
 
-$text = file_get_contents('sessions/'.$session.'/realtime_discarded.txt');
+$outputs = explode("SPLITHERE", $txt);
+
+$commaSplit = explode(",", $outputs[0]);
+for ($i=0; $i < count($commaSplit) ; $i++) { 
+	$input[] = preg_replace('/\s+/','', $commaSplit[$i]);
+}
+
+$lowSplit = explode(",", $outputs[1]);
+$upSplit = explode(",", $outputs[2]);
+for ($i=0; $i < count($lowSplit) ; $i++) { 
+	$boundOutput[] = preg_replace('/\s+/','', $lowSplit[$i]);
+	$boundOutput[] = preg_replace('/\s+/','', $upSplit[$i]);
+}
 
 //The specific variables that will be chosen to be parsed will be stored in this input array
-$input = array("x1","x2");
+$text = file_get_contents('sessions/'.$session.'/realtime_discarded.txt');
+
+
 
 //create a new csv file that will be used for visualizations
-$myfile = fopen('sessions/'.$session.'/disarded.csv', 'w') or die("Unable to open file!");
+$myfile = fopen('sessions/'.$session.'/discarded.csv', 'w') or die("Unable to open file!");
 
 //Explode the realtime discarded solutions to get ready for parsing
 $solutions = explode("OBJECTIVE FUNCTION", $text);
@@ -60,6 +78,13 @@ for($j=0; $j < count($solutions); $j++){
 		$i ++;
 	}
 
+	$x = 0;
+	while($x < count($lower)){
+		$boundOutput[] = $lowerOutput[$x];
+		$boundOutput[] = $upperOutput[$x];
+		$x ++;
+	}
+
 	//Always store the objective function of a discarded set in the first position of the output arrays
 	$i = 0;
 	//$lowerOutput[] = preg_replace('/\s+/','', $lowerArray[0]);
@@ -94,7 +119,7 @@ for($j=0; $j < count($solutions); $j++){
 	if(!$varWrite){
 
 		$varWrite = true;
-		fputcsv($myfile, $input);
+		fputcsv($myfile, $boundOutput);
 	}
 
 	fputcsv($myfile, $lowerOutput);
