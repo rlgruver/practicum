@@ -108,6 +108,10 @@ foreach (glob("sessions/*") as $filename) {
       deleteDirectory($filename);
     }
 }
+//loop through all directories in cr2g server to see if they are older than 24 hours 
+// $ssh->write("cd /code/spopt-stable\n");
+// $ssh->read('rlgruver@cr2g01:/code/spopt-stable$');
+$ssh->exec("cd /code/spopt-stable; python cleanup.py 1 tests/\n");
 
  parseOutput($session); 
 
