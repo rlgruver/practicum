@@ -1,0 +1,26 @@
+body {
+    font: 10px sans-serif;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .rect {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+  .line {
+    fill: none;
+    stroke: #000;
+    strok-width: 2px;
+  }
+
+  #area2 {
+    y.domain: d3.extent(data, function(d) { return d.data2; });
+  }
