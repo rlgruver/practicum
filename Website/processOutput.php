@@ -1,3 +1,4 @@
+
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -65,7 +66,9 @@ while ($ssh->isConnected()) {
   $sftp->get($remoteSolutionsFile, $localSolutionsFile);
   $sftp->get($remoteDiscardedFile, $localDiscardedFile);
 
-  exec("php parseDiscarded.php {$session} ");
+  $command = `php parseDiscarded.php {$session}`;
+  echo "<pre>$command</pre>";
+
 
   if($sftp->get($remoteOutputFile, $localOutputFile)){
     $done = "true";
@@ -105,7 +108,8 @@ foreach (glob("sessions/*") as $filename) {
     }
 }
 
-   exec("php parseOutput.php {$session} ");
+   $command2 = `php parseOutput.php {$session}`;
+   echo "<pre>$command2</pre>"; 
 
 
 ?>
