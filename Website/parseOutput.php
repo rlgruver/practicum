@@ -12,13 +12,6 @@ function parseOutput($session){
 		$input[] = preg_replace('/\s+/','', $commaSplit[$i]);
 	}
 
-	$firstLine = [];
-	$firstLine [] = "data1";
-	$count = 2;
-	for($i = 0; $i < count($input); $i++){
-		$firstLine [] = "data".($i+$count);
-	}
-
 	$secondLine = [];
 	$secondLine [] = "objfunc";
 	for($i = 0; $i < count($input); $i++){
@@ -117,7 +110,6 @@ function parseOutput($session){
 		if(!$varWrite){
 
 			$varWrite = true;
-			fputcsv($myfile, $firstLine);
 			fputcsv($myfile, $secondLine);
 		}
 
