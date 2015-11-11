@@ -12,6 +12,18 @@ function parseOutput($session){
 		$input[] = preg_replace('/\s+/','', $commaSplit[$i]);
 	}
 
+	$firstLine = [];
+	$firstLine [] = "data1";
+	$count = 2;
+	for($i = 0; $i < count($input); $i++){
+		$firstLine [] = "data".($i+$count);
+	}
+
+	$secondLine = [];
+	$secondLine [] = "objfunc";
+	for($i = 0; $i < count($input); $i++){
+		$secondLine [] = $input[$i];
+	}
 
 	$text = file_get_contents('sessions/'.$session.'/output.txt') or die("Output.txt does not exist!");
 
@@ -105,7 +117,8 @@ function parseOutput($session){
 		if(!$varWrite){
 
 			$varWrite = true;
-			fputcsv($myfile, $input);
+			fputcsv($myfile, $firstLine);
+			fputcsv($myfile, $secondLine);
 		}
 
 		fputcsv($myfile, $lowerOutput);
