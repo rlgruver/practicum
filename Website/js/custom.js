@@ -110,10 +110,6 @@ function populateInput(value, type){
   var constantDisplayArea = document.getElementById('constants');
   var constraintDisplayArea = document.getElementById('constraints');
 
-  objectiveDisplayArea.value = "";  
-  constraintDisplayArea.value = "";
-  constantDisplayArea.value = "";
-
   if(type == "VARIABLES"){
 
     removeElementsByClass("dyVar");
@@ -159,6 +155,7 @@ function populateInput(value, type){
   }
 
   if(type == "OBJECTIVE"){
+    
     value = value.replace(/\s/g, "");
     value = value.replace(/;/g,"");
     objectiveDisplayArea.value = value;
