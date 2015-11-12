@@ -299,6 +299,10 @@ window.onload = function() {
         index = positionArray.indexOf(objectivePosition);
         if(positionArray[index] == -1){
           positionArray.splice(index,1);
+
+          //Delete existing values due to it not existing in this input example
+          var objectiveDisplayArea = document.getElementById('objFunction');
+          objectiveDisplayArea.value = "";  
         }
         else{
           positionArray[index] = "OBJECTIVE";
@@ -307,6 +311,9 @@ window.onload = function() {
         index = positionArray.indexOf(constraintPosition);
         if(positionArray[index] == -1){
           positionArray.splice(index,1);
+
+          var constraintDisplayArea = document.getElementById('constraints');
+          constraintDisplayArea.value = "";
         }
         else{
           positionArray[index] = "CONSTRAINTS";
@@ -315,6 +322,9 @@ window.onload = function() {
         index = positionArray.indexOf(constantPosition);
         if(positionArray[index] == -1){
           positionArray.splice(index,1);
+
+          var constantDisplayArea = document.getElementById('constants');
+          constantDisplayArea.value = "";
         }
         else{
           positionArray[index] = "CONSTANTS";
