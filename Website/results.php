@@ -65,8 +65,17 @@ var data = {session_id:session_id};
   }
 
    function showOutputFile() {
-    document.getElementById('downloadOutputFile').style.visibility = 'visible'; 
+    document.getElementById('downloadOutputFile').style.visibility = 'visible';
+    document.getElementById('graphFinalSolutions').style.visibility = 'visible'; 
   }
+
+  function OpenInNewTab() {
+
+   var win = window.open("finalviz.php?s1=" + session_id, '_blank');
+   win.focus();
+
+  }
+
   </script>
 
 
@@ -105,6 +114,8 @@ var data = {session_id:session_id};
     <a href="sessions/<?php echo htmlspecialchars(session_id()); ?>/input.txt" class='modal-action waves-effect waves-green btn' download>Download Input File</a>
     <br><br>
     <a href='sessions/<?php echo htmlspecialchars(session_id()); ?>/output.txt' style="visibility:hidden;" id="downloadOutputFile" class='modal-action waves-effect waves-green btn' download>Download Output File</a>
+    <br><br>
+    <a href="" onclick = "OpenInNewTab(); return false;" style="visibility:hidden;" id="graphFinalSolutions" class='modal-action waves-effect waves-green btn'>Graph Final Solutions</a>
   </div>
   <br>
 
