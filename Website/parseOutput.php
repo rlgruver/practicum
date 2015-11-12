@@ -12,11 +12,22 @@ function parseOutput($session){
 		$input[] = preg_replace('/\s+/','', $commaSplit[$i]);
 	}
 
-	$secondLine = [];
-	$secondLine [] = "objfunc";
-	for($i = 0; $i < count($input); $i++){
-		$secondLine [] = $input[$i];
+	$firstLine = [];
+	$firstLine [] = "data1";
+	$count = 2;
+	for($i=0;$i<count($input);$i++) {
+		$firstLine[] = "data".($i+$count);
 	}
+
+	$varNames = [];
+	$varNames [] = "obj_func";
+	for($i = 0; $i < count($input); $i++){
+		$varNames [] = $input[$i];
+	}
+
+	$varFile = fopen("sessions/".$session."/varNames.csv", "w") or die("Unable to open file!");
+	fputcsv($varFile, $varNames);
+	fclose($varFile);
 
 	$text = file_get_contents('sessions/'.$session.'/output.txt') or die("Output.txt does not exist!");
 
@@ -110,7 +121,7 @@ function parseOutput($session){
 		if(!$varWrite){
 
 			$varWrite = true;
-			fputcsv($myfile, $secondLine);
+			fputcsv($myfile, $firstLine);
 		}
 
 		fputcsv($myfile, $lowerOutput);
@@ -121,4 +132,5 @@ function parseOutput($session){
 	fclose($myfile);
 
 }
+
 ?>
