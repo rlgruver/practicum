@@ -43,8 +43,8 @@ function parseDiscarded($session){
 		$upperArray = [];
 
 		//These will store all values that we want to keep
-		$lowerOutput = [];
-		$upperOutput = [];
+		$endsOutput = [];
+		//$upperOutput = [];
 
 		//Parsing to single out variable names, positions of occurance, lower and upper bounds. Also parsing objective function bounds
 		$objective = explode("DOMAIN", $solutions[$count]);
@@ -76,12 +76,12 @@ function parseDiscarded($session){
 			$i ++;
 		}
 
-		$x = 0;
+		/*$x = 0;
 		while($x < count($lower)){
 			$boundOutput[] = $lowerOutput[$x];
 			$boundOutput[] = $upperOutput[$x];
 			$x ++;
-		}
+		}*/
 
 		//Always store the objective function of a discarded set in the first position of the output arrays
 		$i = 0;
@@ -95,9 +95,9 @@ function parseDiscarded($session){
 
 				if($input[$i] == $nameArray[$x]){
 
-					$lowerOutput[] = preg_replace('/\s+/','', $lowerArray[$x+1]);
+					$endsOutput[] = preg_replace('/\s+/','', $lowerArray[$x+1]);
 
-					$upperOutput[] = preg_replace('/\s+/','', $upperArray[$x+1]);
+					$endsOutput[] = preg_replace('/\s+/','', $upperArray[$x+1]);
 				}
 			}
 			$i ++;
@@ -118,8 +118,8 @@ function parseDiscarded($session){
 			fputcsv($myfile, $boundOutput);
 		}
 
-		fputcsv($myfile, $lowerOutput);	
-		fputcsv($myfile, $upperOutput);
+		fputcsv($myfile, $endsOutput);	
+		//fputcsv($myfile, $upperOutput);
 		$count ++;
 
 	}
