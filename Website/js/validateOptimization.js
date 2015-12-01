@@ -70,6 +70,10 @@ function constraintsValidate(){
 }
 
  function varsDomainValidate(){
+ 	var valid = true;
+ 	document.getElementById("error3").style.visibility = "hidden";
+	document.getElementById("error8").style.visibility = "hidden";
+
 	var varTmp = varArrayVariables();
 	var lowerTmp = varArrayLower();
 	var upperTmp = varArrayUpper();
@@ -100,26 +104,42 @@ function constraintsValidate(){
 
 	if(!(arrayVar.length == arrayLower.length && arrayVar.length == arrayUpper.length && arrayUpper.length == arrayLower.length)){
 		document.getElementById("error3").style.visibility = "visible";
-		return false;
+		valid=false;
 	}
 
-	// for (var i=0; i<arrayVar.length; i++){
-	// 	if(isNaN(arrayLower[i]) || isNaN(arrayUpper[i])){
-	// 		document.getElementById("error8").style.visibility = "visible";
-	// 		return false;
-	// 	}
-	// }
 
-	// for (var i=0; i<arrayVar.length; i++){
-	// 	if(arrayLower[i]>=arrayUpper[i]){
-	// 		document.getElementById("error8").style.visibility = "visible";
-	// 		return false;
-	// 	}
-	// }
 
-	document.getElementById("error3").style.visibility = "hidden";
-	document.getElementById("error8").style.visibility = "hidden";
-	return true;
+	for (var i=0; i<arrayVar.length; i++){
+		if(arrayLower[i]=="oo" || arrayUpper[i]=="oo"){
+			document.getElementById("error8").style.visibility = "visible";
+			valid=false;
+			break;
+		}
+
+		if(arrayLower[i]=="-oo"){
+			if ( isNaN(arrayUpper[i].valueOf()) && arrayUpper[i]!="+oo" ){
+				document.getElementById("error8").style.visibility = "visible";
+				valid=false;
+				break;
+			}
+		}
+
+		if(arrayUpper[i]=="+oo"){
+			if ( isNaN(arrayLower[i].valueOf()) && arrayLower[i]!="-oo" ){
+				document.getElementById("error8").style.visibility = "visible";
+				valid=false;
+				break;
+			}
+		}
+
+		if( Number(arrayLower[i]) > Number(arrayUpper[i])){
+			document.getElementById("error8").style.visibility = "visible";
+			valid=false;
+			break;
+		}
+	}
+	
+	return valid;
 }
 
 
@@ -342,6 +362,9 @@ function mathExp(exp){
 
 	return valid;
 }
+
+
+
 
 
 
