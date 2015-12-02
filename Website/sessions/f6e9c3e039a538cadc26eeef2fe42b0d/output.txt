@@ -1,0 +1,26 @@
+RESULTS
+Search: Complete
+Solutions: 2
+Elapsed time: 359.571933746 ms
+Best upper bound: 0
+SOLUTIONS
+SOLUTION #1
+OBJECTIVE FUNCTION
+[0, 0]
+Precision: -0
+DOMAIN
+x1 in [-0, 0]
+x2 in [-0, 0]
+x3 in [-0, 0]
+x4 in [-0, 0]
+Precision: 0
+SOLUTION #2
+OBJECTIVE FUNCTION
+[0, 0]
+Precision: -0
+DOMAIN
+x1 in [-0, 0]
+x2 in [-0, 0]
+x3 in [-0, 0]
+x4 in [-0, 0]
+Precision: 0
