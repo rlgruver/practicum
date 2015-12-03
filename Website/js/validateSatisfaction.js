@@ -21,15 +21,15 @@ function validate_form(){
 //VALIDATE BY SECTION
 function constantsValidate(){
 	var valid = true;
-	document.getElementById("error9").style.visibility = "hidden";
+	document.getElementById("error10").style.visibility = "hidden";
 	var constants = document.getElementById("constants").value;
 
 	if(constants!=""){
 		var strip = constants.replace(/[\w\s]/gi, "");
 		for (var x = 0; x < strip.length; x++){
 		    var c = strip.charAt(x);
-		    if (c!="," & c!="="){
-		    	document.getElementById("error9").style.visibility = "visible";
+		    if (c!="," && c!="="){
+		    	document.getElementById("error10").style.visibility = "visible";
 				valid = false;
 				break;
 		    }

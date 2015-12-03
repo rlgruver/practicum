@@ -64,7 +64,7 @@ function constantsValidate(){
 		var strip = constants.replace(/[\w\s]/gi, "");
 		for (var x = 0; x < strip.length; x++){
 		    var c = strip.charAt(x);
-		    if (c!="," & c!="="){
+		    if (c!="," && c!="="){
 		    	document.getElementById("error9").style.visibility = "visible";
 				valid = false;
 				break;
