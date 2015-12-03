@@ -66,6 +66,15 @@
   visibility:hidden;
 }
 
+.graph_title{
+  font-size:8pt;
+  padding-left: 42%;
+}
+
+.no-btm-pad{
+  padding-bottom: 0;
+}
+
 /*custom drop down select menu*/
  
 :root .css3-metro-dropdown option,

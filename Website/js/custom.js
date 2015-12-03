@@ -7,7 +7,28 @@ function removeElementsByClass(className){
     }
 }
 
-var counter = 1;  
+var counter = 1;
+
+var dyBoxList = ["initialChoice"];
+
+function CountChecks(whichlist,maxchecked,latestcheck) {
+  var folist = dyBoxList;
+  var iterationlist;
+  eval("iterationlist="+whichlist);
+  var count = 0;
+
+  for(var i=0; i<iterationlist.length; i++ ) {
+    if(document.getElementById(iterationlist[i]).checked == true) { 
+      count++; 
+    } 
+    if(count > maxchecked) { 
+      latestcheck.checked = false; 
+    }
+  }
+  if(count > maxchecked) {
+    alert('Sorry, only ' + maxchecked + ' may be checked.');
+  }
+}  
 
 function replaceHtml(){
     var newdiv = document.createElement('div');
@@ -30,8 +51,9 @@ function replaceHtml(){
 function addBox(divName){
   var newdiv = document.createElement('div');
   newdiv.className = "checkWrapper1";
-  newdiv.innerHTML = "<input class='filled-in' name='vizChoices[]' type='checkbox' id='dyBox"+counter+"'' value="+counter+"><label for='dyBox"+counter+"'></label>";
+  newdiv.innerHTML = "<input class='filled-in' name='vizChoices[]' type='checkbox' id='dyBox"+counter+"' onclick='CountChecks("+'"folist"'+",10,this)' value="+counter+"><label for='dyBox"+counter+"'></label>";
   document.getElementById(divName).appendChild(newdiv);
+  dyBoxList.push("dyBox"+counter);
   counter ++;
 }
 
