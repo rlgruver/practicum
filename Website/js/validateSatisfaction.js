@@ -1,13 +1,14 @@
 function validate_form(){
 	var valid = true;
 	
+	var constants = constantsValidate();
 	var constraints = constraintsValidate();
 	var varsAndDomains = varsDomainValidate();
 	var matchVars = matchVarsValidate();
 	var timeOut = timeOutValidate();
 	var precision = precisionValidate();
 
-	var valid = constraints && varsAndDomains && matchVars && timeOut && precisionValidate;
+	var valid = constants && constraints && varsAndDomains && matchVars && timeOut && precisionValidate;
 
 	if(valid == false){
 		alert("Please fix errors then try submitting again.");
@@ -18,6 +19,26 @@ function validate_form(){
 
 ////////////////////////////
 //VALIDATE BY SECTION
+function constantsValidate(){
+	var valid = true;
+	document.getElementById("error9").style.visibility = "hidden";
+	var constants = document.getElementById("constants").value;
+
+	if(constants!=""){
+		var strip = constants.replace(/[\w\s]/gi, "");
+		for (var x = 0; x < strip.length; x++){
+		    var c = strip.charAt(x);
+		    if (c!="," & c!="="){
+		    	document.getElementById("error9").style.visibility = "visible";
+				valid = false;
+				break;
+		    }
+		}
+	}
+
+	return valid;
+}
+
 function constraintsValidate(){
 	var valid = true;
 	var con = document.getElementById("constraints").value;
