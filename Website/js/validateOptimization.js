@@ -42,6 +42,16 @@ function objFunctionValidate(){
 		valid = false;
 	}
 
+	var strip = objF.replace(/[\w\s]/gi, "");
+		for (var x = 0; x < strip.length; x++){
+		    var c = strip.charAt(x);
+		    if (c==">" || c=="<" || c=="="){
+		    	document.getElementById("error6").style.visibility = "visible";
+				valid = false;
+				break;
+		    }
+		}
+
 	return valid;
 }
 
