@@ -136,6 +136,9 @@
             <h5 style="display:inline;">Variables and Domains</h5>
             <div class="right orange-text" style="display:inline;"><a class="example modal-trigger" href="#varModal">EXAMPLE FILE</a></div>
           </div>
+          <div class="no-btm-pad">
+            <h6 class="graph_title"> Final <br /> Output <br /> Graph</h6>
+          </div>
 
           <div class="col s6" id ="varSection">
 
@@ -171,9 +174,9 @@
         <div class ="col s1" id="dynamicChoices">
          
          <div class ="checkWrapper">
-          <input class="filled-in" name="vizChoices[]" type="checkbox" value = "0" id ="initialChoice" />
+          <input class="filled-in" name="vizChoices[]" type="checkbox" value = "0" id ="initialChoice" onclick=
+          "CountChecks('folist',10,this)" />
           <label for="initialChoice"></label>
-        </div>
         
         </div>
 

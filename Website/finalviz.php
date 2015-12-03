@@ -18,6 +18,9 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" type="text/css" href="css/theme.css" >
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Import jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -38,9 +41,10 @@
 
 
     <div class="container">
-      <h2>Solutions</h2>
-      <section id='chart'>
-        
+      <div class="center-align">
+        <h4>Solutions</h4>
+      </div class="center-align">
+      <section class='center-align' id='chart'>
         <div id="sol_graph">
           <div class="col-sm-4" id="area1"></div>
         </div>
@@ -65,7 +69,7 @@
 
       var headers = <?php echo ($headers) ?>
 
-      var margin = {top: 25, right: 20, bottom: 25, left: 120},
+      var margin = {top: 25, right: 20, bottom: 25, left: 50},
           width = 200 - margin.left - margin.right,
           height = 250 - margin.top - margin.bottom;
 
@@ -189,33 +193,43 @@
           if (dataMatch != '') {
 
             var match2 = d3.select('#area2').select('#'+dataMatch);
+            match2.style('fill', 'red');
             match2.style('opacity', 1);
 
             var match3 = d3.select('#area3').select('#'+dataMatch);
+            match3.style('fill', 'red');
             match3.style('opacity', 1);
 
             var match4 = d3.select('#area4').select('#'+dataMatch);
+            match4.style('fill', 'red');
             match4.style('opacity', 1);
 
             var match5 = d3.select('#area5').select('#'+dataMatch);
+            match5.style('fill', 'red');
             match5.style('opacity', 1);
 
             var match6 = d3.select('#area6').select('#'+dataMatch);
+            match6.style('fill', 'red');
             match6.style('opacity', 1);
 
             var match7 = d3.select('#area7').select('#'+dataMatch);
+            match7.style('fill', 'red');
             match7.style('opacity', 1);
 
             var match8 = d3.select('#area8').select('#'+dataMatch);
+            match8.style('fill', 'red');
             match8.style('opacity', 1);
 
             var match9 = d3.select('#area9').select('#'+dataMatch);
+            match9.style('fill', 'red');
             match9.style('opacity', 1);
 
             var match10 = d3.select('#area10').select('#'+dataMatch);
+            match10.style('fill', 'red');
             match10.style('opacity', 1);
 
             var match11 = d3.select('#area11').select('#'+dataMatch);
+            match11.style('fill', 'red');
             match11.style('opacity', 1);
           }
 
@@ -229,33 +243,43 @@
 
             var match2 = d3.select('#area2').select('#'+dataMatch);
             match2.transition().delay(50).style('opacity', 0);
+            match2.style('fill', 'black');
 
             var match3 = d3.select('#area3').select('#'+dataMatch);
             match3.transition().delay(50).style('opacity', 0).transition();
+            match3.style('fill', 'black');
 
             var match4 = d3.select('#area4').select('#'+dataMatch);
             match4.transition().delay(50).style('opacity', 0);
+            match4.style('fill', 'black');
 
             var match5 = d3.select('#area5').select('#'+dataMatch);
             match5.transition().delay(50).style('opacity', 0);
+            match5.style('fill', 'black');
 
             var match6 = d3.select('#area6').select('#'+dataMatch);
             match6.transition().delay(50).style('opacity', 0);
+            match6.style('fill', 'black');
 
             var match7 = d3.select('#area7').select('#'+dataMatch);
             match7.transition().delay(50).style('opacity', 0);
+            match7.style('fill', 'black');
 
             var match8 = d3.select('#area8').select('#'+dataMatch);
             match8.transition().delay(50).style('opacity', 0);
+            match8.style('fill', 'black');
 
             var match9 = d3.select('#area9').select('#'+dataMatch);
             match9.transition().delay(50).style('opacity', 0);
+            match9.style('fill', 'black');
 
             var match10 = d3.select('#area10').select('#'+dataMatch);
             match10.transition().delay(50).style('opacity', 0);
+            match10.style('fill', 'black');
 
             var match11 = d3.select('#area11').select('#'+dataMatch);
             match11.transition().delay(50).style('opacity', 0);
+            match11.style('fill', 'black');
           }
 
         }, false);
@@ -334,7 +358,21 @@
 
       });
 
-    </script>
+      function changeOpacity(el) {
+        if ( el.innerHTML === "Show All Data" ) {
+          el.innerHTML = "Hide All Data";
+          document.getElementById('[id^=marker]').style.opacity=1;
+        }
+        else {
+          el.innerHTML = "Show All Data";
+          document.getElementById('[id^=marker]').style.opacity=0;
+        }
+      }
 
+    </script>
+    <div class="row" style="position: absolute; left: 25%; right: 20%; bottom: 7%">Scroll you mouse along the Objective Function bar to see solutions and their corresponding variable values.</div>
+    <div class="row">
+      <a style="position: absolute; left: 20%; right: 20%; bottom: 5%" class="waves-effect waves-light btn" onclick="changeOpacity(this)">Show All Data</a>
+    </div>
   </body>
 </html>
