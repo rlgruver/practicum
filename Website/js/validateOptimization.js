@@ -147,20 +147,25 @@ function constraintsValidate(){
 			break;
 		}
 
-		if( isNaN(arrayLower[i].valueOf()) && arrayLower[i]!="+oo" && arrayLower[i]!="-oo" ){
-			document.getElementById("error8").style.visibility = "visible";
-			valid=false;
-			break;
-		}
-
-		if(isNaN(arrayUpper[i].valueOf()) && arrayUpper[i]!="+oo" && arrayUpper[i]!="-oo"){
-			document.getElementById("error8").style.visibility = "visible";
-			valid=false;
-			break;
-		}
 
 		if(arrayLower[i]=="-oo"){
-			if ( isNaN(arrayUpper[i].valueOf()) && arrayUpper[i]!="+oo" && arrayUpper[i]!="-oo"){
+			if (isNaN(arrayUpper[i].valueOf()) && arrayUpper[i]!="+oo" && arrayUpper[i]!="-oo"){
+				document.getElementById("error8").style.visibility = "visible";
+				valid=false;
+				break;
+			}
+		}
+
+		if(arrayLower[i]=="+oo"){
+			if (arrayUpper[i]!="+oo"){
+				document.getElementById("error8").style.visibility = "visible";
+				valid=false;
+				break;
+			}
+		}
+
+		if(arrayUpper[i]=="-oo"){
+			if (arrayLower[i]!="-oo"){
 				document.getElementById("error8").style.visibility = "visible";
 				valid=false;
 				break;
@@ -168,7 +173,7 @@ function constraintsValidate(){
 		}
 
 		if(arrayUpper[i]=="+oo"){
-			if ( isNaN(arrayLower[i].valueOf()) && arrayLower[i]!="-oo" && arrayLower[i]!="+oo"){
+			if (isNaN(arrayLower[i].valueOf()) && arrayLower[i]!="-oo" && arrayLower[i]!="+oo"){
 				document.getElementById("error8").style.visibility = "visible";
 				valid=false;
 				break;
