@@ -9,6 +9,7 @@ function validate_form(){
 	var timeOut = timeOutValidate();
 	var precision = precisionValidate();
 
+	//if all vars are true, valid will be true and will pass
 	var valid = objFunction && constants && constraints && varsAndDomains && matchVars && timeOut && precisionValidate;
 
 	if(valid == false){
@@ -20,6 +21,8 @@ function validate_form(){
 
 ////////////////////////////
 //VALIDATE BY SECTION
+
+//validate objective function follows all rules, OPTIMIZATION cant be null
 function objFunctionValidate(){
 	var valid = true;
 	var objF = document.getElementById("objFunction").value;
@@ -42,6 +45,7 @@ function objFunctionValidate(){
 		valid = false;
 	}
 
+	//check if obj function doesnt contain an <, >, or equals
 	var strip = objF.replace(/[\w\s]/gi, "");
 		for (var x = 0; x < strip.length; x++){
 		    var c = strip.charAt(x);
@@ -55,6 +59,7 @@ function objFunctionValidate(){
 	return valid;
 }
 
+//validate constants section follows all rules, can only be a variable equaling to a constant number
 function constantsValidate(){
 	var valid = true;
 	document.getElementById("error9").style.visibility = "hidden";
@@ -75,6 +80,7 @@ function constantsValidate(){
 	return valid;
 }
 
+//validate constraints section follows all rules
 function constraintsValidate(){
 	var valid = true;
 	var con = document.getElementById("constraints").value;
@@ -83,7 +89,6 @@ function constraintsValidate(){
 	document.getElementById("error7").style.visibility = "hidden";
 
 	if(con == "" || con == null){
-
 		return true;
 	}
 
@@ -100,11 +105,14 @@ function constraintsValidate(){
 	return valid;
 }
 
+
+//validate variables and domain section follows all rules
  function varsDomainValidate(){
  	var valid = true;
  	document.getElementById("error3").style.visibility = "hidden";
 	document.getElementById("error8").style.visibility = "hidden";
 
+	//create variable and lower/upper bound arrays
 	var varTmp = varArrayVariables();
 	var lowerTmp = varArrayLower();
 	var upperTmp = varArrayUpper();
@@ -132,14 +140,14 @@ function constraintsValidate(){
 			}
 	}
 	
-
+	//check same amount of variables, upper domain, and lower domain
 	if(!(arrayVar.length == arrayLower.length && arrayVar.length == arrayUpper.length && arrayUpper.length == arrayLower.length)){
 		document.getElementById("error3").style.visibility = "visible";
 		valid=false;
 	}
 
 
-
+	//upper and lower bound cases that are invalid
 	for (var i=0; i<arrayVar.length; i++){
 		if (isNaN(arrayLower[i].valueOf()) && arrayLower[i]!="-oo" && arrayLower[i]!="+oo"){
 				document.getElementById("error8").style.visibility = "visible";
@@ -204,7 +212,8 @@ function constraintsValidate(){
 }
 
 
-
+//validate all variables found in constants, obj function, and constraints 
+//match with the variables found in the variables and domain section
 function matchVarsValidate(){
 	var comboVarAndConstants = _.union(varArrayVariables(),varArrayConstants());
 	var comboObjAndConstraints = _.union(varArrayObjective(),varArrayConstraints());
@@ -220,6 +229,7 @@ function matchVarsValidate(){
 	return true;
 }
 
+//validate timeout number provided by user
 function timeOutValidate(){
 	var timeOut = document.getElementById("timeout").value;
 	var check = isNaN(timeOut);
@@ -238,6 +248,7 @@ function timeOutValidate(){
 	return true;
 }
 
+//validate precision value provided by user
 function precisionValidate(){
 	var precision = document.getElementById("precision").value;
 	precision = precision.replace(/e|\-|\./g, "");
@@ -253,6 +264,7 @@ function precisionValidate(){
 /////////////////////////////////
 //VALIDATION SETUP
 
+//create array of variables found in constants
 function varArrayConstants(){
 	var constants = document.getElementById("constants").value;
 	var tmpArr = constants.split(/[^a-zA-Z0-9']+/g);
@@ -269,6 +281,7 @@ function varArrayConstants(){
 	return varArr;
 }
 
+//create array of variables found in objective function
 function varArrayObjective(){
 	var objFunction = document.getElementById("objFunction").value;
 	var clean = objFunction.replace(/abs|sin|cos|tan|cot|sec|csc|sqrt|exp|e/g, "");
@@ -285,6 +298,7 @@ function varArrayObjective(){
 	return varArr;
 }
 
+//create array of variables found in constraints
 function varArrayConstraints(){
 	var constraints = document.getElementById("constraints").value;
 	var clean = constraints.replace(/abs|sin|cos|tan|cot|sec|csc|sqrt|exp|e/g, "");
@@ -301,6 +315,7 @@ function varArrayConstraints(){
 	return varArr;
 }
 
+//create array of variables found in variables and domain section
 function varArrayVariables(){
 	var varArr = new Array();
 	var varNames = document.forms.form1.elements['myVars[]'];
@@ -320,6 +335,7 @@ function varArrayVariables(){
 	return varArr;
 }
 
+//create array of lower bound values in domain
 function varArrayLower(){
 	var varArr = new Array();
 	var lowerTmp = document.forms.form1.elements['myLower[]'];
@@ -339,6 +355,7 @@ function varArrayLower(){
 	return varArr;
 }
 
+//create array of upper bound values in domain
 function varArrayUpper(){
 	var varArr = new Array();
 	var upperTmp = document.forms.form1.elements['myUpper[]'];
@@ -358,7 +375,7 @@ function varArrayUpper(){
 	return varArr;
 }
 
-
+//validate parenthesis are matching
 function parenthesesBalanced(s){
   var open = (arguments.length > 1) ? arguments[1] : '(';
   var close = (arguments.length > 2) ? arguments[2] : ')';  
@@ -379,6 +396,7 @@ function parenthesesBalanced(s){
   return c == 0;
 }
  
+//validate brackets are matching
 function bracketsBalanced(s){
   var open = (arguments.length > 1) ? arguments[1] : '[';
   var close = (arguments.length > 2) ? arguments[2] : ']';  
@@ -399,6 +417,7 @@ function bracketsBalanced(s){
   return c == 0;
 }
 
+//validate match expression is valid to the fullest potential possible
 function mathExp(exp){
 	var valid = true; 
 	var firstChar = exp.charAt(0);

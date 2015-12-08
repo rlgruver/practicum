@@ -1,6 +1,8 @@
 <?php 
 session_start();
 session_regenerate_id();
+
+//creates input file from website from to send to the solver
 include 'processInput.php'; 
 ?>
 
@@ -28,49 +30,64 @@ include 'processInput.php';
 
 <script>
 
-
+//store session id in javascript
 var session_id = '<?php echo session_id(); ?>';
 
 $(document).ready(function(){
 var data = {session_id:session_id};
-    // use ajax, call the PHP
+    // using ajax to run processOutput.php in the background
     $.ajax({
         type: "POST",
         url: 'processOutput.php', 
         data: data,
         success: function(response){
-            complete();
+            complete(); //when process output completes, perform the function called
         }
     })
 });
 
+//while processOutput.php runs in the background, showing the loading gif and set the realtime output file to the iframe
   function loading(){
       document.getElementById('loading').style.visibility = 'visible'; 
       document.getElementById('output').src ="sessions/"+session_id+"/realtime_output.txt";
     }
+
+//when process output completes from ajax call do the following: 1. remove load bar 2. stop refreshing realtime output 3. show final output file
   function complete(){
       document.getElementById('loadingPic').src= "img/loadbar.png"; 
       stopRefresh();
       showOutputFile();
   }
 
-  interval = window.setInterval("reloadIFrame();", 5000);
-  function reloadIFrame() {
+//refresh iframe window to refresh real time output in 3 seconds
+  interval = window.setInterval("reloadIFrame(3000);", 3000);
+  
+  //after relaoding the iframe... clear the original interval and call to set a new one
+  function reloadIFrame(milliseconds) {
    document.getElementById('output').contentWindow.location.reload('true');
+   clearInterval(interval);
+   setNewInterval(milliseconds);
   }
 
+//new interval... adds 2 seconds to query time of the realtime output 
+  function setNewInterval(milliseconds){
+    milliseconds = milliseconds + 2000;
+    interval = window.setInterval("reloadIFrame("+milliseconds+");", milliseconds);
+  }
+
+//on complete stop querying the realtime output in the iframe
   function stopRefresh() {
     clearInterval(interval);
     document.getElementById('output').src = "sessions/"+session_id+"/output.txt";
   }
 
+//on complete show the final output file and option to graph the solutions
    function showOutputFile() {
     document.getElementById('downloadOutputFile').style.visibility = 'visible';
     document.getElementById('graphFinalSolutions').style.visibility = 'visible'; 
   }
 
   function OpenInNewTab() {
-
    var win = window.open("finalviz.php?s1=" + session_id, '_blank');
    win.focus();
 
@@ -153,7 +170,7 @@ var data = {session_id:session_id};
 
 
 <?php
-
+//calling javascript method to show the loading gif and set the iframe to real time output 
 echo "<script> loading(); </script>";
 
 ?>
