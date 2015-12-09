@@ -2,7 +2,7 @@
 //CREATE UNIQUE SESSION DIRECTORY
 $makeDir = mkdir("sessions/".session_id()) or die("Unable to create user directory!");
 //HAVE TO INCLUDE REAL TIME OUTPUT FILE
-$realtimeFile = fopen("sessions/".session_id()."/realtime_output.txt", "w");
+$realtimeFile = fopen("sessions/".session_id()."/realtime_solutions.txt", "w");
 fclose($realtimeFile);
 
 //This page creates the input.txt file that will be fed into the solver, it also creates the file upload.txt that contains the text file

@@ -18,7 +18,7 @@ $upper = $_POST['upperBounds'];
 //local path variables to files
 $localInputFile = "sessions/".$session."/input.txt"; 
 $localOutputFile = "sessions/".$session."/output.txt"; 
-$localSolutionsFile = "sessions/".$session."/realtime_output.txt";
+$localSolutionsFile = "sessions/".$session."/realtime_solutions.txt";
 $localDiscardedFile = "sessions/".$session."/realtime_discarded.txt";
 
 //remote path variables to files

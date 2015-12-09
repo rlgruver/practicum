@@ -49,7 +49,7 @@ var data = {session_id:session_id};
 //while processOutput.php runs in the background, showing the loading gif and set the realtime output file to the iframe
   function loading(){
       document.getElementById('loading').style.visibility = 'visible'; 
-      document.getElementById('output').src ="sessions/"+session_id+"/realtime_output.txt";
+      document.getElementById('output').src ="sessions/"+session_id+"/realtime_solutions.txt";
     }
 
 //when process output completes from ajax call do the following: 1. remove load bar 2. stop refreshing realtime output 3. show final output file
