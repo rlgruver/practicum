@@ -66,9 +66,16 @@
   visibility:hidden;
 }
 
+.rt_viz_title{
+  font-size:8pt;
+  padding-left: 55%;
+  display: inline-block;
+}
+
 .graph_title{
   font-size:8pt;
-  padding-left: 42%;
+  padding-left: 2%;
+  display: inline-block;
 }
 
 .no-btm-pad{

@@ -9,10 +9,12 @@ function removeElementsByClass(className){
 
 var counter = 1;
 
-var dyBoxList = ["initialChoice"];
+var dyBoxListRT = ["initialChoiceRT"];
+var dyBoxListFO = ["initialChoiceFO"];
 
 function CountChecks(whichlist,maxchecked,latestcheck) {
-  var folist = dyBoxList;
+  var rtlist = dyBoxListRT;
+  var folist = dyBoxListFO;
   var iterationlist;
   eval("iterationlist="+whichlist);
   var count = 0;
@@ -40,21 +42,33 @@ function replaceHtml(){
     +'</div><div class="input-field col s1 right-align" id="commaText"><div class="varText"> ,</div></div><div'
     +' class="input-field col s2" id="dynamicUpperBounds"><input type="text" class="validate center-align" '
     +'name="myUpper[]" placeholder="8" id="initialUpperBound"></div><div class="input-field col s1 left-align" '
-    +'id="rightBracket"><div class="varText">]</div></div><div class ="col s1" id="dynamicChoices"><div class '
-    +'="checkWrapper"><input class="filled-in" name="vizChoices[]" type="checkbox" value = "0" id ="initialCho'
-    +'ice" /><label for="initialChoice"></label></div></div>';
+    +'id="rightBracket"><div class="varText">]</div></div><div class ="col s2" id="dynamicChoices1"><div class '
+    +'="checkWrapper"><input class="filled-in" name="rtVizChoices[]" type="checkbox" value = "0" id ="initialCho'
+    +'iceRT " "onclick=CountChecks("+"rtlist"+",3,this)"" /><label for="initialChoiceRT"></label></div><div class'
+    +' ="col s1" id="dynamicChoices2"><div class="checkWrapper"><input class="filled-in" name="foVizChoices[]" type'
+    +'="checkbox" value = "0" id ="initialChoiceFO " "onclick=CountChecks("+"folist"+",10,this)"" /><label for="initialChoiceFO"></label></div>';
     document.getElementById("varSection").appendChild(newdiv);
     counter = 1;
 }
 
  
 function addBox(divName){
-  var newdiv = document.createElement('div');
-  newdiv.className = "checkWrapper1";
-  newdiv.innerHTML = "<input class='filled-in' name='vizChoices[]' type='checkbox' id='dyBox"+counter+"' onclick='CountChecks("+'"folist"'+",10,this)' value="+counter+"><label for='dyBox"+counter+"'></label>";
-  document.getElementById(divName).appendChild(newdiv);
-  dyBoxList.push("dyBox"+counter);
-  counter ++;
+  if(divName=='dynamicChoices1'){
+    var newdiv = document.createElement('div');
+    newdiv.className = "checkWrapper1";
+    newdiv.innerHTML = "<input class='filled-in' name='rtVizChoices[]' type='checkbox' id='dyBoxRT"+counter+"' onclick='CountChecks("+'"rtlist"'+",3,this)' value="+counter+"><label for='dyBoxRT"+counter+"'></label>";
+    document.getElementById(divName).appendChild(newdiv);
+    dyBoxListRT.push("dyBoxRT"+counter);
+    counter ++;
+  }
+  else{
+    var newdiv = document.createElement('div');
+    newdiv.className = "checkWrapper1";
+    newdiv.innerHTML = "<input class='filled-in' name='foVizChoices[]' type='checkbox' id='dyBoxFO"+counter+"' onclick='CountChecks("+'"folist"'+",10,this)' value="+counter+"><label for='dyBoxFO"+counter+"'></label>";
+    document.getElementById(divName).appendChild(newdiv);
+    dyBoxListFO.push("dyBoxFO"+counter);
+    counter ++;
+  }
 }
 
 function addVars(divName,value){
@@ -167,7 +181,8 @@ function populateInput(value, type){
       var lower = bounds[0];
       var upper = bounds[1];
 
-      addBox('dynamicChoices');
+      addBox('dynamicChoices1');
+      addBox('dynamicChoices2');
       addVars('dynamicVariables',name); 
       addLower('dynamicLowerBounds',lower);
       addUpper('dynamicUpperBounds',upper);
@@ -270,7 +285,8 @@ window.onload = function() {
           var lower = bounds[0];
           var upper = bounds[1];
 
-          addBox('dynamicChoices');
+          addBox('dynamicChoices1');
+          addBox('dynamicChoices2');
           addVars('dynamicVariables',name); 
           addLower('dynamicLowerBounds',lower);
           addUpper('dynamicUpperBounds',upper);

@@ -126,8 +126,12 @@ It is able to solve linear and non-linear systems of equations and inequalities,
             <h5 style="display:inline;">Variables and Domains</h5>
             <div class="right orange-text" style="display:inline;"><a class="example modal-trigger" href="#varModal">EXAMPLE FILE</a></div>
           </div>
+          <div class="no-btm-pad">
+            <h6 class="rt_viz_title"> Real <br /> Time <br /> Visuals</h6>
+            <h6 class="graph_title"> Final <br /> Output <br /> Graph</h6>
+          </div>
 
-          <div class="col s6" id ="varSection">
+          <div class="col s8" id ="varSection">
             
             <div class="input-field col s2 " id="dynamicVariables">
               <input type="text" class="validate center-align" name="myVars[]" placeholder="x" form="form1" id="initialVariable">
@@ -158,18 +162,23 @@ It is able to solve linear and non-linear systems of equations and inequalities,
           <div class="varText">]</div>
         </div>
 
-        <div class ="col s1" id="dynamicChoices">
-         
-         <div class ="checkWrapper">
-          <input class="filled-in" name="vizChoices[]" type="checkbox" value = "0" id ="initialChoice" />
-          <label for="initialChoice"></label>
+        <div class ="col s1" id="dynamicChoices1">
+          <div class ="checkWrapper">
+            <input class="filled-in" name="rtVizChoices[]" type="checkbox" value = "0" id ="initialChoiceRT" onclick="CountChecks('rtlist',3,this)" />
+            <label for="initialChoiceRT"></label>
+          </div>
         </div>
-        
+
+        <div class ="col s1" id="dynamicChoices2">  
+          <div class ="checkWrapper">
+            <input class="filled-in" name="foVizChoices[]" type="checkbox" value = "0" id ="initialChoiceFO" onclick="CountChecks('folist',10,this)" />
+            <label for="initialChoiceFO"></label>
+          </div>
         </div>
 
       </div>
 
-      <div class="file-field input-field col s5 offset-s1">
+      <div class="file-field input-field col s4">
 
         <div class="btn green darken-3">
           <span>Browse</span>
@@ -183,7 +192,7 @@ It is able to solve linear and non-linear systems of equations and inequalities,
     </div>
     <div class="row">
       <div class="button col s1">
-        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariables',''); addLower('dynamicLowerBounds','');addUpper('dynamicUpperBounds','');addText('inText','leftBracket','commaText','rightBracket');"><i class="material-icons">add</i></a>
+        <a class="btn-floating btn waves-effect waves-light green" onClick="addVars('dynamicVariables',''); addLower('dynamicLowerBounds','');addUpper('dynamicUpperBounds','');addText('inText','leftBracket','commaText','rightBracket');addBox('dynamicChoices1');addBox('dynamicChoices2');"><i class="material-icons">add</i></a>
       </div>
     </div>
     <span id="error1" class="error">Error: Variable mismatch detected</span><br>
