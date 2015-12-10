@@ -34,19 +34,16 @@ function CountChecks(whichlist,maxchecked,latestcheck) {
 
 function replaceHtml(){
     var newdiv = document.createElement('div');
-    newdiv.innerHTML = '<div class="input-field col s2 " id="dynamicVariables"><input type="text"class="validate'
-    +' center-align" name="myVars[]" placeholder="x" form="form1" id="initialVariable"></div><div class="input-field'
-    +' col s1 right-align" id="inText"><div class="inz">IN</div></div><div class="input-field col s1 right-align" '
-    +'id="leftBracket"><div class="varText">[</div></div><div class="input-field col s2" id="dynamicLowerBounds">'
-    +'<input type="text" class="validate center-align" name="myLower[]" placeholder="-8" id="initialLowerBound">'
-    +'</div><div class="input-field col s1 right-align" id="commaText"><div class="varText"> ,</div></div><div'
-    +' class="input-field col s2" id="dynamicUpperBounds"><input type="text" class="validate center-align" '
-    +'name="myUpper[]" placeholder="8" id="initialUpperBound"></div><div class="input-field col s1 left-align" '
-    +'id="rightBracket"><div class="varText">]</div></div><div class ="col s1" id="dynamicChoices1"><div class '
-    +'="checkWrapper"><input class="filled-in" name="rtVizChoices[]" type="checkbox" value = "0" id ="initialCho'
-    +'iceRT " "onclick=CountChecks("+"rtlist"+",3,this)" /><label for="initialChoiceRT"></label></div><div class'
-    +' ="col s1" id="dynamicChoices2"><div class="checkWrapper"><input class="filled-in" name="foVizChoices[]" type'
-    +'="checkbox" value = "0" id ="initialChoiceFO " "onclick=CountChecks("+"folist"+",10,this)" /><label for="initialChoiceFO"></label></div>';
+    newdiv.innerHTML = '<div class="input-field col s2 " id="dynamicVariables"><input type="text"class="validate center-align" name="myVars[]" placeholder="x" form="form1" id="initialVariable">'
+    +'</div><div class="input-field col s1 right-align" id="inText"><div class="inz">IN</div></div><div class="input-field col s1 right-align" id="leftBracket">'
+    +'<div class="varText">[</div></div><div class="input-field col s2" id="dynamicLowerBounds"><input type="text" class="validate center-align" name="myLower[]" placeholder="-8" id="initialLowerBound">'
+    +'</div><div class="input-field col s1 right-align" id="commaText"><div class="varText"> ,</div></div><div class="input-field col s2" id="dynamicUpperBounds">'
+    +'<input type="text" class="validate center-align" name="myUpper[]" placeholder="8" id="initialUpperBound"></div>'
+    +'<div class="input-field col s1 left-align" id="rightBracket"><div class="varText">]</div></div><div class ="col s1" id="dynamicChoices1"><div class ="checkWrapper">'
+    +'<input class="filled-in" name="rtVizChoices[]" type="checkbox" value = "0" id ="initialChoiceRT " onclick="CountChecks('+'rtlist'+',3,this)" />'
+    +'<label for="initialChoiceRT"></label></div></div><div class="col s1" id="dynamicChoices2"><div class="checkWrapper">'
+    +'<input class="filled-in" name="foVizChoices[]" type="checkbox" value = "0" id ="initialChoiceFO " onclick="CountChecks('+'folist'+',10,this)" />'
+    +'<label for="initialChoiceFO"></label></div>';
     document.getElementById("varSection").appendChild(newdiv);
     counter = 1;
 }
