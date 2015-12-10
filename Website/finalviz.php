@@ -331,6 +331,8 @@
           .attr('height', 2)
           .attr('x', 10)
           .attr('y', function(d) {
+            console.log(d);
+            console.log(y(d));
             return y(d);
           })
 
@@ -352,27 +354,50 @@
               .transition()
               .delay(50)
               .style('opacity', 0)
-          })
-
+          });
         }
-
       });
 
-      function changeOpacity(el) {
+      var allHTMLTags = new Array();
+
+      function getElementByClass(theClass, visi) {
+
+      //Create Array of All HTML Tags
+      var allHTMLTags=document.getElementsByTagName('*');
+
+      //Loop through all tags using a for loop
+      for (i=0; i<allHTMLTags.length; i++) {
+
+      //Get all tags with the specified class name.
+      if (allHTMLTags[i].className==theClass) {
+
+      //Place any code you want to apply to all
+      //elements with the class specified.
+
+      allHTMLTags[i].style.opacity=visi;
+
+          }
+        }
+      }
+
+
+      function changeButton(el) {
         if ( el.innerHTML === "Show All Data" ) {
           el.innerHTML = "Hide All Data";
-          document.getElementById('[id^=marker]').style.opacity=1;
+          getElementByClass('sol_data',1);
+          getElementByClass('var_data',1);
         }
         else {
           el.innerHTML = "Show All Data";
-          document.getElementById('[id^=marker]').style.opacity=0;
+          getElementByClass('sol_data',0);
+          getElementByClass('var_data',0);
         }
       }
 
     </script>
     <div class="row" style="position: absolute; left: 25%; right: 20%; bottom: 7%">Scroll you mouse along the Objective Function bar to see solutions and their corresponding variable values.</div>
     <div class="row">
-      <a style="position: absolute; left: 20%; right: 20%; bottom: 5%" class="waves-effect waves-light btn" onclick="changeOpacity(this)">Show All Data</a>
+      <a style="position: absolute; left: 20%; right: 20%; bottom: 5%" class="waves-effect waves-light btn" onclick="changeButton(this)">Show All Data</a>
     </div>
   </body>
 </html>
