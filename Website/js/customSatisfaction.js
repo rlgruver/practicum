@@ -64,7 +64,7 @@ function addBox(divName){
     newdiv.innerHTML = "<input class='filled-in' name='foVizChoices[]' type='checkbox' id='dyBoxFO"+counter+"' onclick='CountChecks("+'"folist"'+",10,this)' value="+counter+"><label for='dyBoxFO"+counter+"'></label>";
     document.getElementById(divName).appendChild(newdiv);
     dyBoxListFO.push("dyBoxFO"+counter);
-    counter ++;
+    
   }
 }
 
@@ -175,6 +175,7 @@ function populateInput(value, type){
 
       addBox('dynamicChoices1');
       addBox('dynamicChoices2');
+      counter ++;
       addVars('dynamicVariables',name); 
       addLower('dynamicLowerBounds',lower);
       addUpper('dynamicUpperBounds',upper);
