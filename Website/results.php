@@ -120,7 +120,8 @@ var data = {session_id:session_id};
       <div class='row col s12 center-align'>
         <div id ="loading" style="visibility:hidden;"> <img src="img/loadbar.gif" id="loadingPic" width="9%" height="auto"> </div>
         <div id="frameHolder">
-          <iframe id="output" name="output" src="" class="white" style="border:1.5px solid #99CC00" width="700" height="400"></iframe>
+          <iframe id="output" name="output" src="" class="white" style="inline border:1.5px solid #99CC00" width="49%" height="400"></iframe>
+          <iframe id="rtviz" name="rtviz" src="rtviz/rtviz.html" class="white" style="inline border:1.5px solid #99CC00" width="49%" height="400"></iframe>
         </div>
       </div>
 

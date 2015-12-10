@@ -15,7 +15,7 @@ $upperBounds = $_POST["myUpper"];
 $constants = $_POST["constants"];
 $constraints = $_POST["constraints"];
 $objectiveFunction = $_POST["objFunction"];
-$checkboxes = $_POST["vizChoices"];
+$checkboxes = $_POST["foVizChoices"];
 
 $satisfaction = isset($_POST['isSatisfaction']) ? $_POST['isSatisfaction'] : '';
 $precision = isset($_POST['precision']) ? $_POST['precision'] : '';
