@@ -17,7 +17,7 @@ function CountChecks(whichlist,maxchecked,latestcheck) {
   var folist = dyBoxListFO;
   var iterationlist;
   eval("iterationlist="+whichlist);
-  var count = 0;
+  var count = 0;  
 
   for(var i=0; i<iterationlist.length; i++ ) {
     if(document.getElementById(iterationlist[i]).checked == true) { 
@@ -45,7 +45,11 @@ function replaceHtml(){
     +'<input class="filled-in" name="foVizChoices[]" type="checkbox" value = "0" id ="initialChoiceFO" onclick="CountChecks(&#34;folist&#34;,10,this)" />'
     +'<label for="initialChoiceFO"></label></div>';
     document.getElementById("varSection").appendChild(newdiv);
+    
     counter = 1;
+
+    dyBoxListRT = ["initialChoiceRT"];
+    dyBoxListFO = ["initialChoiceFO"];
 }
 
  

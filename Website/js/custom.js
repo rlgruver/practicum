@@ -30,7 +30,7 @@ function CountChecks(whichlist,maxchecked,latestcheck) {
   if(count > maxchecked) {
     alert('Sorry, only ' + maxchecked + ' may be checked.');
   }
-}  
+}
 
 function replaceHtml(){
     var newdiv = document.createElement('div');
@@ -46,6 +46,8 @@ function replaceHtml(){
     +'<label for="initialChoiceFO"></label></div>';
     document.getElementById("varSection").appendChild(newdiv);
     counter = 1;
+    dyBoxListRT = ["initialChoiceRT"];
+    dyBoxListFO = ["initialChoiceFO"];
 }
 
  
